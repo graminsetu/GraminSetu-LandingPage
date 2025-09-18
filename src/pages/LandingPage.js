@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import graminsetuMainImage from "../assets/images/graminsetu-main-image.png";
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
+import SEO from "../components/SEO";
 import Logo from "../components/Logo/Logo";
 import Loader from "../components/Loader/Loader";
 import LanguageSelector from "../components/LanguageSelector/LanguageSelector";
@@ -29,34 +30,7 @@ const LandingPage = () => {
   }
   return (
     <main className="min-h-screen bg-gradient-to-br from-gramin-50 via-white to-setu-50 font-sans">
-      <Helmet>
-        <title>{landingContent.meta.title}</title>
-        <meta name="description" content={landingContent.meta.description} />
-        <meta name="keywords" content={landingContent.meta.keywords} />
-        <meta name="author" content={landingContent.meta.author} />
-        <meta property="og:title" content={landingContent.meta.ogTitle} />
-        <meta
-          property="og:description"
-          content={landingContent.meta.ogDescription}
-        />
-        <meta property="og:type" content={landingContent.meta.ogType} />
-        <meta
-          property="og:site_name"
-          content={landingContent.meta.ogSiteName}
-        />
-        <meta property="og:locale" content={landingContent.meta.ogLocale} />
-        <meta property="og:image" content={landingContent.meta.ogImage} />
-        <meta name="twitter:card" content={landingContent.meta.twitterCard} />
-        <meta name="twitter:title" content={landingContent.meta.twitterTitle} />
-        <meta
-          name="twitter:description"
-          content={landingContent.meta.twitterDescription}
-        />
-        <meta name="twitter:image" content={landingContent.meta.twitterImage} />
-        <meta name="theme-color" content={landingContent.meta.themeColor} />
-        <link rel="canonical" href={landingContent.meta.canonical} />
-        <html lang={landingContent.meta.lang} />
-      </Helmet>
+      <SEO />
       {/* Header */}
       <header className="bg-white border-b border-gramin-200 sticky top-0 z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
