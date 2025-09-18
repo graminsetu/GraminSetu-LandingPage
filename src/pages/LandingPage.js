@@ -135,9 +135,9 @@ const LandingPage = () => {
 
       {/* Portal Cards Row (below hero, moved up and with hover effect) */}
       <section className="w-full flex flex-col items-center justify-center pt-2 pb-6 bg-[#f6fcf8]" style={{marginTop: '-48px'}}>
-  <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 justify-items-center">
+        <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-2 md:px-6">
           {/* Villager Portal Card */}
-          <div className="bg-white rounded-2xl shadow-lg border border-transparent flex flex-col items-center p-6 md:p-7 transition-all duration-200 hover:shadow-xl hover:-translate-y-2 hover:border-gramin-400 mx-auto">
+          <div className="bg-white rounded-2xl shadow-xl border border-gramin-300 flex flex-col items-center p-8 md:p-10 -translate-y-2 transition-transform duration-200 w-full min-w-0">
             <div className="mb-4 pt-3">
               <svg className="w-12 h-12 text-gramin-600" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><path d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m9-5a4 4 0 11-8 0 4 4 0 018 0z" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </div>
@@ -146,7 +146,7 @@ const LandingPage = () => {
             <button className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto">Enter as Villager</button>
           </div>
           {/* Business/NGO Portal Card */}
-          <div className="bg-white rounded-2xl shadow-lg border border-transparent flex flex-col items-center p-6 md:p-7 transition-all duration-200 hover:shadow-xl hover:-translate-y-2 hover:border-gramin-400 mx-auto">
+          <div className="bg-white rounded-2xl shadow-xl border border-gramin-300 flex flex-col items-center p-8 md:p-10 -translate-y-2 transition-transform duration-200 w-full min-w-0">
             <div className="mb-4">
               <svg className="w-12 h-12 text-gramin-600" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 3v4M8 3v4"/></svg>
             </div>
@@ -155,7 +155,7 @@ const LandingPage = () => {
             <button className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto">Business/NGO Portal</button>
           </div>
           {/* Government/CSR Portal Card */}
-          <div className="bg-white rounded-2xl shadow-lg border border-transparent flex flex-col items-center p-6 md:p-7 transition-all duration-200 hover:shadow-xl hover:-translate-y-2 hover:border-gramin-400 mx-auto">
+          <div className="bg-white rounded-2xl shadow-xl border border-gramin-300 flex flex-col items-center p-8 md:p-10 -translate-y-2 transition-transform duration-200 w-full min-w-0">
             <div className="mb-4">
               <svg className="w-10 h-10 text-gramin-600" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
             </div>

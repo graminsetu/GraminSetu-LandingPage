@@ -9,8 +9,8 @@ export const footerContent = {
     { label: "Privacy Policy", href: "/privacy" }
   ],
   helpLinks: [
-    { label: "WhatsApp Support", href: "https://wa.me/919876543210", icon: "💬" },
-    { label: "Phone Support", href: "tel:+919876543210", icon: "📞" }
+    { label: "WhatsApp Support", href: "https://wa.me/919704635156", icon: "💬" },
+    { label: "Phone Support", href: "tel:+919704635156", icon: "📞" }
   ],
   teamNote: "Teams details are updated soon.",
   mission: "GraminSetu is on a mission to bridge India’s villages with technology, transparency, and trust.",
