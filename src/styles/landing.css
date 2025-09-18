@@ -1,0 +1,25 @@
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: #f7fafc;
+  margin: 0;
+  padding: 0;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+
+/* Use Tailwind utility classes for buttons and nav links */
+.btn-primary {
+  @apply bg-gramin-600 text-white rounded-lg font-semibold transition-colors duration-200;
+}
+.btn-primary:hover {
+  @apply bg-gramin-700;
+}
+.nav-link {
+  @apply text-gramin-600 font-medium mr-4 transition-colors duration-200;
+}
+.nav-link:hover {
+  @apply underline text-gramin-700;
+}

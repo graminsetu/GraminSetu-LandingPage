@@ -1,0 +1,12 @@
+.howitworks-section {
+  background: #f1f5f9;
+  padding: 6rem 0;
+}
+.howitworks-step {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
