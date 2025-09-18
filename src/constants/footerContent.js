@@ -12,7 +12,7 @@ export const footerContent = {
     { label: "WhatsApp Support", href: "https://wa.me/919876543210", icon: "💬" },
     { label: "Phone Support", href: "tel:+919876543210", icon: "📞" }
   ],
-  teamNote: "Ravi Reddy.",
+  teamNote: "Teams details are updated soon.",
   mission: "GraminSetu is on a mission to bridge India’s villages with technology, transparency, and trust.",
   copyright: "© 2024 GraminSetu. All rights reserved.",
   newsletter: {
