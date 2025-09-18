@@ -4,18 +4,18 @@ import { Helmet } from "react-helmet";
 import Logo from "../components/Logo/Logo";
 import Loader from "../components/Loader/Loader";
 import LanguageSelector from "../components/LanguageSelector/LanguageSelector";
-import VillageSearch from "../components/VillageSearch/VillageSearch";
 import Footer from "../components/Footer/Footer";
-import SecondaryCTA from "../components/SecondaryCTA/SecondaryCTA";
-import Features from "../components/Features/Features";
+// import SecondaryCTA from "../components/SecondaryCTA/SecondaryCTA";
 import HowItWorks from "../components/HowItWorks/HowItWorks";
-import ImpactStats from "../components/ImpactStats/ImpactStats";
+
 import FAQ from "../components/FAQ/FAQ";
 import Trust from "../components/Trust/Trust";
 import { landingContent } from "../constants/landingContent";
+import { businessModels } from "../constants/businessModels";
 
 const LandingPage = () => {
   const [loading, setLoading] = useState(true);
+  const [selectedModel, setSelectedModel] = useState('village');
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1200);
     return () => clearTimeout(timer);
@@ -135,9 +135,9 @@ const LandingPage = () => {
 
       {/* Portal Cards Row (below hero, moved up and with hover effect) */}
       <section className="w-full flex flex-col items-center justify-center pt-2 pb-6 bg-[#f6fcf8]" style={{marginTop: '-48px'}}>
-        <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-2 md:px-6">
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-2 md:px-6">
           {/* Villager Portal Card */}
-          <div className="bg-white rounded-2xl shadow-xl border border-gramin-300 flex flex-col items-center p-8 md:p-10 -translate-y-2 transition-transform duration-200 w-full min-w-0">
+          <div className="bg-white rounded-3xl border border-gramin-200 shadow-lg flex flex-col items-center p-10 md:p-12 -translate-y-2 transition-all duration-200 w-full min-w-0 hover:shadow-xl hover:-translate-y-2 hover:border-gramin-400">
             <div className="mb-4 pt-3">
               <svg className="w-12 h-12 text-gramin-600" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><path d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m9-5a4 4 0 11-8 0 4 4 0 018 0z" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </div>
@@ -146,7 +146,7 @@ const LandingPage = () => {
             <button className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto">Enter as Villager</button>
           </div>
           {/* Business/NGO Portal Card */}
-          <div className="bg-white rounded-2xl shadow-xl border border-gramin-300 flex flex-col items-center p-8 md:p-10 -translate-y-2 transition-transform duration-200 w-full min-w-0">
+          <div className="bg-white rounded-3xl border border-gramin-200 shadow-lg flex flex-col items-center p-10 md:p-12 -translate-y-2 transition-all duration-200 w-full min-w-0 hover:shadow-xl hover:-translate-y-2 hover:border-gramin-400">
             <div className="mb-4">
               <svg className="w-12 h-12 text-gramin-600" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 3v4M8 3v4"/></svg>
             </div>
@@ -155,7 +155,7 @@ const LandingPage = () => {
             <button className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto">Business/NGO Portal</button>
           </div>
           {/* Government/CSR Portal Card */}
-          <div className="bg-white rounded-2xl shadow-xl border border-gramin-300 flex flex-col items-center p-8 md:p-10 -translate-y-2 transition-transform duration-200 w-full min-w-0">
+          <div className="bg-white rounded-3xl border border-gramin-200 shadow-lg flex flex-col items-center p-10 md:p-12 -translate-y-2 transition-all duration-200 w-full min-w-0 hover:shadow-xl hover:-translate-y-2 hover:border-gramin-400">
             <div className="mb-4">
               <svg className="w-10 h-10 text-gramin-600" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
             </div>
@@ -166,10 +166,55 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <Features />
-      <HowItWorks />
-      <ImpactStats />
-      <SecondaryCTA />
+      {/* Explore Our Business Models Section - Full Page */}
+      <section className="min-h-screen w-full flex flex-col items-center justify-center bg-[#f6fcf8] p-0 m-0">
+        <h2 className="text-5xl font-extrabold text-gramin-800 mb-12 text-center tracking-tight" style={{letterSpacing: '-1px'}}>EXPLORE OUR BUSINESS MODELS</h2>
+        <div className="flex gap-8 mb-14 w-full max-w-4xl justify-center">
+          {businessModels.map(({key, label}) => (
+            <button
+              key={key}
+              className={`flex items-center gap-2 px-10 py-4 rounded-full font-semibold text-xl shadow-md border-2 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-gramin-400 ${selectedModel === key ? 'bg-gramin-600 text-white border-gramin-600 shadow-lg scale-105' : 'bg-white text-gramin-600 border-gramin-200 hover:bg-gramin-50'}`}
+              onClick={() => setSelectedModel(key)}
+              style={{minWidth: 220, boxShadow: selectedModel === key ? '0 4px 24px 0 #02844a22' : '0 2px 8px 0 #0001'}}
+            >
+              {/* Use PNG icon, white if selected, green otherwise */}
+              <img
+                src={require(`../assets/business-models/${key}.png`)}
+                alt={label}
+                className={`w-8 h-8 mr-2 rounded-full object-contain ${selectedModel === key ? 'bg-white p-1' : 'bg-[#eafaf1] p-0'}`}
+                style={{filter: selectedModel === key ? 'brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(104%) contrast(104%)' : 'none'}}
+              />
+              <span>{label}</span>
+            </button>
+          ))}
+        </div>
+        {/* Card for selected model */}
+        <div className="w-full max-w-7xl bg-[#eafaf1] rounded-2xl shadow-2xl border border-gramin-100 flex flex-row items-center p-14 md:p-20" style={{boxShadow:'0 12px 48px 0 #02844a22'}}>
+          <div className="flex-shrink-0 flex items-center justify-center w-80 h-80 rounded-2xl bg-white border-2 border-gramin-200 mr-16 shadow" style={{boxShadow:'0 2px 16px 0 #02844a11'}}>
+            <img
+              src={require(`../assets/business-models/${selectedModel}.png`)}
+              alt={businessModels.find((m) => m.key === selectedModel).label}
+              className="w-full h-full object-contain"
+              style={{maxWidth:'320px', maxHeight:'320px'}}
+            />
+          </div>
+          <div className="flex-1">
+            <div className="font-extrabold text-3xl md:text-4xl text-gramin-800 mb-3">{businessModels.find((m) => m.key === selectedModel).headline}</div>
+            <div className="text-gramin-700 text-xl mb-4">{businessModels.find((m) => m.key === selectedModel).brief}</div>
+            <ul className="list-disc pl-6 text-gramin-700 text-lg mb-8">
+              {businessModels.find((m) => m.key === selectedModel).bullets.map((point, idx) => (
+                <li key={idx} className="mb-1">{point}</li>
+              ))}
+            </ul>
+            <button className="bg-gramin-700 hover:bg-gramin-800 text-white font-bold py-4 px-12 rounded-full transition text-xl shadow-md flex items-center gap-2">
+              Explore More <span className="ml-1">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+      {/* <SecondaryCTA /> */}
       <Trust />
       {/* Find Your Village Section - moved below Trust/Features */}
       <section className="py-16 bg-[#f8fcfa] flex flex-col items-center">
