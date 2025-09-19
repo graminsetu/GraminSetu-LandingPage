@@ -15,6 +15,13 @@ import Trust from "../components/Trust/Trust";
 import { landingContent } from "../constants/landingContent";
 import { businessModels } from "../constants/businessModels";
 
+// Emoji icons for each business model toggle button
+const businessModelIcons = {
+  village: "🏡",
+  business: "🏢",
+  government: "🏛️"
+};
+
 const LandingPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -79,22 +86,20 @@ const LandingPage = () => {
                 {landingContent.hero.subheadline}
               </p>
               <div className="flex flex-col sm:flex-row items-start gap-4 mb-2 w-full">
-                <a
-                  href="/register"
+                <button
                   className="bg-gramin-600 text-white rounded-lg font-bold shadow-lg transition-colors duration-200 text-lg px-8 py-3 text-center inline-block hover:bg-gramin-700 focus:outline-none focus:ring-2 focus:ring-gramin-400"
+                  onClick={() => navigate('/work-in-progress')}
                 >
                   {landingContent.hero.button}
-                </a>
+                </button>
                 <button
                   className="border-2 border-gramin-600 text-gramin-600 rounded-lg font-bold transition-colors duration-200 text-lg px-8 py-3 text-center inline-block hover:bg-gramin-50 hover:text-gramin-700 focus:outline-none focus:ring-2 focus:ring-gramin-400"
                   onClick={() => {
-                    const el = document.getElementById(
-                      landingContent.hero.secondaryCTA.scrollTo
-                    );
-                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                    const el = document.getElementById('newsletter');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
-                  {landingContent.hero.secondaryCTA.text}
+                  Join Beta
                 </button>
               </div>
             </div>
@@ -120,7 +125,7 @@ const LandingPage = () => {
             </div>
             <div className="font-bold text-xl mb-2">Villager</div>
             <div className="text-gramin-600 text-center mb-4">Access schemes, learn, and connect with your community.</div>
-            <a href="/village-business-model" className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto text-center block">Explore Village Model</a>
+            <button className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto text-center block" onClick={() => navigate('/work-in-progress')}>Village Portal</button>
           </div>
           {/* Business/NGO Portal Card */}
           <div className="bg-white rounded-3xl border border-gramin-200 shadow-lg flex flex-col items-center p-10 md:p-12 -translate-y-2 transition-all duration-200 w-full min-w-0 hover:shadow-xl hover:-translate-y-2 hover:border-gramin-400">
@@ -129,7 +134,7 @@ const LandingPage = () => {
             </div>
             <div className="font-bold text-xl mb-2">Business/NGO</div>
             <div className="text-gramin-600 text-center mb-4">Discover partners, expand reach, and collaborate.</div>
-            <button className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto" onClick={() => navigate('/business/ngo-business-model')}>Business/NGO Portal</button>
+            <button className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto" onClick={() => navigate('/work-in-progress')}>Business/NGO Portal</button>
           </div>
           {/* Government/CSR Portal Card */}
           <div className="bg-white rounded-3xl border border-gramin-200 shadow-lg flex flex-col items-center p-10 md:p-12 -translate-y-2 transition-all duration-200 w-full min-w-0 hover:shadow-xl hover:-translate-y-2 hover:border-gramin-400">
@@ -138,7 +143,7 @@ const LandingPage = () => {
             </div>
             <div className="font-bold text-xl mb-2">Government/CSR</div>
             <div className="text-gramin-600 text-center mb-4">Implement initiatives, track impact, and empower.</div>
-            <button className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto">Govt/CSR Portal</button>
+            <button className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto" onClick={() => navigate('/work-in-progress')}>Govt/CSR Portal</button>
           </div>
         </div>
       </section>
@@ -154,26 +159,50 @@ const LandingPage = () => {
               onClick={() => setSelectedModel(key)}
               style={{minWidth: 220, boxShadow: selectedModel === key ? '0 4px 24px 0 #02844a22' : '0 2px 8px 0 #0001'}}
             >
-              {/* Use PNG icon, white if selected, green otherwise */}
-              <img
-                src={require(`../assets/business-models/${key}.png`)}
-                alt={label}
-                className={`w-8 h-8 mr-2 rounded-full object-contain ${selectedModel === key ? 'bg-white p-1' : 'bg-[#eafaf1] p-0'}`}
-                style={{filter: selectedModel === key ? 'brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(104%) contrast(104%)' : 'none'}}
-              />
+              <span
+                className={`w-10 h-10 mr-2 rounded-full border-2 flex items-center justify-center text-2xl transition-all duration-200 ${selectedModel === key ? 'bg-white border-gramin-600 shadow-lg scale-110' : 'bg-[#eafaf1] border-transparent'}`}
+                style={{color: '#222', boxShadow: selectedModel === key ? '0 0 0 2px #02844a55' : 'none', background: selectedModel === key ? '#fff' : '#eafaf1'}}
+              >
+                {businessModelIcons[key]}
+              </span>
               <span>{label}</span>
             </button>
           ))}
         </div>
         {/* Card for selected model */}
-        <div className="w-full max-w-7xl bg-[#eafaf1] rounded-2xl shadow-2xl border border-gramin-100 flex flex-row items-center p-14 md:p-20" style={{boxShadow:'0 12px 48px 0 #02844a22'}}>
-          <div className="flex-shrink-0 flex items-center justify-center w-80 h-80 rounded-2xl bg-white border-2 border-gramin-200 mr-16 shadow" style={{boxShadow:'0 2px 16px 0 #02844a11'}}>
-            <img
-              src={require(`../assets/business-models/${selectedModel}.png`)}
-              alt={businessModels.find((m) => m.key === selectedModel).label}
-              className="w-full h-full object-contain"
-              style={{maxWidth:'320px', maxHeight:'320px'}}
-            />
+        <div className="w-full max-w-7xl bg-[#eafaf1] rounded-2xl shadow-2xl border border-gramin-100 flex flex-row items-center p-14 md:p-20 justify-center" style={{boxShadow:'0 12px 48px 0 #02844a22'}}>
+          <div
+            className="flex items-center justify-center rounded-2xl bg-[#f6fcf8] border-2 border-gramin-200 mr-16 shadow p-0"
+            style={{
+              boxShadow: '0 2px 16px 0 #02844a11',
+              width: '340px',
+              // height: (selectedModel === 'government' || selectedModel === 'business' || selectedModel === 'village') ? '400px' : '340px',
+              minWidth: 0,
+              minHeight: 0
+            }}
+          >
+            {selectedModel === 'village' && (
+              <img
+                src={require('../assets/business-models/village.png')}
+                alt="Village Business Model"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+            )}
+            {selectedModel === 'government' && (
+              <img
+                src={require('../assets/business-models/govt.png')}
+                alt="Government/CSR Business Model"
+                className="w-full h-full object-contain rounded-2xl"
+                style={{display: 'block', height: '100%', width: '100%'}}
+              />
+            )}
+            {selectedModel === 'business' && (
+              <img
+                src={require('../assets/business-models/bussiness.png')}
+                alt="Business/NGO Business Model"
+                className="w-full h-full object-cover rounded-2xl"
+              />
+            )}
           </div>
           <div className="flex-1">
             <div className="font-extrabold text-3xl md:text-4xl text-gramin-800 mb-3">{businessModels.find((m) => m.key === selectedModel).headline}</div>

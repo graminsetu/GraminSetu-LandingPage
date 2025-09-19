@@ -197,7 +197,7 @@ const BusinessNgoBusinessModel = () => {
         <p className="text-lg text-gramin-600 mb-8 max-w-3xl">GraminSetu’s Business and NGO portal is specially designed to empower organizations to extend their reach, simplify project management, and create measurable social impact within rural communities. Harness the power of technology to engage villagers effectively, manage campaigns, and drive sustainable development outcomes.</p>
         <div className="w-full flex justify-center mb-6">
           <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-gramin-100 bg-white">
-            <img src="/images/business-hero.jpg" alt="Business/NGO using GraminSetu" className="mx-auto w-full max-w-2xl object-cover" style={{ minHeight: 220, maxHeight: 340 }} />
+            <img src={require('../assets/Before-and-after-images/bussigness b-f.png')} alt="GraminSetu: Empowering Business & NGO Impact" className="mx-auto w-full max-w-2xl object-cover" style={{ minHeight: 250, maxHeight: 640 }} />
           </div>
         </div>
       </section>

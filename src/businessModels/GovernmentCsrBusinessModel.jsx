@@ -255,6 +255,11 @@ const GovernmentCsrBusinessModel = () => {
       <h1 className="text-5xl md:text-6xl font-extrabold text-gramin-900 mb-4 leading-tight tracking-tight drop-shadow-lg bg-gradient-to-r from-gramin-600 via-gramin-400 to-setu-400 bg-clip-text text-transparent">Explore Our Government & CSR Model</h1>
       <p className="text-2xl text-gramin-700 mb-6 font-semibold">Promote Transparent Governance & Accelerate Rural Development</p>
       <p className="text-lg text-gramin-600 mb-8 max-w-3xl">GraminSetu’s Government and CSR portal empowers public agencies and socially responsible enterprises to efficiently monitor village-level programs, foster transparency, and engage with communities in real time. Drive impactful governance and development outcomes through technology tailored for rural realities.</p>
+      <div className="w-full flex justify-center mb-6">
+        <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-gramin-100 bg-white">
+          <img src={require('../assets/Before-and-after-images/govt-b-a.png')} alt="GraminSetu: Transparent Governance & Development" className="mx-auto w-full max-w-2xl object-cover" style={{ minHeight: 250, maxHeight: 640 }} />
+        </div>
+      </div>
     </section>
 
     {/* Features Section */}

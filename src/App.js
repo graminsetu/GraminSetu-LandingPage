@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
+import WorkInProgress from './pages/WorkInProgress';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import Schemes from './pages/Schemes.jsx';
@@ -20,6 +21,7 @@ function App() {
       <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-xl">Loading...</div>}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/work-in-progress" element={<WorkInProgress />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/schemes" element={<Schemes />} />

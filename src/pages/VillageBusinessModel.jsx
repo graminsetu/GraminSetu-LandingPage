@@ -95,7 +95,13 @@ const VillageBusinessModel = () => (
       <h1 className="text-4xl md:text-5xl font-bold text-gramin-900 mb-4">Explore Our Village Business Model</h1>
       <p className="text-xl text-gramin-700 mb-6">Empower Your Village Digitally — Connect, Grow, Thrive</p>
       <p className="text-lg text-gramin-600 mb-8">GraminSetu bridges the digital divide by creating an integrated village ecosystem where every resident enjoys seamless access to information, commerce, community engagement, and governance transparency. Our platform empowers villagers to take charge of their development and livelihood, unlocking opportunities for sustainable growth.</p>
-      <img src="/images/village-hero.jpg" alt="Engaged villagers using GraminSetu" className="mx-auto rounded-lg shadow-md w-full max-w-2xl mb-6" />
+    </section>
+
+    {/* Empowered Village Image Section */}
+    <section className="max-w-3xl mx-auto px-4 py-6">
+      <div className="bg-white rounded-xl shadow-md border border-gramin-100 p-4 flex items-center justify-center">
+        <img src={require('../assets/business-models/village-before-after.png')} alt="GraminSetu: The Empowered Village" className="w-full max-w-2xl rounded-lg" />
+      </div>
     </section>
 
     {/* Features Section */}
