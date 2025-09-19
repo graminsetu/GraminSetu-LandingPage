@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import graminsetuMainImage from "../assets/images/graminsetu-main-image.png";
 // import { Helmet } from "react-helmet";
 import SEO from "../components/SEO";
@@ -15,6 +16,7 @@ import { landingContent } from "../constants/landingContent";
 import { businessModels } from "../constants/businessModels";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [selectedModel, setSelectedModel] = useState('village');
   useEffect(() => {
@@ -49,6 +51,7 @@ const LandingPage = () => {
               <LanguageSelector />
             </div>
           </div>
+          
         </div>
       </header>
       {/* Hero Section */}
@@ -117,7 +120,7 @@ const LandingPage = () => {
             </div>
             <div className="font-bold text-xl mb-2">Villager</div>
             <div className="text-gramin-600 text-center mb-4">Access schemes, learn, and connect with your community.</div>
-            <button className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto">Enter as Villager</button>
+            <a href="/village-business-model" className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto text-center block">Explore Village Model</a>
           </div>
           {/* Business/NGO Portal Card */}
           <div className="bg-white rounded-3xl border border-gramin-200 shadow-lg flex flex-col items-center p-10 md:p-12 -translate-y-2 transition-all duration-200 w-full min-w-0 hover:shadow-xl hover:-translate-y-2 hover:border-gramin-400">
@@ -126,7 +129,7 @@ const LandingPage = () => {
             </div>
             <div className="font-bold text-xl mb-2">Business/NGO</div>
             <div className="text-gramin-600 text-center mb-4">Discover partners, expand reach, and collaborate.</div>
-            <button className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto">Business/NGO Portal</button>
+            <button className="bg-gramin-600 hover:bg-gramin-700 text-white font-bold py-2 px-6 rounded-lg transition w-full mt-auto" onClick={() => navigate('/business/ngo-business-model')}>Business/NGO Portal</button>
           </div>
           {/* Government/CSR Portal Card */}
           <div className="bg-white rounded-3xl border border-gramin-200 shadow-lg flex flex-col items-center p-10 md:p-12 -translate-y-2 transition-all duration-200 w-full min-w-0 hover:shadow-xl hover:-translate-y-2 hover:border-gramin-400">
@@ -180,7 +183,16 @@ const LandingPage = () => {
                 <li key={idx} className="mb-1">{point}</li>
               ))}
             </ul>
-            <button className="bg-gramin-700 hover:bg-gramin-800 text-white font-bold py-4 px-12 rounded-full transition text-xl shadow-md flex items-center gap-2">
+            <button
+              className="bg-gramin-700 hover:bg-gramin-800 text-white font-bold py-4 px-12 rounded-full transition text-xl shadow-md flex items-center gap-2 mt-2"
+              style={{ width: 'fit-content' }}
+              onClick={() => {
+                let link = businessModels.find((m) => m.key === selectedModel).exploreLink || '#';
+                if (selectedModel === 'village') link = '/village-business-model';
+                if (selectedModel === 'business') link = '/business/ngo-business-model';
+                navigate(link);
+              }}
+            >
               Explore More <span className="ml-1">→</span>
             </button>
           </div>
