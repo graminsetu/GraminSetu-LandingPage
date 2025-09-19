@@ -6,7 +6,7 @@ import { useState as useAccordionState } from "react";
 
 const planCycles = [
   { key: 'monthly', label: 'Monthly', savings: null },
-  { key: 'quarterly', label: 'Quarterly', savings: 'Save 10%' },
+  { key: 'quarterly', label: 'Quarterly (4 Months)', savings: 'Save 10%' },
   { key: 'yearly', label: 'Yearly', savings: 'Save 17%' }
 ];
 
@@ -83,8 +83,8 @@ const pricingPlans = {
     {
       name: "Growth",
       icon: "🚀",
-      price: 1349,
-      priceLabel: "₹1,349/quarter",
+  price: 1799,
+  priceLabel: "₹1,799/quarter (4 mo)",
       summary: "Unlimited messaging, enhanced analytics, campaign templates, API access",
       who: "Active NGOs, small businesses",
       details: [
@@ -100,8 +100,8 @@ const pricingPlans = {
     {
       name: "Impact",
       icon: "🌟",
-      price: 2499,
-      priceLabel: "₹2,499/quarter",
+  price: 3299,
+  priceLabel: "₹3,299/quarter (4 mo)",
       summary: "All Growth features, custom integrations, dedicated support, multi-village tools",
       who: "Scaling NGOs, CSR teams",
       details: [

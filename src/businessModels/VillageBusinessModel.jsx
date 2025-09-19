@@ -69,8 +69,8 @@ const pricingPlans = {
         "Personalized alerts",
         "Community recognition badges"
       ],
-      price: 270,
-      offer: "₹199 for first 3 months",
+  price: 360,
+  offer: "₹299 for 4 months",
       highlight: true
     },
     {
@@ -83,8 +83,8 @@ const pricingPlans = {
         "Premium customer support",
         "Advanced marketplace analytics"
       ],
-      price: 400,
-      offer: "₹299 for first 3 months",
+  price: 520,
+  offer: "₹399 for 4 months",
       highlight: false
     }
   ],
@@ -146,7 +146,7 @@ const userJourney = [
 
 const planLabels = {
   monthly: "Monthly",
-  quarterly: "Quarterly (3 Months)",
+  quarterly: "Quarterly (4 Months)",
   yearly: "Yearly (12 Months)"
 };
 
@@ -280,7 +280,7 @@ function PricingCard({ name, features, price, offer, highlight, planType }) {
       </div>
       <div className="text-4xl font-extrabold text-gramin-600 mb-1 flex items-end">
         {price === 0 ? <span>Free</span> : <><span className="text-2xl align-super">₹</span>{price}</>}
-        <span className="text-base font-medium text-gramin-500 ml-1">{planType === 'monthly' ? '/mo' : planType === 'quarterly' ? '/3mo' : '/yr'}</span>
+        <span className="text-base font-medium text-gramin-500 ml-1">{planType === 'monthly' ? '/mo' : planType === 'quarterly' ? '/4mo' : '/yr'}</span>
       </div>
       <div className="text-xs text-gramin-500 mb-3 font-semibold tracking-wide uppercase">{offer}</div>
       <button

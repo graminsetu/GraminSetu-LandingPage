@@ -42,6 +42,6 @@ export const businessModels = [
       "Promote sustainable development goals with clear reporting.",
       "Drive better governance and community empowerment."
     ],
-    exploreLink: "/governments"
+  exploreLink: "/government-csr-business-model"
   }
 ];
