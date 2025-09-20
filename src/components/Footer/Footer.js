@@ -17,13 +17,27 @@ function Footer() {
                             <form className="flex flex-col sm:flex-row items-center gap-2 w-full justify-center" onSubmit={async (e) => {
                                 e.preventDefault();
                                 const email = e.target.email.value;
-                                await fetch('/api/newsletter/subscribe', {
-                                    method: 'POST',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify({ email }),
-                                });
-                                alert(footerContent.newsletter.success);
-                                e.target.reset();
+                                // Email validation regex
+                                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                if (!emailRegex.test(email)) {
+                                    alert('Please enter a valid email address.');
+                                    return;
+                                }
+                                try {
+                                    const response = await fetch('http://statedata.api.graminsetu.in/api/beta/nost', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ email }),
+                                    });
+                                    if (response.ok) {
+                                        alert(footerContent.newsletter.success);
+                                        e.target.reset();
+                                    } else {
+                                        alert('Failed to send email. Please try again later.');
+                                    }
+                                } catch (error) {
+                                    alert('An error occurred. Please try again later.');
+                                }
                             }}>
                                 <input
                                     type="email"

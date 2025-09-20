@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import graminsetuMainImage from "../assets/images/graminsetu-main-image.png";
+import graminsetuMainImage from "../assets/images/graminsetu-main-image.webp";
 // import { Helmet } from "react-helmet";
 import SEO from "../components/SEO";
 import Logo from "../components/Logo/Logo";
