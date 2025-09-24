@@ -59,7 +59,7 @@ function Footer() {
                     <div className="flex flex-col items-center md:items-start min-h-[180px] w-full md:max-w-[180px]" style={{flexBasis: '0', flexGrow: 0.8}}>
                         <h3 className="text-lg font-bold mb-4 tracking-wide uppercase text-gramin-200 text-center md:text-left">Quick Links</h3>
                         <ul className="space-y-2 w-full max-w-xs mx-auto md:mx-0">
-                            {footerContent.quickLinks.filter(link => link.label !== 'Govt Schemas' && link.label !== 'Carrier').map(link => (
+                            {footerContent.quickLinks.filter(link => link.label !== 'Govt Schemas' && link.label !== 'Carrier' && link.label !== 'Government Schemes').map(link => (
                                 <li key={link.href} className="w-full">
                                     <a href={link.href} className="flex items-center gap-2 text-gramin-300 hover:text-gramin-50 transition-colors text-base font-medium px-1 py-1 rounded focus:outline-none focus:bg-gramin-800 group">
                                         <span className="transition-transform group-hover:translate-x-1">🔗</span>
@@ -69,26 +69,11 @@ function Footer() {
                             ))}
                         </ul>
                     </div>
-                    {/* Need Help (top) + Team (bottom) */}
-                    <div className="flex flex-col justify-between h-full w-full max-w-xs mx-auto md:mx-0">
-                        <div className="flex flex-col items-center md:items-start mb-8 md:mb-6">
-                            <h3 className="text-lg font-bold mb-4 tracking-wide uppercase text-gramin-200 text-center md:text-left">Need Help?</h3>
-                            <ul className="space-y-2 w-full">
-                                {footerContent.helpLinks.map(link => (
-                                    <li key={link.href} className="w-full">
-                                        <a href={link.href} className="flex items-center gap-2 text-gramin-300 hover:text-gramin-50 transition-colors text-base font-medium px-1 py-1 rounded focus:outline-none focus:bg-gramin-800 group">
-                                            <span className="transition-transform group-hover:scale-125">{link.icon}</span>
-                                            <span>{link.label}</span>
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="flex flex-col items-center md:items-start">
-                            <h3 className="text-lg font-bold mb-4 tracking-wide uppercase text-gramin-200 text-center md:text-left">Our Team</h3>
-                            <div className="bg-gramin-800/60 rounded-xl p-4 shadow-inner w-full">
-                                <p className="text-gramin-200 text-base leading-relaxed">{footerContent.teamNote}</p>
-                            </div>
+                    {/* Our Team (bottom) */}
+                    <div className="flex flex-col items-center md:items-start w-full max-w-xs mx-auto md:mx-0">
+                        <h3 className="text-lg font-bold mb-4 tracking-wide uppercase text-gramin-200 text-center md:text-left">Our Team</h3>
+                        <div className="bg-gramin-800/60 rounded-xl p-4 shadow-inner w-full">
+                            <p className="text-gramin-200 text-base leading-relaxed">{footerContent.teamNote}</p>
                         </div>
                     </div>
                 </div>
