@@ -136,7 +136,7 @@ const Contact = () => (
               >
                 <Instagram className="w-7 h-7" />
               </a>
-            </div>
+            </div>please check carrier page 
           </div>
         </div>
 

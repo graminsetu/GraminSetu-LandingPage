@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import Logo from "../components/Logo/Logo";
 import graminsetuLogo from "../assets/images/graminsetu-logo.png";
 import LanguageSelector from "../components/LanguageSelector/LanguageSelector";
 import Footer from "../components/Footer/Footer";
@@ -34,8 +35,7 @@ function Careers() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <a href="/" className="flex items-center space-x-3">
-              <img src={graminsetuLogo} alt="GraminSetu Logo" className="drop-shadow" style={{ width: 48, height: 48, marginTop: 0, marginBottom: 0 }} />
-              <span className="text-2xl font-bold text-gramin-700 hidden sm:inline">GraminSetu</span>
+              <Logo size="lg" showText={true} />
             </a>
             <div className="flex items-center space-x-6">
               <LanguageSelector />
@@ -44,20 +44,29 @@ function Careers() {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="flex-1 w-full max-w-4xl mx-auto py-16 px-4">
-        <div className="flex flex-col items-center mb-8">
-          <img
-            src={graminsetuLogo}
-            alt="GraminSetu Logo"
-            className="drop-shadow"
-            style={{ width: 120, height: 120, marginTop: 0, marginBottom: 8, display: 'block' }}
-          />
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-2 text-gramin-700 drop-shadow-sm text-center">Careers</h1>
-          <p className="text-lg text-gramin-800 text-center max-w-2xl mb-4">
-            Join GraminSetu and help bridge India's villages with technology, transparency, and trust. Explore open positions below and apply to be part of our mission-driven team.
-          </p>
+      {/* Hero Section */}
+      <section className=" pt-0 relative w-full flex flex-col items-center justify-center py-16 md:py-24 px-4 bg-gradient-to-br from-gramin-50 via-white to-gramin-100 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none select-none pt-0">
         </div>
+        <img
+          src={graminsetuLogo}
+          alt="GraminSetu Logo"
+          className="drop-shadow animate-fade-in"
+          style={{ width: 230, height: 230, marginTop: -100, marginBottom: -20, display: 'block' }}
+        />
+        <h1 className="text-5xl md:text-6xl font-black mb-4 text-gramin-700 drop-shadow-lg text-center tracking-tight animate-fade-in">Careers at GraminSetu</h1>
+        <p className="text-xl md:text-2xl text-gramin-700 text-center max-w-2xl mb-6 animate-fade-in delay-100">
+          Join <span className="text-gramin-600 font-bold">GraminSetu</span> and help bridge India's villages with <span className="text-gramin-700 font-bold">technology</span>, <span className="text-gramin-500 font-bold">transparency</span>, and <span className="text-gramin-800 font-bold">trust</span>.<br/>
+          <span className="text-gramin-700">Explore open positions below and apply to be part of our mission-driven team.</span>
+        </p>
+        <div className="flex flex-wrap gap-4 justify-center animate-fade-in delay-200">
+          <span className="inline-flex items-center bg-gramin-50 border border-gramin-200 text-gramin-700 rounded-full px-5 py-2 text-lg font-semibold shadow-sm">🌱 Impact Rural India</span>
+          <span className="inline-flex items-center bg-gramin-100 border border-gramin-200 text-gramin-800 rounded-full px-5 py-2 text-lg font-semibold shadow-sm">🤝 Inclusive Culture</span>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <main className="flex-1 w-full max-w-5xl mx-auto py-12 px-2 md:px-6">
         {/* Job listings and application form will go here */}
         <div className="w-full" id="job-listings">
           <JobListings jobs={jobs} loading={loadingJobs} error={jobsError} onView={setViewJob} onApply={setApplyJob} />
@@ -160,46 +169,46 @@ function JobApplicationForm({ job, jobs, loadingJobs, onClose }) {
   return (
     <>
       <Toast message={toast.message} type={toast.type} onClose={() => setToast({ message: '', type: toast.type })} />
-      <div className="bg-white rounded-2xl shadow-2xl border border-gramin-100 p-0 max-w-2xl mx-auto relative overflow-hidden">
-        <div className="bg-gradient-to-r from-gramin-100 to-setu-100 px-8 py-6 border-b border-gramin-200 flex items-center gap-4">
-          <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="text-gramin-600"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 01-8 0m8 0a4 4 0 00-8 0m8 0V5a4 4 0 00-8 0v2m8 0a4 4 0 01-8 0m8 0v2a4 4 0 01-8 0V7m8 0v2a4 4 0 01-8 0V9m8 0v2a4 4 0 01-8 0v2m8 0v2a4 4 0 01-8 0v2m8 0v2a4 4 0 01-8 0v2m8 0v2a4 4 0 01-8 0v2" /></svg>
+      <div className="bg-white rounded-3xl shadow-xl border border-gramin-100 p-0 max-w-2xl mx-auto relative overflow-hidden animate-fade-in">
+        <div className="bg-gradient-to-r from-gramin-50 to-gramin-100 px-10 py-8 border-b border-gramin-200 flex items-center gap-4 relative">
+          <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-gramin-100 to-gramin-200 shadow text-3xl mr-2">✍️</span>
           <div>
-            <h2 className="text-2xl font-bold text-gramin-800 mb-1">Apply for this Job</h2>
-            {job && <div className="text-gramin-700 font-semibold text-lg">{job.title || job.Title || ''}</div>}
+            <h2 className="text-3xl font-black text-gramin-700 mb-1 tracking-tight">Apply for this Job</h2>
+            {job && <div className="text-gramin-600 font-semibold text-lg">{job.title || job.Title || ''}</div>}
           </div>
         </div>
-        <div className="p-8">
+        <div className="p-10 bg-white">
         {submitting && (
-          <div className="absolute inset-0 bg-white/80 flex flex-col items-center justify-center z-20 rounded-2xl">
-            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-gramin-600 mb-2"></div>
-            <span className="text-gramin-700 font-semibold">Submitting...</span>
+          <div className="absolute inset-0 bg-white/80 flex flex-col items-center justify-center z-20 rounded-3xl">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-setu-600 mb-2"></div>
+            <span className="text-setu-700 font-semibold text-lg">Submitting...</span>
           </div>
         )}
-        <form className="flex flex-col gap-5" onSubmit={handleSubmit} aria-busy={submitting} aria-live="polite">
-          <div className="flex flex-col md:flex-row gap-4">
+        <form className="flex flex-col gap-6" onSubmit={handleSubmit} aria-busy={submitting} aria-live="polite">
+          <div className="flex flex-col md:flex-row gap-6">
             <label className="flex-1 text-base font-semibold text-gramin-700">
               Name
-              <input type="text" name="name" required value={form.name} onChange={handleChange} className="mt-1 w-full px-4 py-3 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow" placeholder="Your full name" autoFocus />
+              <input type="text" name="name" required value={form.name} onChange={handleChange} className="mt-1 w-full px-5 py-3 rounded-xl border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow-sm" placeholder="Your full name" autoFocus />
             </label>
             <label className="flex-1 text-base font-semibold text-gramin-700">
               Email
-              <input type="email" name="email" required value={form.email} onChange={handleChange} className="mt-1 w-full px-4 py-3 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow" placeholder="Your email address" />
+              <input type="email" name="email" required value={form.email} onChange={handleChange} className="mt-1 w-full px-5 py-3 rounded-xl border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow-sm" placeholder="Your email address" />
             </label>
           </div>
-          <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col md:flex-row gap-6">
             <label className="flex-1 text-base font-semibold text-gramin-700">
               Phone
-              <input type="tel" name="phone" required value={form.phone} onChange={handleChange} className="mt-1 w-full px-4 py-3 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow" placeholder="Your phone number" />
+              <input type="tel" name="phone" required value={form.phone} onChange={handleChange} className="mt-1 w-full px-5 py-3 rounded-xl border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow-sm" placeholder="Your phone number" />
             </label>
             <label className="flex-1 text-base font-semibold text-gramin-700">
               Job Position
               {job ? (
-                <div className="mt-1 w-full px-4 py-3 rounded-lg border border-gramin-200 bg-gray-100 text-gramin-900 text-lg shadow flex items-center">
+                <div className="mt-1 w-full px-5 py-3 rounded-xl border border-gramin-200 bg-gramin-50 text-gramin-900 text-lg shadow flex items-center">
                   <span>{job.title || job.Title || ''}</span>
                   <input type="hidden" name="job" value={job.id} />
                 </div>
               ) : (
-                <select name="job" required value={form.job} onChange={handleChange} className="mt-1 w-full px-4 py-3 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 bg-white text-lg shadow">
+                <select name="job" required value={form.job} onChange={handleChange} className="mt-1 w-full px-5 py-3 rounded-xl border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 bg-white text-lg shadow-sm">
                   <option value="" disabled>{loadingJobs ? 'Loading jobs...' : 'Select a job'}</option>
                   {jobs.filter(j => j.isActive !== false).map((j) => (
                     <option key={j.id} value={j.id}>{j.title || j.Title || ''}</option>
@@ -210,10 +219,10 @@ function JobApplicationForm({ job, jobs, loadingJobs, onClose }) {
           </div>
           <label className="text-base font-semibold text-gramin-700">
             Resume (PDF, DOC, DOCX)
-            <input ref={fileInputRef} type="file" name="resume" accept=".pdf,.doc,.docx" required onChange={handleChange} className="mt-1 w-full px-4 py-2 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 bg-white text-lg shadow" />
+            <input ref={fileInputRef} type="file" name="resume" accept=".pdf,.doc,.docx" required onChange={handleChange} className="mt-1 w-full px-5 py-3 rounded-xl border border-gramin-200 focus:ring-2 focus:ring-gramin-400 bg-white text-lg shadow-sm" />
           </label>
-          <button type="submit" disabled={submitting} className="mt-2 bg-gramin-600 text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:bg-gramin-700 focus:ring-2 focus:ring-gramin-400 transition text-lg tracking-wide disabled:opacity-60 disabled:cursor-not-allowed">
-            {submitting ? 'Submitting...' : 'Submit Application'}
+          <button type="submit" disabled={submitting} className="mt-2 bg-gramin-600 text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:bg-gramin-700 focus:ring-2 focus:ring-gramin-400 transition text-lg tracking-wide disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+            {submitting ? (<><span className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></span> Submitting...</>) : (<><span>🚀</span>Submit Application</>)}
           </button>
         </form>
         </div>
@@ -254,25 +263,34 @@ function JobListings({ jobs, loading, error, onView, onApply }) {
   };
 
   return (
-    <div className="grid gap-10 md:grid-cols-2">
+  <div className="grid gap-10 grid-cols-1 md:grid-cols-2 justify-items-center items-stretch">
       {jobs.map((job) => {
+        const isClosed = job.isActive === false;
         return (
           <div
             key={job.id}
-            className="bg-white rounded-2xl shadow-xl border border-gramin-100 p-8 flex flex-col transition-transform hover:scale-[1.025] hover:shadow-2xl focus-within:ring-2 focus-within:ring-gramin-400"
+            className={`relative group bg-white rounded-3xl shadow-xl border border-gramin-100 p-8 flex flex-col items-start transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:border-gramin-300 focus-within:ring-2 focus-within:ring-gramin-400 ${isClosed ? 'opacity-70 grayscale' : ''} w-full max-w-[380px] min-w-[270px] mx-auto md:mx-0 md:w-[95%]`}
+            style={{ minHeight: 370, marginBottom: 0 }}
             tabIndex={0}
             aria-label={`Job card: ${job.Title || job.title || ''}`}
           >
-            <h2 className="text-2xl font-extrabold text-gramin-700 mb-2 tracking-tight">{job.Title || job.title || ''}</h2>
-            <div className="flex flex-wrap gap-3 mb-2">
-              <span className="inline-flex items-center bg-gramin-50 border border-gramin-200 text-gramin-700 rounded px-3 py-1 text-sm font-medium">
-                <span className="font-semibold mr-1">Location:</span> {job.Location || job.location || 'N/A'}
+            {/* Icon and badge row */}
+            <div className="flex items-center gap-3 mb-3">
+              <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-gramin-100 to-gramin-200 shadow text-3xl">
+                {isClosed ? '🔒' : '💼'}
               </span>
-              <span className="inline-flex items-center bg-gramin-50 border border-gramin-200 text-gramin-700 rounded px-3 py-1 text-sm font-medium">
-                <span className="font-semibold mr-1">Type:</span> {job.JobType || job.type || job.Type || 'N/A'}
+              <span className={`ml-auto px-3 py-1 rounded-full text-xs font-bold tracking-wide shadow-sm ${isClosed ? 'bg-red-100 text-red-700' : 'bg-gramin-50 text-gramin-700'}`}>{isClosed ? 'Closed' : 'Open'}</span>
+            </div>
+            <h2 className="text-2xl font-extrabold text-gramin-700 mb-2 tracking-tight group-hover:text-gramin-800 transition-colors">{job.Title || job.title || ''}</h2>
+            <div className="flex flex-wrap gap-3 mb-3">
+              <span className="inline-flex items-center bg-gramin-50 border border-gramin-200 text-gramin-700 rounded-full px-3 py-1 text-sm font-medium">
+                <span className="font-semibold mr-1">📍</span> {job.Location || job.location || 'N/A'}
+              </span>
+              <span className="inline-flex items-center bg-gramin-100 border border-gramin-200 text-gramin-800 rounded-full px-3 py-1 text-sm font-medium">
+                <span className="font-semibold mr-1">🕒</span> {job.JobType || job.type || job.Type || 'N/A'}
               </span>
             </div>
-            <p className="text-gramin-800 mb-3 text-base leading-relaxed">
+            <p className="text-gramin-800 mb-4 text-base leading-relaxed min-h-[60px]">
               {Array.isArray(job.Description)
                 ? getShortDesc(job.Description)
                 : (job.Description || job.description || '')}
@@ -280,11 +298,6 @@ function JobListings({ jobs, loading, error, onView, onApply }) {
                 <span className="text-gramin-600 cursor-pointer ml-2 underline font-medium" onClick={() => onView(job)} tabIndex={0} role="button" aria-label="Read more about job">Read more</span>
               )}
             </p>
-            <div className="flex flex-wrap gap-4 text-gramin-600 text-base mt-auto mb-4">
-              {job.isActive === false && (
-                <span className="bg-red-100 text-red-700 rounded px-3 py-1 font-medium">Closed</span>
-              )}
-            </div>
             <div className="flex gap-4 mt-auto">
               <button
                 className="bg-gramin-600 text-white px-6 py-2 rounded-lg font-semibold shadow hover:bg-gramin-700 transition focus:outline-none focus:ring-2 focus:ring-gramin-400"
@@ -292,18 +305,20 @@ function JobListings({ jobs, loading, error, onView, onApply }) {
                 tabIndex={0}
                 aria-label={`View details for ${job.Title || job.title || ''}`}
               >
-                View
+                <span className="mr-2">🔎</span>View
               </button>
               <button
-                className={`bg-gramin-100 text-gramin-700 px-6 py-2 rounded-lg font-semibold shadow hover:bg-gramin-200 transition border border-gramin-200 focus:outline-none focus:ring-2 focus:ring-gramin-400 ${job.isActive === false ? 'opacity-60 cursor-not-allowed' : ''}`}
+                className={`bg-gramin-100 text-gramin-700 px-6 py-2 rounded-lg font-semibold shadow hover:bg-gramin-200 transition border border-gramin-200 focus:outline-none focus:ring-2 focus:ring-gramin-400 ${isClosed ? 'opacity-60 cursor-not-allowed' : ''}`}
                 onClick={() => onApply(job)}
-                disabled={job.isActive === false}
+                disabled={isClosed}
                 tabIndex={0}
                 aria-label={`Apply for ${job.Title || job.title || ''}`}
               >
-                Apply
+                <span className="mr-2">✍️</span>Apply
               </button>
             </div>
+            {/* Decorative animated border */}
+            <span className="pointer-events-none absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-gramin-400 group-hover:shadow-lg transition-all duration-300"></span>
           </div>
         );
       })}
