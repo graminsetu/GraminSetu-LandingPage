@@ -6,6 +6,20 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import './tailwind.css';
 
+// Microsoft Clarity: Load only if production and ID exists
+// const clarityId = process.env.REACT_APP_CLARITY_ID;
+
+// if (
+//   process.env.NODE_ENV === 'production' &&
+//   clarityId
+// ) {
+//   (function(c,l,a,r,i,t,y){
+//     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+//     t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+//     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+//   })(window, document, "clarity", "script", clarityId);
+// }
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -13,12 +27,8 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://cra.link/PWA
+// Service worker configuration
 serviceWorkerRegistration.unregister();
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// Performance reporting
 reportWebVitals();

@@ -121,12 +121,13 @@ function JobApplicationForm({ job, jobs, loadingJobs, onClose }) {
     setToast({ message: '', type: 'success' });
     try {
       // 1. Upload resume if present
-      let resumeUrl = '';
+      let resumeId = null;
       if (form.resume) {
         const fileData = new FormData();
         fileData.append('files', form.resume);
         const uploadRes = await axios.post('https://helpful-moonlight-9442b7df97.strapiapp.com/api/upload', fileData);
-        resumeUrl = uploadRes.data[0]?.url || '';
+        // Strapi returns an array of uploaded files
+        resumeId = uploadRes.data && Array.isArray(uploadRes.data) && uploadRes.data[0]?.id ? uploadRes.data[0].id : null;
       }
       // 2. Post application JSON
       const payload = {
@@ -134,8 +135,10 @@ function JobApplicationForm({ job, jobs, loadingJobs, onClose }) {
           name: form.name,
           email: form.email,
           phone: form.phone,
-          resume: resumeUrl,
-          job: form.job,
+          resume: resumeId,
+          jobs: {
+            connect: [parseInt(form.job, 10)] // Array of job IDs only
+          }
         }
       };
       await axios.post('https://helpful-moonlight-9442b7df97.strapiapp.com/api/applications', payload, {
