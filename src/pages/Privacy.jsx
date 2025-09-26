@@ -1,4 +1,3 @@
-
 import Logo from '../components/Logo/Logo';
 import graminsetuLogo from '../assets/images/graminsetu-logo.png';
 import LanguageSelector from '../components/LanguageSelector/LanguageSelector';
@@ -29,7 +28,9 @@ const Privacy = () => (
           className="drop-shadow"
           style={{ width: 230, height: 230, marginTop: 0, marginBottom: -20 }}
         />
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-2 text-gramin-700 drop-shadow-sm text-center">Privacy Policy</h1>
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-2 text-gramin-700 drop-shadow-sm text-center">
+          Privacy Policy
+        </h1>
         <p className="text-lg text-gramin-700 text-center max-w-2xl mb-4">
           Effective Date: <span className="font-semibold">[Insert Date]</span>
         </p>
@@ -37,46 +38,63 @@ const Privacy = () => (
       <div className="bg-white rounded-2xl shadow-xl border border-gramin-100 max-w-3xl w-full mx-auto p-8 md:p-12 animate-fade-in">
         <ol className="list-decimal list-inside text-gramin-800 text-lg space-y-6">
           <li>
-            <span className="font-bold">Information We Collect</span><br/>
+            <span className="font-bold">Information We Collect</span>
+            <br />
             We collect personal information you provide directly to us, such as:
             <ul className="list-disc pl-6 mt-2 text-base text-gramin-700">
               <li>Name</li>
               <li>Email address</li>
               <li>Phone number</li>
-              <li>Resume and other documents submitted through job applications or demo requests</li>
+              <li>
+                Resume and other documents submitted through job applications or demo requests
+              </li>
               <li>Any other information you choose to provide</li>
             </ul>
-            We may also collect non-personal information via cookies and similar technologies to improve user experience.
+            We may also collect non-personal information via cookies and similar technologies to
+            improve user experience.
           </li>
           <li>
-            <span className="font-bold">How We Use Your Information</span><br/>
+            <span className="font-bold">How We Use Your Information</span>
+            <br />
             We use your information to:
             <ul className="list-disc pl-6 mt-2 text-base text-gramin-700">
               <li>Provide and improve our services and website</li>
-              <li>Respond to your inquiries and requests, including job applications and demo contacts</li>
+              <li>
+                Respond to your inquiries and requests, including job applications and demo contacts
+              </li>
               <li>Communicate updates and marketing information if you opt-in</li>
               <li>Comply with legal obligations</li>
             </ul>
           </li>
           <li>
-            <span className="font-bold">Data Sharing and Disclosure</span><br/>
-            We do not sell, rent, or trade your personal data to third parties.<br/>
+            <span className="font-bold">Data Sharing and Disclosure</span>
+            <br />
+            We do not sell, rent, or trade your personal data to third parties.
+            <br />
             We may share information with:
             <ul className="list-disc pl-6 mt-2 text-base text-gramin-700">
-              <li>Service providers who assist us in operating our business, under strict confidentiality.</li>
+              <li>
+                Service providers who assist us in operating our business, under strict
+                confidentiality.
+              </li>
               <li>As required by law, or to protect legal rights.</li>
             </ul>
           </li>
           <li>
-            <span className="font-bold">Data Security</span><br/>
-            We implement reasonable security measures to protect your personal information from unauthorized access or disclosure. However, no internet transmission is 100% secure.
+            <span className="font-bold">Data Security</span>
+            <br />
+            We implement reasonable security measures to protect your personal information from
+            unauthorized access or disclosure. However, no internet transmission is 100% secure.
           </li>
           <li>
-            <span className="font-bold">Data Retention</span><br/>
-            We retain your personal data only as long as necessary for the purposes described in this policy or as required by law.
+            <span className="font-bold">Data Retention</span>
+            <br />
+            We retain your personal data only as long as necessary for the purposes described in
+            this policy or as required by law.
           </li>
           <li>
-            <span className="font-bold">Your Rights</span><br/>
+            <span className="font-bold">Your Rights</span>
+            <br />
             Depending on your jurisdiction, you may have rights to:
             <ul className="list-disc pl-6 mt-2 text-base text-gramin-700">
               <li>Access and update your personal information</li>
@@ -86,21 +104,31 @@ const Privacy = () => (
             </ul>
           </li>
           <li>
-            <span className="font-bold">Children’s Privacy</span><br/>
-            Our website and services are not intended for children under 13. We do not knowingly collect data from children.
+            <span className="font-bold">Children’s Privacy</span>
+            <br />
+            Our website and services are not intended for children under 13. We do not knowingly
+            collect data from children.
           </li>
           <li>
-            <span className="font-bold">Cookies and Tracking Technologies</span><br/>
-            Our website uses cookies to enhance user experience. You can control cookie preferences through your browser settings.
+            <span className="font-bold">Cookies and Tracking Technologies</span>
+            <br />
+            Our website uses cookies to enhance user experience. You can control cookie preferences
+            through your browser settings.
           </li>
           <li>
-            <span className="font-bold">Changes to This Privacy Policy</span><br/>
-            We may update this policy periodically. We encourage you to review it regularly. Continued use of our site signifies acceptance of current terms.
+            <span className="font-bold">Changes to This Privacy Policy</span>
+            <br />
+            We may update this policy periodically. We encourage you to review it regularly.
+            Continued use of our site signifies acceptance of current terms.
           </li>
           <li>
-            <span className="font-bold">Contact Us</span><br/>
-            If you have questions, concerns, or requests regarding this Privacy Policy, please contact us at:<br/>
-            <span className="font-semibold">[Insert Contact Email]</span><br/>
+            <span className="font-bold">Contact Us</span>
+            <br />
+            If you have questions, concerns, or requests regarding this Privacy Policy, please
+            contact us at:
+            <br />
+            <span className="font-semibold">[Insert Contact Email]</span>
+            <br />
             <span className="font-semibold">[Insert Company Address as applicable]</span>
           </li>
         </ol>

@@ -9,7 +9,6 @@ body {
   min-height: 100vh;
 }
 
-
 /* Use Tailwind utility classes for buttons and nav links */
 .btn-primary {
   @apply bg-gramin-600 text-white rounded-lg font-semibold transition-colors duration-200;

@@ -1,6 +1,6 @@
 export const howItWorksContent = {
-  sectionTitle: "How GraminSetu Works",
-  sectionSubtitle: "Get started in just 3 simple steps",
+  sectionTitle: 'How GraminSetu Works',
+  sectionSubtitle: 'Get started in just 3 simple steps',
   steps: [
     {
       title: 'Register Easily',
@@ -17,5 +17,5 @@ export const howItWorksContent = {
       description: 'Share news, organize events, and build a stronger community together',
       icon: '3',
     },
-  ]
+  ],
 };

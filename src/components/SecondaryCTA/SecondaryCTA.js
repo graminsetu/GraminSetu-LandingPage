@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 // const SecondaryCTA = () => (
 // 	<section className="py-12 bg-white">
 // 		<div className="max-w-2xl mx-auto text-center">

@@ -10,11 +10,11 @@ import {
   User,
   MessageSquare,
   Type,
-} from "lucide-react";
-import Logo from "../components/Logo/Logo";
-import graminsetuLogo from "../assets/images/graminsetu-logo.png";
-import LanguageSelector from "../components/LanguageSelector/LanguageSelector";
-import Footer from "../components/Footer/Footer";
+} from 'lucide-react';
+import Logo from '../components/Logo/Logo';
+import graminsetuLogo from '../assets/images/graminsetu-logo.png';
+import LanguageSelector from '../components/LanguageSelector/LanguageSelector';
+import Footer from '../components/Footer/Footer';
 
 const Contact = () => (
   <div className="min-h-screen bg-gradient-to-br from-gramin-50 via-white to-setu-50 font-sans flex flex-col">
@@ -45,8 +45,8 @@ const Contact = () => (
           Contact Us
         </h1>
         <p className="text-lg text-gramin-800 text-center max-w-2xl">
-          We would love to hear from you! Whether you have questions,
-          partnership ideas, or need support, please get in touch.
+          We would love to hear from you! Whether you have questions, partnership ideas, or need
+          support, please get in touch.
         </p>
       </div>
 
@@ -54,8 +54,7 @@ const Contact = () => (
         {/* Contact Details */}
         <div className="bg-white/95 rounded-2xl shadow-xl p-8 flex flex-col justify-between border border-gramin-100 w-full h-full">
           <h2 className="text-3xl font-bold mb-6 text-gramin-800 flex items-center gap-2">
-            <MessageSquare className="w-8 h-8 text-gramin-600" /> Our Contact
-            Details
+            <MessageSquare className="w-8 h-8 text-gramin-600" /> Our Contact Details
           </h2>
           <div className="space-y-6">
             <div className="flex items-center gap-3 text-lg">
@@ -68,7 +67,7 @@ const Contact = () => (
                 support@graminsetu.in
               </a>
             </div>
-              <div className="flex items-center gap-3 text-lg justify-center">
+            <div className="flex items-center gap-3 text-lg justify-center">
               <Phone className="w-6 h-6 text-gramin-600" />
               <span className="font-semibold text-gramin-700">Phone:</span>
               <a
@@ -81,19 +80,14 @@ const Contact = () => (
             <div className="flex items-start gap-3 text-lg">
               <MapPin className="w-7 h-7 text-gramin-600 mt-1" />
               <span>
-                <span className="font-semibold text-gramin-700">
-                  Office Address:
-                </span>{" "}
+                <span className="font-semibold text-gramin-700">Office Address:</span>{' '}
                 Visakhapatnam, Andhra Pradesh, India
               </span>
             </div>
-              <div className="flex items-start gap-3 text-lg justify-center">
+            <div className="flex items-start gap-3 text-lg justify-center">
               <Clock className="w-7 h-7 text-gramin-600 mt-1" />
               <span>
-                <span className="font-semibold text-gramin-700">
-                  Business Hours:
-                </span>{" "}
-                <br />
+                <span className="font-semibold text-gramin-700">Business Hours:</span> <br />
                 Monday - Friday: 9:00 AM - 6:00 PM (IST)
                 <br />
                 Saturday - Sunday: Closed
@@ -102,9 +96,7 @@ const Contact = () => (
           </div>
 
           <div className="mt-8">
-            <h3 className="text-xl font-semibold mb-3 text-gramin-800">
-              Connect With Us
-            </h3>
+            <h3 className="text-xl font-semibold mb-3 text-gramin-800">Connect With Us</h3>
             <div className="flex space-x-5">
               <a
                 href="https://www.linkedin.com/company/graminsetu/"
@@ -136,7 +128,8 @@ const Contact = () => (
               >
                 <Instagram className="w-7 h-7" />
               </a>
-            </div>please check carrier page 
+            </div>
+            please check carrier page
           </div>
         </div>
 
@@ -145,12 +138,11 @@ const Contact = () => (
           className="bg-white/95 rounded-2xl shadow-xl p-8 flex flex-col gap-5 border border-gramin-100 w-full h-full"
           onSubmit={(e) => {
             e.preventDefault();
-            alert("Thank you for contacting us! We will get back to you soon.");
+            alert('Thank you for contacting us! We will get back to you soon.');
           }}
         >
           <h2 className="text-3xl font-bold mb-6 text-gramin-800 flex items-center gap-2">
-            <MessageSquare className="w-8 h-8 text-gramin-600" /> Send Us a
-            Message
+            <MessageSquare className="w-8 h-8 text-gramin-600" /> Send Us a Message
           </h2>
           <div className="flex flex-col gap-5">
             <label className="text-base font-semibold text-gramin-700">

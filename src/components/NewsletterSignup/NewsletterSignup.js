@@ -25,8 +25,11 @@ const NewsletterSignup = () => {
   };
 
   return (
-    <section id="newsletter" className="py-16 bg-gradient-to-br from-gramin-50 via-white to-setu-50">
-  <div className="max-w-sm mx-auto px-4 text-center">
+    <section
+      id="newsletter"
+      className="py-16 bg-gradient-to-br from-gramin-50 via-white to-setu-50"
+    >
+      <div className="max-w-sm mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-2">💌 Stay Connected with GraminSetu</h2>
         <p className="text-lg text-gramin-700 mb-6">
           Be the first to explore our Beta version. Enter your email below to join the waitlist.
@@ -37,7 +40,7 @@ const NewsletterSignup = () => {
             name="email"
             required
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Your email address"
             className="flex-1 px-2 py-3 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-black !text-black placeholder-gramin-400"
             disabled={status === 'loading'}

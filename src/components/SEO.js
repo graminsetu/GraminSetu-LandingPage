@@ -1,25 +1,40 @@
-import React from "react";
-import { Helmet } from "react-helmet";
+import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const SEO = () => (
   <Helmet>
     {/* Basic SEO Meta Tags */}
     <title>GraminSetu – Empowering Rural Communities with Technology</title>
-    <meta name="description" content="GraminSetu, founded by Tamminana Bhogesh, connects and empowers rural communities with technology." />
+    <meta
+      name="description"
+      content="GraminSetu, founded by Tamminana Bhogesh, connects and empowers rural communities with technology."
+    />
     <meta name="author" content="Tamminana Bhogesh" />
-    <meta name="keywords" content="GraminSetu, Rural, Technology, India, Bhogesh, Community, Empowerment, Founder, Tamminana Bhogesh" />
+    <meta
+      name="keywords"
+      content="GraminSetu, Rural, Technology, India, Bhogesh, Community, Empowerment, Founder, Tamminana Bhogesh"
+    />
 
     {/* OpenGraph Meta Tags */}
     <meta property="og:title" content="GraminSetu – Empowering Rural Communities with Technology" />
-    <meta property="og:description" content="GraminSetu, founded by Tamminana Bhogesh, connects and empowers rural communities with technology." />
+    <meta
+      property="og:description"
+      content="GraminSetu, founded by Tamminana Bhogesh, connects and empowers rural communities with technology."
+    />
     <meta property="og:image" content="https://graminsetu.com/logo.png" />
     <meta property="og:url" content="https://graminsetu.com" />
     <meta property="og:type" content="website" />
 
     {/* Twitter Card Meta Tags */}
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="GraminSetu – Empowering Rural Communities with Technology" />
-    <meta name="twitter:description" content="GraminSetu, founded by Tamminana Bhogesh, connects and empowers rural communities with technology." />
+    <meta
+      name="twitter:title"
+      content="GraminSetu – Empowering Rural Communities with Technology"
+    />
+    <meta
+      name="twitter:description"
+      content="GraminSetu, founded by Tamminana Bhogesh, connects and empowers rural communities with technology."
+    />
     <meta name="twitter:image" content="https://graminsetu.com/logo.png" />
 
     {/* Structured Data: Person & Organization */}

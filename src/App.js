@@ -12,13 +12,21 @@ import Privacy from './pages/Privacy.jsx';
 import { Suspense, lazy } from 'react';
 
 const VillageBusinessModel = lazy(() => import('./businessModels/VillageBusinessModel.jsx'));
-const BusinessNgoBusinessModel = lazy(() => import('./businessModels/BusinessNgoBusinessModel.jsx'));
-const GovernmentCsrBusinessModel = lazy(() => import('./businessModels/GovernmentCsrBusinessModel.jsx'));
+const BusinessNgoBusinessModel = lazy(
+  () => import('./businessModels/BusinessNgoBusinessModel.jsx')
+);
+const GovernmentCsrBusinessModel = lazy(
+  () => import('./businessModels/GovernmentCsrBusinessModel.jsx')
+);
 
 function App() {
   return (
     <Router>
-      <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-xl">Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="min-h-screen flex items-center justify-center text-xl">Loading...</div>
+        }
+      >
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/work-in-progress" element={<WorkInProgress />} />

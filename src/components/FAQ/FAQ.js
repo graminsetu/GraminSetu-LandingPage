@@ -4,15 +4,20 @@ import { faqContent as faqs } from '../../constants/faqContent';
 const FAQ = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
   const [showAll, setShowAll] = useState(false);
-  const toggleFAQ = idx => setOpenFAQ(openFAQ === idx ? null : idx);
+  const toggleFAQ = (idx) => setOpenFAQ(openFAQ === idx ? null : idx);
   const MAJOR_FAQ_COUNT = 5;
   const displayedFaqs = showAll ? faqs : faqs.slice(0, MAJOR_FAQ_COUNT);
   return (
     <section className="py-24 bg-gramin-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gramin-900 mb-6">Frequently Asked Questions</h2>
-          <p className="text-xl text-gramin-600">Find answers to the most common questions about GraminSetu. For more details, contact our support team.</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-gramin-900 mb-6">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-xl text-gramin-600">
+            Find answers to the most common questions about GraminSetu. For more details, contact
+            our support team.
+          </p>
         </div>
         <div className="space-y-4">
           {displayedFaqs.map((faq, idx) => (
