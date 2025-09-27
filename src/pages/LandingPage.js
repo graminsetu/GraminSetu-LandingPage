@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import graminsetuMainImage from '../assets/images/graminsetu-main-image.webp';
 // import { Helmet } from "react-helmet";
 import SEO from '../components/SEO';
-import Logo from '../components/Logo/Logo';
+// import Logo from '../components/Logo/Logo';
+import Navbar from '../components/Navbar';
 import Loader from '../components/Loader/Loader';
-import LanguageSelector from '../components/LanguageSelector/LanguageSelector';
+// import LanguageSelector from '../components/LanguageSelector/LanguageSelector';
 import Footer from '../components/Footer/Footer';
 // import SecondaryCTA from "../components/SecondaryCTA/SecondaryCTA";
-import HowItWorks from '../components/HowItWorks/HowItWorks';
+// import HowItWorks from '../components/HowItWorks/HowItWorks';
 
 import FAQ from '../components/FAQ/FAQ';
 import Trust from '../components/Trust/Trust';
@@ -40,24 +41,7 @@ const LandingPage = () => {
   return (
     <main className="min-h-screen bg-gradient-to-br from-gramin-50 via-white to-setu-50 font-sans">
       <SEO />
-      {/* Header */}
-      <header className="bg-white border-b border-gramin-200 sticky top-0 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
-              <a href="/" className="flex items-center space-x-3">
-                <Logo size="lg" showText={false} />
-                <span className="text-xl md:text-2xl font-bold text-gramin-600">GraminSetu</span>
-              </a>
-            </div>
-            <div className="flex items-center space-x-6">
-              {/* <a href="/login" className="text-gramin-600 font-medium mr-4 transition-colors duration-200 hover:underline hover:text-gramin-700">Login</a>
-              <a href="/register" className="bg-gramin-600 text-white rounded-lg font-semibold transition-colors duration-200 px-4 py-2 hover:bg-gramin-700">Register</a> */}
-              <LanguageSelector />
-            </div>
-          </div>
-        </div>
-      </header>
+      <Navbar />
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-10 pb-8 md:pt-14 md:pb-10 bg-[#f6fcf8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

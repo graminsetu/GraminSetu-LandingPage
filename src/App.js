@@ -10,6 +10,7 @@ import Careers from './pages/Careers.jsx';
 import Terms from './pages/Terms.jsx';
 import Privacy from './pages/Privacy.jsx';
 import { Suspense, lazy } from 'react';
+import Blog from './pages/Blog.jsx';
 
 const VillageBusinessModel = lazy(() => import('./businessModels/VillageBusinessModel.jsx'));
 const BusinessNgoBusinessModel = lazy(
@@ -40,6 +41,7 @@ function App() {
           <Route path="/village-business-model" element={<VillageBusinessModel />} />
           <Route path="/business/ngo-business-model" element={<BusinessNgoBusinessModel />} />
           <Route path="/government-csr-business-model" element={<GovernmentCsrBusinessModel />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
       </Suspense>
     </Router>

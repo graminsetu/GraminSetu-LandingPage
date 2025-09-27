@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import * as yup from 'yup';
 import applicationValidationSchema from '../validation/formsvalidation';
 import axios from 'axios';
-import Logo from '../components/Logo/Logo';
-import LanguageSelector from '../components/LanguageSelector/LanguageSelector';
+import Navbar from '../components/Navbar';
+// import LanguageSelector from '../components/LanguageSelector/LanguageSelector';
 import Footer from '../components/Footer/Footer';
 import Toast from '../components/Toast';
 
@@ -631,18 +631,7 @@ function Careers() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gramin-50 via-white to-setu-50 font-sans flex flex-col">
       {/* Nav Bar */}
-      <header className="bg-white border-b border-gramin-200 sticky top-0 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <a href="/" className="flex items-center space-x-3">
-              <Logo size="lg" showText={true} />
-            </a>
-            <div className="flex items-center space-x-6">
-              <LanguageSelector />
-            </div>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Hero Section */}
       <section className=" pt-0 relative w-full flex flex-col items-center justify-center py-16 md:py-24 px-4 bg-gradient-to-br from-gramin-50 via-white to-gramin-100 overflow-hidden">

@@ -22,5 +22,9 @@ WORKDIR /app
 # Install serve only (no dev dependencies)
 RUN npm install -g serve
 
+
 # Copy built assets from builder
 COPY --from=builder /app/build ./build
+
+# Run the app with serve in single-process foreground mode
+CMD ["serve", "-s", "build", "-p", "80", "--single"]

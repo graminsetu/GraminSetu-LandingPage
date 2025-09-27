@@ -1,6 +1,6 @@
-import Logo from '../components/Logo/Logo';
 import graminsetuLogo from '../assets/images/graminsetu-logo.png';
-import LanguageSelector from '../components/LanguageSelector/LanguageSelector';
+import Navbar from '../components/Navbar';
+// import LanguageSelector from '../components/LanguageSelector/LanguageSelector';
 import Footer from '../components/Footer/Footer';
 
 const About = () => (
@@ -24,18 +24,7 @@ const About = () => (
       }}
     />
     {/* Nav Bar */}
-    <header className="bg-white border-b border-gramin-200 sticky top-0 z-40 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <a href="/" className="flex items-center space-x-3">
-            <Logo size="lg" showText={true} />
-          </a>
-          <div className="flex items-center space-x-6">
-            <LanguageSelector />
-          </div>
-        </div>
-      </div>
-    </header>
+    <Navbar />
     {/* Main Content */}
     <main className="flex-1 w-full max-w-4xl mx-auto py-16 px-4 pt-0">
       <div className="flex flex-col items-center mb-8">
