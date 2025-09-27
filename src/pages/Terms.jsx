@@ -32,7 +32,7 @@ const Terms = () => (
           Terms of Service
         </h1>
         <p className="text-lg text-gramin-700 text-center max-w-2xl mb-4">
-          Effective Date: <span className="font-semibold">[Insert Date]</span>
+          Effective Date: <span className="font-semibold">September 27, 2025</span>
         </p>
       </div>
       <div className="bg-white rounded-2xl shadow-xl border border-gramin-100 max-w-3xl w-full mx-auto p-8 md:p-12 animate-fade-in">
@@ -97,13 +97,13 @@ const Terms = () => (
             <br />
             Any disputes arising out of or in connection with these Terms shall be resolved amicably
             or, if necessary, by arbitration or in courts located in{' '}
-            <span className="font-semibold">[Your City]</span>, India.
+            <span className="font-semibold">Vishakapatnam</span>, India.
           </li>
           <li>
             <span className="font-bold">Contact Us</span>
             <br />
             For questions or concerns regarding these Terms, please contact us at:{' '}
-            <span className="font-semibold">[Insert official contact email]</span>
+            <span className="font-semibold">support@graminsetu.in</span>
           </li>
         </ol>
       </div>

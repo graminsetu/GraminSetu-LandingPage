@@ -32,7 +32,7 @@ const Privacy = () => (
           Privacy Policy
         </h1>
         <p className="text-lg text-gramin-700 text-center max-w-2xl mb-4">
-          Effective Date: <span className="font-semibold">[Insert Date]</span>
+          Effective Date: <span className="font-semibold">September 27, 2025</span>
         </p>
       </div>
       <div className="bg-white rounded-2xl shadow-xl border border-gramin-100 max-w-3xl w-full mx-auto p-8 md:p-12 animate-fade-in">
@@ -127,9 +127,9 @@ const Privacy = () => (
             If you have questions, concerns, or requests regarding this Privacy Policy, please
             contact us at:
             <br />
-            <span className="font-semibold">[Insert Contact Email]</span>
+            <span className="font-semibold">support@graminsetu.in</span>
             <br />
-            <span className="font-semibold">[Insert Company Address as applicable]</span>
+            <span className="font-semibold">Vishakapatnam, India</span>
           </li>
         </ol>
       </div>

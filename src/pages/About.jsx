@@ -54,23 +54,6 @@ const About = () => (
           India. Our mission is to create equitable access to markets, resources, information, and
           services, fully respecting all applicable legal regulations and privacy norms.
         </p>
-        {/* Founder & Vision Section */}
-        <div className="bg-gramin-50 border border-gramin-200 rounded-lg p-6 mt-6 mb-4 shadow-md max-w-2xl w-full">
-          <h2 className="text-2xl font-bold text-gramin-800 mb-2 text-center">
-            Founder &amp; Vision
-          </h2>
-          <p className="text-base text-gramin-700 text-center mb-2">
-            <span className="font-semibold">Tamminana Bhogesh</span> — Founder &amp; CEO of
-            GraminSetu
-          </p>
-          <p className="text-base text-gramin-700 text-center">
-            "My vision is to empower every Indian village with digital access, opportunity, and
-            community. GraminSetu was founded to bridge the gap between rural India and the digital
-            world, ensuring that every villager can benefit from technology, government schemes, and
-            new economic possibilities. Together, we are building a transparent, inclusive, and
-            prosperous future for Bharat."
-          </p>
-        </div>
       </div>
 
       <section className="mb-10">
