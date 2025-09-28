@@ -7,20 +7,19 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted   # use your EC2 runner
 
     steps:
-      - name: Deploy to EC2 via SSH
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            cd /home/ec2-user/GraminSetu-LandingPage
-            git fetch origin
-            git reset --hard origin/master
-            docker stop landingpage || true
-            docker rm landingpage || true
-            docker build -t landingpage .
-            docker run -d --name landingpage -p 8080:80 landingpage
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Stop old container if running
+        run: |
+          docker stop landingpage || true
+          docker rm landingpage || true
+
+      - name: Build Docker image
+        run: docker build -t landingpage .
+
+      - name: Run new container
+        run: docker run -d --name landingpage -p 8080:80 landingpage
