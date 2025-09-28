@@ -184,29 +184,32 @@ const LandingPage = () => {
       {/* Explore Our Business Models Section - Full Page */}
       <section className="min-h-screen w-full flex flex-col items-center justify-center bg-[#f6fcf8] p-0 m-0">
         <h2
-          className="text-5xl font-extrabold text-gramin-800 mb-12 text-center tracking-tight"
+          className="text-4xl md:text-5xl font-extrabold text-gramin-800 mb-10 md:mb-12 text-center tracking-tight"
           style={{ letterSpacing: '-1px' }}
         >
-          EXPLORE OUR BUSINESS MODELS
+          Explore Our Business Models
         </h2>
-        <div className="flex gap-8 mb-14 w-full max-w-4xl justify-center">
+        <div className="flex flex-wrap gap-4 md:gap-8 mb-10 md:mb-14 w-full max-w-4xl justify-center">
           {businessModels.map(({ key, label }) => (
             <button
               key={key}
-              className={`flex items-center gap-2 px-10 py-4 rounded-full font-semibold text-xl shadow-md border-2 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-gramin-400 ${selectedModel === key ? 'bg-gramin-600 text-white border-gramin-600 shadow-lg scale-105' : 'bg-white text-gramin-600 border-gramin-200 hover:bg-gramin-50'}`}
+              className={`flex items-center gap-2 px-6 md:px-10 py-3 md:py-4 rounded-full font-semibold text-lg md:text-xl shadow-md border-2 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-gramin-400 ${selectedModel === key ? 'bg-gramin-600 text-white border-gramin-600 shadow-lg scale-105' : 'bg-white text-gramin-600 border-gramin-200 hover:bg-gramin-50'}`}
               onClick={() => setSelectedModel(key)}
+              aria-pressed={selectedModel === key}
+              tabIndex={0}
               style={{
-                minWidth: 220,
+                minWidth: 160,
                 boxShadow: selectedModel === key ? '0 4px 24px 0 #02844a22' : '0 2px 8px 0 #0001',
               }}
             >
               <span
-                className={`w-10 h-10 mr-2 rounded-full border-2 flex items-center justify-center text-2xl transition-all duration-200 ${selectedModel === key ? 'bg-white border-gramin-600 shadow-lg scale-110' : 'bg-[#eafaf1] border-transparent'}`}
+                className={`w-9 h-9 md:w-10 md:h-10 mr-2 rounded-full border-2 flex items-center justify-center text-xl md:text-2xl transition-all duration-200 ${selectedModel === key ? 'bg-white border-gramin-600 shadow-lg scale-110' : 'bg-[#eafaf1] border-transparent'}`}
                 style={{
                   color: '#222',
                   boxShadow: selectedModel === key ? '0 0 0 2px #02844a55' : 'none',
                   background: selectedModel === key ? '#fff' : '#eafaf1',
                 }}
+                aria-hidden="true"
               >
                 {businessModelIcons[key]}
               </span>
