@@ -44,7 +44,7 @@ const LandingPage = () => {
       <Navbar />
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-10 pb-8 md:pt-14 md:pb-10 bg-[#f6fcf8]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:px-6 lg:px-8 md:max-w-7xl md:mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 mt-[-32px] md:mt-[-48px]">
             {/* Left: Headline, subtext, CTAs */}
             <div className="flex-1 flex flex-col items-start text-left">

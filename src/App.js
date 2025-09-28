@@ -9,8 +9,12 @@ import Policies from './pages/Policies.jsx';
 import Careers from './pages/Careers.jsx';
 import Terms from './pages/Terms.jsx';
 import Privacy from './pages/Privacy.jsx';
+
 import { Suspense, lazy } from 'react';
 import Blog from './pages/Blog.jsx';
+import LoginVillage from './pages/LoginVillage.jsx';
+import LoginBusiness from './pages/LoginBusiness.jsx';
+import LoginGovernment from './pages/LoginGovernment.jsx';
 
 const VillageBusinessModel = lazy(() => import('./businessModels/VillageBusinessModel.jsx'));
 const BusinessNgoBusinessModel = lazy(
@@ -41,6 +45,9 @@ function App() {
           <Route path="/village-business-model" element={<VillageBusinessModel />} />
           <Route path="/business/ngo-business-model" element={<BusinessNgoBusinessModel />} />
           <Route path="/government-csr-business-model" element={<GovernmentCsrBusinessModel />} />
+          <Route path="/login/village" element={<LoginVillage />} />
+          <Route path="/login/business" element={<LoginBusiness />} />
+          <Route path="/login/government" element={<LoginGovernment />} />
           <Route path="/blog" element={<Blog />} />
         </Routes>
       </Suspense>
