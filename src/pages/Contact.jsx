@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Mail,
   Phone,
@@ -12,14 +13,70 @@ import {
   Type,
 } from 'lucide-react';
 import Logo from '../components/Logo/Logo';
-import graminsetuLogo from '../assets/images/graminsetu-logo.png';
+// import graminsetuLogo from '../assets/images/graminsetu-logo.png'; // Not used, remove or keep for future use
 import LanguageSelector from '../components/LanguageSelector/LanguageSelector';
 import Footer from '../components/Footer/Footer';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import PageTitle from '../components/PageTitle';
+import Toast from '../components/Toast';
+
+// Initial state for the contact form
+const initialFormState = { name: '', email: '', subject: '', message: '' };
 
 function Contact() {
   const location = useLocation();
+  const [form, setForm] = React.useState(initialFormState);
+  const [submitting, setSubmitting] = React.useState(false);
+  const [status, setStatus] = React.useState(null);
+  const [showToast, setShowToast] = React.useState(false);
+
+  // Handle input changes for all fields
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setStatus(null);
+    try {
+      await axios.post(
+        `${process.env.REACT_APP_STRAPI_API_URL}/contacts`,
+        {
+          data: {
+            name: form.name,
+            email: form.email,
+            subject: form.subject,
+            messages: form.message,
+          },
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      setStatus({
+        type: 'success',
+        message: 'Thank you for contacting us! We will get back to you soon.',
+      });
+      setForm(initialFormState);
+      setShowToast(true);
+    } catch (err) {
+      // Show a more detailed error if available
+      const errorMsg =
+        err?.response?.data?.error?.message ||
+        'There was a problem submitting your message. Please try again.';
+      setStatus({ type: 'error', message: errorMsg });
+      setShowToast(true);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gramin-50 via-white to-setu-50 font-sans flex flex-col">
       <PageTitle pathname={location.pathname} />
@@ -36,24 +93,8 @@ function Contact() {
           </div>
         </div>
       </header>
-
-      {/* Main Content */}
       <main className="flex-1 w-full max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center mb-10">
-          <img
-            src={graminsetuLogo}
-            alt="GraminSetu Logo"
-            className="drop-shadow"
-            style={{ width: 200, height: 200, marginBottom: -15 }}
-          />
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-2 text-gramin-700 drop-shadow-sm text-center tracking-tight">
-            Contact Us
-          </h1>
-          <p className="text-lg text-gramin-800 text-center max-w-2xl">
-            We would love to hear from you! Whether you have questions, partnership ideas, or need
-            support, please get in touch.
-          </p>
-        </div>
+        {/* ...existing code... */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Contact Details */}
@@ -141,10 +182,7 @@ function Contact() {
           {/* Contact Form */}
           <form
             className="bg-white/95 rounded-2xl shadow-xl p-8 flex flex-col gap-5 border border-gramin-100 w-full h-full"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert('Thank you for contacting us! We will get back to you soon.');
-            }}
+            onSubmit={handleSubmit}
           >
             <h2 className="text-3xl font-bold mb-6 text-gramin-800 flex items-center gap-2">
               <MessageSquare className="w-8 h-8 text-gramin-600" /> Send Us a Message
@@ -160,6 +198,9 @@ function Contact() {
                   required
                   placeholder="Enter your full name"
                   className="mt-2 w-full px-4 py-3 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow"
+                  value={form.name}
+                  onChange={handleChange}
+                  disabled={submitting}
                 />
               </label>
               <label className="text-base font-semibold text-gramin-700">
@@ -172,6 +213,9 @@ function Contact() {
                   required
                   placeholder="Enter your email address"
                   className="mt-2 w-full px-4 py-3 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow"
+                  value={form.email}
+                  onChange={handleChange}
+                  disabled={submitting}
                 />
               </label>
               <label className="text-base font-semibold text-gramin-700">
@@ -184,6 +228,9 @@ function Contact() {
                   required
                   placeholder="Subject of your message"
                   className="mt-2 w-full px-4 py-3 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow"
+                  value={form.subject}
+                  onChange={handleChange}
+                  disabled={submitting}
                 />
               </label>
               <label className="text-base font-semibold text-gramin-700">
@@ -196,15 +243,25 @@ function Contact() {
                   placeholder="Write your message here"
                   rows={6}
                   className="mt-2 w-full px-4 py-3 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow resize-none"
+                  value={form.message}
+                  onChange={handleChange}
+                  disabled={submitting}
                 />
               </label>
             </div>
             <button
               type="submit"
               className="mt-4 bg-gramin-600 text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:bg-gramin-700 focus:ring-2 focus:ring-gramin-400 transition text-lg tracking-wide"
+              disabled={submitting}
             >
-              Submit
+              {submitting ? 'Submitting...' : 'Submit'}
             </button>
+            {/* Toast notification for success or error */}
+            <Toast
+              message={showToast ? status?.message : ''}
+              type={status?.type === 'error' ? 'error' : 'success'}
+              onClose={() => setShowToast(false)}
+            />
             <p className="text-xs text-gramin-500 mt-3 text-center">
               Your message is confidential. We respect your privacy.
             </p>
