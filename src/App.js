@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import WorkInProgress from './pages/WorkInProgress';
 import About from './pages/About.jsx';
@@ -11,6 +11,7 @@ import Terms from './pages/Terms.jsx';
 import Privacy from './pages/Privacy.jsx';
 
 import { Suspense, lazy } from 'react';
+import PageTitle from './components/PageTitle';
 import Blog from './pages/Blog.jsx';
 import LoginVillage from './pages/LoginVillage.jsx';
 import LoginBusiness from './pages/LoginBusiness.jsx';
@@ -24,9 +25,15 @@ const GovernmentCsrBusinessModel = lazy(
   () => import('./businessModels/GovernmentCsrBusinessModel.jsx')
 );
 
+function PageTitleWithLocation() {
+  const location = useLocation();
+  return <PageTitle pathname={location.pathname} />;
+}
+
 function App() {
   return (
     <Router>
+      <PageTitleWithLocation />
       <Suspense
         fallback={
           <div className="min-h-screen flex items-center justify-center text-xl">Loading...</div>

@@ -6,6 +6,8 @@ import Navbar from '../components/Navbar';
 // import LanguageSelector from '../components/LanguageSelector/LanguageSelector';
 import Footer from '../components/Footer/Footer';
 import Toast from '../components/Toast';
+import { useLocation } from 'react-router-dom';
+import PageTitle from '../components/PageTitle';
 
 // ...other code (hooks, helpers, etc.)
 
@@ -15,7 +17,7 @@ function JobApplicationForm({ job, jobs, loadingJobs, onClose }) {
     name: '',
     email: '',
     phone: '',
-    job: job?.id || '',
+    job: job && job.id ? job.id : '',
     resume: null,
   });
   const [errors, setErrors] = React.useState({});
@@ -24,7 +26,7 @@ function JobApplicationForm({ job, jobs, loadingJobs, onClose }) {
   const fileInputRef = React.useRef();
 
   React.useEffect(() => {
-    setForm((prev) => ({ ...prev, job: job?.id || '' }));
+    setForm((prev) => ({ ...prev, job: job && job.id ? job.id : '' }));
   }, [job]);
 
   const handleChange = (e) => {
@@ -87,7 +89,7 @@ function JobApplicationForm({ job, jobs, loadingJobs, onClose }) {
         { headers: { 'Content-Type': 'application/json' } }
       );
       setToast({ message: 'Application submitted successfully!', type: 'success' });
-      setForm({ name: '', email: '', phone: '', job: job?.id || '', resume: null });
+      setForm({ name: '', email: '', phone: '', job: job && job.id ? job.id : '', resume: null });
       if (fileInputRef.current) fileInputRef.current.value = '';
       setTimeout(() => {
         if (onClose) onClose();
@@ -606,6 +608,7 @@ function JobModal({ job, onClose }) {
 }
 
 function Careers() {
+  const location = useLocation();
   const [viewJob, setViewJob] = useState(null);
   const [applyJob, setApplyJob] = useState(null);
   const [jobs, setJobs] = useState([]);
@@ -630,6 +633,7 @@ function Careers() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gramin-50 via-white to-setu-50 font-sans flex flex-col">
+      <PageTitle pathname={location.pathname} />
       {/* Nav Bar */}
       <Navbar />
 
