@@ -39,8 +39,8 @@ const LandingPage = () => {
   };
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gramin-50 via-gramin-100 to-gramin-200">
-        <Loader size="lg" variant="default" text="Loading GraminSetu..." />
+      <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-gramin-50 via-white to-gramin-100 z-50">
+        <Loader size="lg" variant="creative" />
       </div>
     );
   }
@@ -49,66 +49,93 @@ const LandingPage = () => {
       <SEO />
       <Navbar />
 
-      {/* Hero Section - Perfect UX Design */}
-      <section id="hero" className="relative pt-24 pb-32 bg-gradient-to-b from-gramin-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left Content - Improved Typography */}
-            <div className="space-y-8">
-              {landingContent.hero.eyebrow && (
-                <div className="inline-flex items-center px-4 py-2 bg-gramin-100 rounded-full">
-                  <span className="text-sm font-semibold text-gramin-700 uppercase tracking-wide">
-                    {landingContent.hero.eyebrow}
-                  </span>
-                </div>
-              )}
+      {/* Hero Section - Official & Professional */}
+      <section id="hero" className="relative pt-0 pb-12 bg-white min-h-screen flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left Content - Official & Clean */}
+            <div className="lg:col-span-6 space-y-6">
+              {/* Official Badge */}
+              <div className="inline-flex items-center px-4 py-2 bg-gray-100 rounded-md border">
+                <span className="text-sm font-medium text-gray-700">
+                  Digital Solutions for Rural Development
+                </span>
+              </div>
 
-              <div className="space-y-6">
+              {/* Main Heading */}
+              <div className="space-y-4">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                  <span className="text-gramin-600">{landingContent.hero.headline}</span>
+                  <span className="text-gramin-600">GraminSetu</span>
+                  <br />
+                  Rural Development Platform
                 </h1>
 
-                {landingContent.hero.headlineSecondary && (
-                  <p className="text-xl text-gray-700 font-medium">
-                    {landingContent.hero.headlineSecondary}
-                  </p>
-                )}
+                <p className="text-xl text-gray-600 font-normal leading-relaxed">
+                  Connecting villages, government agencies, and businesses through digital solutions
+                  designed for rural India.
+                </p>
 
-                <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
-                  {landingContent.hero.highlight}
+                <p className="text-lg text-gray-500 leading-relaxed">
+                  Our platform provides specialized portals for village governance, government
+                  services, and business development to strengthen rural communities.
                 </p>
               </div>
 
-              {/* CTA Buttons - Better Arrangement */}
+              {/* Key Features */}
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-gramin-500 rounded-full"></div>
+                  <span className="text-gray-700 text-lg">
+                    Village Portal for Panchayat Management
+                  </span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-gramin-500 rounded-full"></div>
+                  <span className="text-gray-700 text-lg">
+                    Government Portal for Service Delivery
+                  </span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-gramin-500 rounded-full"></div>
+                  <span className="text-gray-700 text-lg">
+                    Business Portal for Rural Development
+                  </span>
+                </div>
+              </div>
+
+              {/* CTA Buttons - Professional */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <button
-                  className="px-8 py-4 bg-gramin-600 text-white font-semibold rounded-lg hover:bg-gramin-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+                  className="px-10 py-4 bg-gramin-600 text-white font-medium rounded-md hover:bg-gramin-700 transition-colors duration-200 text-lg"
                   onClick={() => handleAction(landingContent.hero.primaryAction)}
                 >
-                  {landingContent.hero.primaryAction.label}
+                  Explore Portals
                 </button>
 
                 <button
-                  className="px-8 py-4 border-2 border-gramin-600 text-gramin-600 font-semibold rounded-lg hover:bg-gramin-50 transition-all duration-200"
+                  className="px-10 py-4 border border-gray-300 text-gray-700 font-medium rounded-md hover:bg-gray-50 transition-colors duration-200 text-lg"
                   onClick={() => handleAction(landingContent.hero.secondaryAction)}
                 >
-                  {landingContent.hero.secondaryAction.label}
+                  Contact Us
                 </button>
               </div>
             </div>
 
-            {/* Right Image - Better Positioning */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative">
+            {/* Right Image - Enhanced Size and Presentation */}
+            <div className="lg:col-span-6 flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-2xl">
                 <img
                   src={graminsetuMainImage}
-                  alt="GraminSetu Digital Platform"
-                  className="w-full max-w-lg h-auto object-contain"
+                  alt="GraminSetu Digital Platform Interface"
+                  className="w-full h-auto object-contain"
                 />
               </div>
             </div>
           </div>
         </div>
+
+        {/* Subtle bottom border */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
       </section>
 
       {/* Three Specialized Portals Section - Perfect UX */}

@@ -23,19 +23,19 @@ export const landingContent = {
     lang: 'en',
   },
   hero: {
-    eyebrow: 'Transforming Rural India Digitally',
-    headline: 'Connecting Villages, Government & Businesses',
-    headlineSecondary: 'One Platform. Three Powerful Portals. Infinite Possibilities.',
+    eyebrow: 'Digital Solutions for Rural Development',
+    headline: 'GraminSetu Rural Development Platform',
+    headlineSecondary: 'Connecting villages, government, and businesses through technology.',
     highlight:
-      'GraminSetu bridges the digital divide by providing specialized portals for Villages, Government agencies, and Businesses to collaborate, grow, and serve rural communities effectively.',
+      'A comprehensive digital platform designed to support rural development through specialized portals for village governance, government services, and business growth.',
     subheadline:
-      'From village governance and citizen services to business opportunities and government schemes - experience seamless digital transformation designed for rural India.',
+      'Supporting rural communities with digital tools for governance, service delivery, and economic development.',
     primaryAction: {
-      label: 'Explore Our Portals',
+      label: 'Explore Portals',
       scrollTo: 'portals-overview',
     },
     secondaryAction: {
-      label: 'Schedule a Demo',
+      label: 'Contact Us',
       to: '/contact',
     },
   },

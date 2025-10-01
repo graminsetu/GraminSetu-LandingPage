@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 const SEO = () => (
   <Helmet>
     {/* Basic SEO Meta Tags */}
-    <title>GraminSetu – Empowering Rural Communities with Technology</title>
+    <title>GraminSetu | Home</title>
     <meta
       name="description"
       content="GraminSetu, founded by Tamminana Bhogesh, connects and empowers rural communities with technology."

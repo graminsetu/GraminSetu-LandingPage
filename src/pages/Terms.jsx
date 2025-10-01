@@ -1,6 +1,5 @@
-import Logo from '../components/Logo/Logo';
+import Navbar from '../components/Navbar';
 import graminsetuLogo from '../assets/images/graminsetu-logo.png';
-import LanguageSelector from '../components/LanguageSelector/LanguageSelector';
 import Footer from '../components/Footer/Footer';
 import { useLocation } from 'react-router-dom';
 import PageTitle from '../components/PageTitle';
@@ -10,21 +9,10 @@ function Terms() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gramin-50 via-white to-gramin-100 font-sans flex flex-col">
       <PageTitle pathname={location.pathname} />
-      {/* Nav Bar */}
-      <header className="bg-white border-b border-gramin-200 sticky top-0 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <a href="/" className="flex items-center space-x-3">
-              <Logo size="lg" showText={true} />
-            </a>
-            <div className="flex items-center space-x-6">
-              <LanguageSelector />
-            </div>
-          </div>
-        </div>
-      </header>
 
-      {/* Main Content */}
+      {/* Navbar */}
+      <Navbar />
+
       {/* Main Content */}
       <main className="flex-1 w-full max-w-4xl mx-auto py-12 px-4 md:px-8 flex flex-col items-center justify-start pt-0">
         <div className="flex flex-col items-center mb-8 pt-2">

@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from '../../assets/images/graminsetu-logo.png';
 
-// Loader variants: 'default', 'pulse', 'bounce', 'spin'
-const Loader = ({ size = 'md', text, className = '', variant = 'default' }) => {
+// Enhanced Loader with creative animations: 'default', 'pulse', 'bounce', 'spin', 'creative'
+const Loader = ({ size = 'md', text, className = '', variant = 'creative' }) => {
   const sizeClasses = {
     sm: 'w-12 h-12',
     md: 'w-20 h-20',
@@ -15,8 +15,44 @@ const Loader = ({ size = 'md', text, className = '', variant = 'default' }) => {
     lg: 'text-lg',
     xl: 'text-xl',
   };
+
   const renderLoader = () => {
     switch (variant) {
+      case 'creative':
+        return (
+          <div className="relative flex flex-col items-center justify-center min-h-[300px] w-full">
+            {/* Simple Main Loader - Larger Size */}
+            <div className={`${sizeClasses[size]} relative mx-auto`}>
+              {/* Single Clean Ring */}
+              <div className="absolute inset-0 rounded-full border-4 border-gray-200"></div>
+              <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-gramin-600 animate-spin"></div>
+
+              {/* Logo Container - Larger Image */}
+              <div className="absolute inset-2 bg-white rounded-full flex items-center justify-center">
+                <img src={logo} alt="GraminSetu" className="w-20 h-20 object-contain" />
+              </div>
+            </div>
+
+            {/* Animated Brand Text */}
+            <div className="mt-8 text-center">
+              {/* Creative Loading Text Animation */}
+              <div className="text-3xl font-bold text-gramin-700">
+                {'GraminSetu'.split('').map((letter, index) => (
+                  <span
+                    key={index}
+                    className="inline-block animate-bounce"
+                    style={{
+                      animationDelay: `${index * 0.1}s`,
+                      animationDuration: '1s',
+                    }}
+                  >
+                    {letter}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
       case 'pulse':
         return (
           <div className={`${sizeClasses[size]} relative`}>
@@ -53,10 +89,11 @@ const Loader = ({ size = 'md', text, className = '', variant = 'default' }) => {
         );
     }
   };
+
   return (
     <div className={`flex flex-col items-center justify-center space-y-4 ${className}`}>
       {renderLoader()}
-      {text && (
+      {text && variant !== 'creative' && (
         <div className={`text-center ${textSizes[size]}`}>
           <p className="text-gramin-600 font-medium">{text}</p>
           <div className="flex justify-center space-x-1 mt-2">
