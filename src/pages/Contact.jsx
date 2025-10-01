@@ -12,9 +12,7 @@ import {
   MessageSquare,
   Type,
 } from 'lucide-react';
-import Logo from '../components/Logo/Logo';
-// import graminsetuLogo from '../assets/images/graminsetu-logo.png'; // Not used, remove or keep for future use
-import LanguageSelector from '../components/LanguageSelector/LanguageSelector';
+import Navbar from '../components/Navbar';
 import Footer from '../components/Footer/Footer';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -80,19 +78,10 @@ function Contact() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gramin-50 via-white to-setu-50 font-sans flex flex-col">
       <PageTitle pathname={location.pathname} />
-      {/* Nav Bar */}
-      <header className="bg-white border-b border-gramin-200 sticky top-0 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <a href="/" className="flex items-center space-x-3">
-              <Logo size="lg" showText={true} />
-            </a>
-            <div className="flex items-center space-x-6">
-              <LanguageSelector />
-            </div>
-          </div>
-        </div>
-      </header>
+
+      {/* Navbar */}
+      <Navbar />
+
       <main className="flex-1 w-full max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         {/* ...existing code... */}
 

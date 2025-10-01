@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import * as yup from 'yup';
 import applicationValidationSchema from '../validation/formsvalidation';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
@@ -104,7 +103,7 @@ function JobApplicationForm({ job, jobs, loadingJobs, onClose }) {
   // Helper for floating label
   // Improved floating label for better placeholder and alignment
   // Floating label with no placeholder, perfect alignment
-  const floatingLabel = (label, id, input, required) => {
+  /* const floatingLabel = (label, id, input, required) => {
     const value = input.props.value || '';
     const isNotEmpty = value && value.length > 0;
     return (
@@ -133,7 +132,8 @@ function JobApplicationForm({ job, jobs, loadingJobs, onClose }) {
         </label>
       </div>
     );
-  };
+  }; */
+
   return (
     <div>
       <Toast

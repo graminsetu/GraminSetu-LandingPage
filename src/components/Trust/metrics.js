@@ -1,7 +1,7 @@
 export const metrics = [
   {
-    label: 'Villages Connected',
-    value: 500,
+    label: 'Discovery conversations',
+    value: 28,
     icon: (
       <svg
         className="w-10 h-10 text-gramin-600"
@@ -19,8 +19,8 @@ export const metrics = [
     ),
   },
   {
-    label: 'Active Users',
-    value: 12000,
+    label: 'States with field research',
+    value: 3,
     icon: (
       <svg
         className="w-10 h-10 text-gramin-600"
@@ -29,14 +29,14 @@ export const metrics = [
         strokeWidth="2.2"
         viewBox="0 0 24 24"
       >
-        <circle cx="12" cy="7" r="4" />
-        <path d="M5.5 21a7.5 7.5 0 0113 0" />
+        <rect x="3" y="4" width="18" height="16" rx="2" />
+        <path d="M8 8h8M8 12h5M8 16h3" />
       </svg>
     ),
   },
   {
-    label: 'Events',
-    value: 3200,
+    label: 'Months in user research',
+    value: 8,
     icon: (
       <svg
         className="w-10 h-10 text-gramin-600"
@@ -45,14 +45,14 @@ export const metrics = [
         strokeWidth="2.2"
         viewBox="0 0 24 24"
       >
-        <rect x="3" y="8" width="18" height="13" rx="2" />
-        <path d="M16 2v4M8 2v4" />
+        <path d="M9 11l3 3L22 4" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M3 12l5 5V7l9 9" />
       </svg>
     ),
   },
   {
-    label: 'Funds Raised',
-    value: 150000,
+    label: 'Partner organizations',
+    value: 12,
     icon: (
       <svg
         className="w-10 h-10 text-gramin-600"
@@ -61,8 +61,8 @@ export const metrics = [
         strokeWidth="2.2"
         viewBox="0 0 24 24"
       >
-        <path d="M12 8v8m0 0l-3-3m3 3l3-3" />
         <circle cx="12" cy="12" r="10" />
+        <path d="M12 6v6l3 3" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },

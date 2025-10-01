@@ -1,44 +1,186 @@
 export const landingContent = {
   meta: {
-    title: 'GraminSetu | Empowering Every Indian Village Digitally',
+    title: 'GraminSetu | Digital Transformation for Rural India',
     description:
-      "Join GraminSetu, India's most trusted digital platform for villages. Discover government schemes, connect with your community, and unlock new opportunities for rural growth. Trusted by 500+ villages!",
+      'Comprehensive digital platform connecting Villages, Government, and Businesses for transparent governance, economic growth, and community development across rural India.',
     keywords:
-      'GraminSetu, rural India, digital village, government schemes, community, empowerment, Bharat, village development, rural technology, transparent governance, digital empowerment',
+      'GraminSetu, rural India, digital transformation, village portal, government portal, business portal, CSR, governance, community development',
     author: 'GraminSetu',
-    ogTitle: 'GraminSetu | Empowering Every Indian Village Digitally',
+    ogTitle: 'GraminSetu | Digital Transformation for Rural India',
     ogDescription:
-      "India's most trusted digital bridge for villages. Discover schemes, connect, and grow your community with GraminSetu.",
+      'Empowering Villages, Government, and Businesses through integrated digital solutions for rural development.',
     ogType: 'website',
     ogSiteName: 'GraminSetu',
     ogLocale: 'en_IN',
     ogImage: '/logo192.png',
     twitterCard: 'summary_large_image',
-    twitterTitle: 'GraminSetu | Empowering Every Indian Village Digitally',
+    twitterTitle: 'GraminSetu | Digital Transformation for Rural India',
     twitterDescription:
-      "India's most trusted digital bridge for villages. Discover schemes, connect, and grow your community with GraminSetu.",
+      'Empowering Villages, Government, and Businesses through integrated digital solutions for rural development.',
     twitterImage: '/logo192.png',
     themeColor: '#0ea55e',
     canonical: 'https://graminsetu.in/',
     lang: 'en',
   },
   hero: {
-    headline: 'Connecting Villages. Empowering Communities. Building India’s Digital Future.',
+    eyebrow: 'Transforming Rural India Digitally',
+    headline: 'Connecting Villages, Government & Businesses',
+    headlineSecondary: 'One Platform. Three Powerful Portals. Infinite Possibilities.',
+    highlight:
+      'GraminSetu bridges the digital divide by providing specialized portals for Villages, Government agencies, and Businesses to collaborate, grow, and serve rural communities effectively.',
     subheadline:
-      'GraminSetu is the digital bridge uniting rural India with opportunity, transparency, and growth.',
-    ctaLine:
-      'Unlock government schemes, connect with your community, and build a brighter rural future. 500+ villages trust GraminSetu for growth and transparency.',
-    supportLine:
-      '🚀 Join the digital revolution for Bharat. Free, secure, and made for every Indian village.',
-    button: 'Get Started Free',
-    buttonNote: 'No credit card required. 100% free for villages.',
-    secondaryCTA: {
-      text: 'Join Beta Waitlist',
-      scrollTo: 'newsletter-section',
+      'From village governance and citizen services to business opportunities and government schemes - experience seamless digital transformation designed for rural India.',
+    primaryAction: {
+      label: 'Explore Our Portals',
+      scrollTo: 'portals-overview',
+    },
+    secondaryAction: {
+      label: 'Schedule a Demo',
+      to: '/contact',
     },
   },
-  findVillage: {
-    title: 'Find Your Village',
-    subtitle: 'Find and join your village community or create a new one',
+  portals: {
+    title: 'Three Specialized Portals, One Connected Ecosystem',
+    description: 'Tailored digital solutions for every stakeholder in rural development',
+    village: {
+      title: 'Village Portal',
+      subtitle: 'Empowering Panchayats & Communities',
+      description:
+        'Digital governance tools, citizen services, and community management for village leaders and residents.',
+      features: [
+        'Digital Panchayat Management',
+        'Citizen Service Delivery',
+        'Grievance Redressal System',
+        'Community Engagement Tools',
+        'Financial Transparency Dashboard',
+      ],
+      cta: 'Access Village Portal',
+      link: '/village-business-model',
+    },
+    government: {
+      title: 'Government Portal',
+      subtitle: 'Streamlining Public Administration',
+      description:
+        'Comprehensive platform for government departments to manage schemes, monitor progress, and serve citizens efficiently.',
+      features: [
+        'Scheme Management & Monitoring',
+        'Real-time Progress Tracking',
+        'Inter-department Coordination',
+        'Data Analytics & Reporting',
+        'Policy Implementation Tools',
+      ],
+      cta: 'Access Government Portal',
+      link: '/government-csr-business-model',
+    },
+    business: {
+      title: 'Business Portal',
+      subtitle: 'Driving Rural Economic Growth',
+      description:
+        'Platform for businesses, NGOs, and CSR initiatives to connect with rural markets and communities.',
+      features: [
+        'Rural Market Access',
+        'CSR Project Management',
+        'Supply Chain Integration',
+        'Impact Measurement Tools',
+        'Community Partnership Hub',
+      ],
+      cta: 'Access Business Portal',
+      link: '/business/ngo-business-model',
+    },
+  },
+  story: {
+    title: 'Transforming Rural India Through Digital Innovation',
+    description:
+      'GraminSetu represents the next generation of rural development - where technology meets tradition, and digital solutions are designed with and for rural communities.',
+    pillars: [
+      {
+        title: 'Community-Centric Design',
+        copy: 'Built with deep understanding of rural needs, incorporating feedback from village leaders, citizens, and local organizations.',
+      },
+      {
+        title: 'Seamless Integration',
+        copy: 'Connecting villages, government, and businesses on one platform for efficient collaboration and service delivery.',
+      },
+      {
+        title: 'Scalable Solutions',
+        copy: 'From individual villages to entire districts - technology that grows with your community and administrative needs.',
+      },
+      {
+        title: 'Data-Driven Impact',
+        copy: 'Real-time analytics and reporting tools to measure progress, track outcomes, and optimize rural development initiatives.',
+      },
+    ],
+    challenges: [
+      {
+        label: 'Digital Divide',
+        detail:
+          'Bridging the gap between urban and rural access to digital services and opportunities.',
+      },
+      {
+        label: 'Service Delivery',
+        detail:
+          'Ensuring efficient, transparent delivery of government schemes and services to rural populations.',
+      },
+      {
+        label: 'Economic Growth',
+        detail:
+          'Creating sustainable livelihood opportunities and market access for rural entrepreneurs and farmers.',
+      },
+      {
+        label: 'Governance',
+        detail:
+          'Enhancing transparency, accountability, and citizen participation in local governance processes.',
+      },
+    ],
+  },
+  features: {
+    title: 'Comprehensive Digital Ecosystem',
+    description: 'Everything you need to drive rural development and digital transformation',
+    categories: [
+      {
+        title: 'Village Empowerment',
+        icon: 'village',
+        items: [
+          'Digital Panchayat Management',
+          'Citizen Service Portal',
+          'Community Forums',
+          'Local Business Directory',
+          'Grievance Management',
+        ],
+      },
+      {
+        title: 'Government Efficiency',
+        icon: 'government',
+        items: [
+          'Scheme Management',
+          'Progress Monitoring',
+          'Inter-department Coordination',
+          'Policy Analytics',
+          'Citizen Feedback Systems',
+        ],
+      },
+      {
+        title: 'Business Growth',
+        icon: 'business',
+        items: [
+          'Rural Market Access',
+          'CSR Project Tracking',
+          'Supply Chain Management',
+          'Impact Measurement',
+          'Partnership Networks',
+        ],
+      },
+    ],
+  },
+  partnership: {
+    title: 'Join the Rural Digital Revolution',
+    description: 'Partner with us to create lasting impact in rural communities across India',
+  },
+  cta: {
+    title: 'Ready to Transform Rural India?',
+    description:
+      'Join thousands of villages, government departments, and businesses already using GraminSetu',
+    primaryAction: 'Get Started Today',
+    secondaryAction: 'Schedule a Demo',
   },
 };

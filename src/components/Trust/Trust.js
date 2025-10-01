@@ -60,10 +60,11 @@ const Trust = () => {
     <section ref={sectionRef} className="py-24 bg-white w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         <h2 className="text-4xl md:text-5xl font-extrabold text-gramin-800 mb-4 text-center tracking-tight">
-          Trusted by Villages Across India
+          Building with community input
         </h2>
         <p className="text-xl md:text-2xl text-gramin-600 mb-12 text-center max-w-2xl">
-          See how GraminSetu is transforming rural communities
+          We are in discovery mode, learning from Panchayats, NGOs, and government teams about what
+          rural India needs.
         </p>
 
         {/* Animated Metrics Row */}
@@ -79,13 +80,13 @@ const Trust = () => {
             <span role="img" aria-label="point">
               👉
             </span>{' '}
-            Ready to connect your village?
+            Ready to join our founding cohort?
           </div>
           <a
-            href="/register"
+            href="/contact"
             className="inline-block bg-gramin-600 hover:bg-gramin-700 text-white font-bold text-lg px-8 py-3 rounded shadow transition-all duration-200"
           >
-            Join Beta Today
+            Book a discovery call
           </a>
         </div>
 
