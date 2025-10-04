@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta
-              "url": "https://graminsetu.in/",
+                "url": "https://graminsetu.in/",
+        "logo": "https://graminsetu.in/logo512.png",
+        "description": "GraminSetu is India's most trusted digital platform for villages. Explore government schemes, connect with your community, and unlock new opportunities for rural empowerment, jobs, and essential services. Founded by Tamminana Bhogesh, CEO.",   "url": "https://graminsetu.in/",
         "logo": "https://graminsetu.in/logo512.png",
         "description": "GraminSetu is India's most trusted digital platform for villages. Explore government schemes, connect with your community, and unlock new opportunities for rural empowerment, jobs, and essential services. Founded by Tamminana Bhogesh, CEO.",e="twitter:description"
       content="GraminSetu is India's most trusted digital platform for villages. Explore government schemes, connect with your community, and unlock new opportunities for rural empowerment, jobs, and essential services. Founded by Tamminana Bhogesh, CEO."
@@ -59,7 +61,7 @@
         "@type": "Organization",
         "name": "GraminSetu",
         "url": "https://graminsetu.in/",
-        "logo": "https://graminsetu.in/logo512.png",
+        "logo": "https://graminsetu.in/logo192.png",
         "description": "GraminSetu is India’s most trusted digital platform for villages. Explore government schemes, connect with your community, and unlock new opportunities for rural empowerment, jobs, and essential services. Founded by Tamminana Bhogesh, CEO.",
         "founder": {
           "@type": "Person",
