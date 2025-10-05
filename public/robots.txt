@@ -1,5 +1,33 @@
 # https://www.robotstxt.org/robotstxt.html
+# GraminSetu - India's Trusted Digital Platform for Villages
 
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /*?*utm_*
+Disallow: /*?*ref=*
+
+# Specific instructions for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Sitemaps
 Sitemap: https://graminsetu.in/sitemap.xml
+
+# Important pages for indexing
+# https://graminsetu.in/ (Homepage - highest priority)
+# https://graminsetu.in/about (About GraminSetu and Tamminana Bhogesh)
+# https://graminsetu.in/features (Platform features)
+# https://graminsetu.in/contact (Contact information)

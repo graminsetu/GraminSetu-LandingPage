@@ -3,6 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import graminsetuMainImage from '../assets/images/graminsetu-main-image.webp';
 // import { Helmet } from "react-helmet";
 import SEO from '../components/SEO';
+import FAQStructuredData from '../components/FAQStructuredData';
+import PageSEO from '../components/PageSEO';
+import GraminSetuBrandSchema from '../components/GraminSetuBrandSchema';
+import Analytics from '../components/Analytics';
+import TamminanaBhogeshPersonalBrand from '../components/TamminanaBhogeshPersonalBrand';
+import KnowledgePanelOptimization from '../components/KnowledgePanelOptimization';
+import GoogleAIOptimization from '../components/GoogleAIOptimization';
+import FounderAchievementsSchema from '../components/FounderAchievementsSchema';
+import AdvancedSEOSchemas from '../components/AdvancedSEOSchemas';
 // import Logo from '../components/Logo/Logo';
 import Navbar from '../components/Navbar';
 import Loader from '../components/Loader/Loader';
@@ -47,6 +56,20 @@ const LandingPage = () => {
   return (
     <main className="min-h-screen bg-white font-sans">
       <SEO />
+      <FAQStructuredData />
+      <GraminSetuBrandSchema />
+      <Analytics />
+      <TamminanaBhogeshPersonalBrand />
+      <KnowledgePanelOptimization />
+      <GoogleAIOptimization />
+      <FounderAchievementsSchema />
+      <AdvancedSEOSchemas />
+      <PageSEO
+        title="Home"
+        description="GraminSetu is India's most trusted digital platform for villages. Founded by Tamminana Bhogesh, CEO. Connect with your community, access government schemes, and unlock rural opportunities. Join 500+ villages transforming their future."
+        keywords="graminsetu home, graminsetu platform, graminsetu india, digital village platform, rural empowerment"
+        url="/"
+      />
       <Navbar />
 
       {/* Hero Section - Official & Professional */}
