@@ -32,25 +32,6 @@ const Loader = ({ size = 'md', text, className = '', variant = 'creative' }) => 
                 <img src={logo} alt="GraminSetu" className="w-20 h-20 object-contain" />
               </div>
             </div>
-
-            {/* Animated Brand Text */}
-            <div className="mt-8 text-center">
-              {/* Creative Loading Text Animation */}
-              <div className="text-3xl font-bold text-gramin-700">
-                {'GraminSetu'.split('').map((letter, index) => (
-                  <span
-                    key={index}
-                    className="inline-block animate-bounce"
-                    style={{
-                      animationDelay: `${index * 0.1}s`,
-                      animationDuration: '1s',
-                    }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-              </div>
-            </div>
           </div>
         );
       case 'pulse':
