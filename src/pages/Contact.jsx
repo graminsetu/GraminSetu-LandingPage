@@ -92,79 +92,132 @@ function Contact() {
               <MessageSquare className="w-8 h-8 text-gramin-600" /> Our Contact Details
             </h2>
             <div className="space-y-6">
-              <div className="flex items-center gap-3 text-lg">
-                <Mail className="w-6 h-6 text-gramin-600" />
-                <span className="font-semibold text-gramin-700">Email:</span>
-                <a
-                  href="mailto:support@graminsetu.in"
-                  className="text-gramin-600 underline hover:text-gramin-800"
-                >
-                  support@graminsetu.in
-                </a>
+              {/* Email */}
+              <div className="flex items-center gap-4 text-lg">
+                <div className="flex-shrink-0">
+                  <Mail className="w-6 h-6 text-gramin-600" />
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                  <span className="font-semibold text-gramin-700">Email:</span>
+                  <a
+                    href="mailto:support@graminsetu.in"
+                    className="text-gramin-600 underline hover:text-gramin-800 transition-colors duration-200"
+                  >
+                    support@graminsetu.in
+                  </a>
+                </div>
               </div>
-              <div className="flex items-center gap-3 text-lg justify-center">
-                <Phone className="w-6 h-6 text-gramin-600" />
-                <span className="font-semibold text-gramin-700">Phone:</span>
-                <a
-                  href="tel:+919704635156"
-                  className="text-gramin-600 underline hover:text-gramin-800"
-                >
-                  +91-9704635156
-                </a>
+
+              {/* Phone */}
+              <div className="flex items-center gap-4 text-lg">
+                <div className="flex-shrink-0">
+                  <Phone className="w-6 h-6 text-gramin-600" />
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                  <span className="font-semibold text-gramin-700">Phone:</span>
+                  <a
+                    href="tel:+919704635156"
+                    className="text-gramin-600 underline hover:text-gramin-800 transition-colors duration-200"
+                  >
+                    +91-9704635156
+                  </a>
+                </div>
               </div>
-              <div className="flex items-start gap-3 text-lg">
-                <MapPin className="w-7 h-7 text-gramin-600 mt-1" />
-                <span>
-                  <span className="font-semibold text-gramin-700">Office Address:</span>{' '}
-                  Visakhapatnam, Andhra Pradesh, India
-                </span>
+
+              {/* WhatsApp */}
+              <div className="flex items-center gap-4 text-lg">
+                <div className="flex-shrink-0">
+                  <MessageSquare className="w-6 h-6 text-gramin-600" />
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                  <span className="font-semibold text-gramin-700">WhatsApp:</span>
+                  <a
+                    href="https://wa.me/919704635156"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gramin-600 underline hover:text-gramin-800 transition-colors duration-200"
+                  >
+                    +91-9704635156
+                  </a>
+                </div>
               </div>
-              <div className="flex items-start gap-3 text-lg justify-center">
-                <Clock className="w-7 h-7 text-gramin-600 mt-1" />
-                <span>
-                  <span className="font-semibold text-gramin-700">Business Hours:</span> <br />
-                  Monday - Friday: 9:00 AM - 6:00 PM (IST)
-                  <br />
-                  Saturday - Sunday: Closed
-                </span>
+
+              {/* Office Address */}
+              <div className="flex items-start gap-4 text-lg">
+                <div className="flex-shrink-0">
+                  <MapPin className="w-6 h-6 text-gramin-600 mt-1" />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="font-semibold text-gramin-700">Office Address:</span>
+                  <span className="text-gramin-600 leading-relaxed">
+                    Visakhapatnam, Andhra Pradesh, India
+                  </span>
+                </div>
+              </div>
+
+              {/* Business Hours */}
+              <div className="flex items-start gap-4 text-lg">
+                <div className="flex-shrink-0">
+                  <Clock className="w-6 h-6 text-gramin-600 mt-1" />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <span className="font-semibold text-gramin-700">Business Hours:</span>
+                  <div className="text-gramin-600 space-y-1">
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium">Monday - Friday:</span>
+                      <span>9:00 AM - 6:00 PM (IST)</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium">Saturday - Sunday:</span>
+                      <span>Closed</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="mt-8">
-              <h3 className="text-xl font-semibold mb-3 text-gramin-800">Connect With Us</h3>
-              <div className="flex space-x-5">
+            {/* Social Media Section */}
+            <div className="mt-8 pt-6 border-t border-gramin-100">
+              <h3 className="text-xl font-semibold mb-4 text-gramin-800">Connect With Us</h3>
+              <div className="flex space-x-4">
                 <a
                   href="https://www.linkedin.com/company/graminsetu/"
                   aria-label="LinkedIn"
-                  className="text-gramin-600 hover:text-gramin-800 transition"
+                  className="group flex items-center justify-center w-12 h-12 bg-gramin-50 rounded-full text-gramin-600 hover:bg-gramin-600 hover:text-white transition-all duration-200 shadow-sm hover:shadow-md"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Linkedin className="w-7 h-7" />
+                  <Linkedin className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://www.linkedin.com/company/graminsetu/?viewAsMember=true"
+                  href="https://twitter.com/graminsetu"
                   aria-label="Twitter"
-                  className="text-gramin-600 hover:text-gramin-800 transition"
+                  className="group flex items-center justify-center w-12 h-12 bg-gramin-50 rounded-full text-gramin-600 hover:bg-gramin-600 hover:text-white transition-all duration-200 shadow-sm hover:shadow-md"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <Twitter className="w-7 h-7" />
+                  <Twitter className="w-6 h-6" />
                 </a>
-                <a
-                  href="https://www.linkedin.com/company/graminsetu/?viewAsMember=true"
-                  aria-label="Facebook"
-                  className="text-gramin-600 hover:text-gramin-800 transition"
+                <button
+                  disabled
+                  aria-label="Facebook (Coming Soon)"
+                  className="group flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full text-gray-400 cursor-not-allowed shadow-sm"
+                  title="Coming Soon"
                 >
-                  <Facebook className="w-7 h-7" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/company/graminsetu/?viewAsMember=true"
-                  aria-label="Instagram"
-                  className="text-gramin-600 hover:text-gramin-800 transition"
+                  <Facebook className="w-6 h-6" />
+                </button>
+                <button
+                  disabled
+                  aria-label="Instagram (Coming Soon)"
+                  className="group flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full text-gray-400 cursor-not-allowed shadow-sm"
+                  title="Coming Soon"
                 >
-                  <Instagram className="w-7 h-7" />
-                </a>
+                  <Instagram className="w-6 h-6" />
+                </button>
               </div>
-              please check carrier page
+              <p className="text-sm text-gramin-500 mt-4">
+                Follow us on social media for updates and news about rural development initiatives.
+              </p>
             </div>
           </div>
 
