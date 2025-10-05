@@ -15,7 +15,7 @@ export const footerContent = {
   teamNote: 'Teams details are updated soon.',
   mission:
     'GraminSetu is on a mission to bridge India’s villages with technology, transparency, and trust.',
-  copyright: '© 2024 GraminSetu. All rights reserved.',
+  copyright: '© 2025 GraminSetu. All rights reserved.',
   newsletter: {
     title: '💌 Stay Connected with GraminSetu',
     subtitle:
