@@ -121,9 +121,7 @@ const LandingPage = () => {
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="w-2 h-2 bg-gramin-500 rounded-full"></div>
-                  <span className="text-gray-700 text-lg">
-                    Business Portal for Rural Development
-                  </span>
+                  <span className="text-gray-700 text-lg">Business Portal for Rural</span>
                 </div>
               </div>
 
