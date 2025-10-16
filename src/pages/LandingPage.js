@@ -22,6 +22,7 @@ import Footer from '../components/Footer/Footer';
 
 import FAQ from '../components/FAQ/FAQ';
 import { landingContent } from '../constants/landingContent';
+import HelpSupportButton from '../components/HelpSupport/HelpSupportButton';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -664,6 +665,8 @@ const LandingPage = () => {
 
       <FAQ />
       <Footer />
+      {/* Help & Support bot (AI assistant) */}
+      <HelpSupportButton />
     </main>
   );
 };
