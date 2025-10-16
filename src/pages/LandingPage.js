@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import graminsetuMainImage from '../assets/images/graminsetu-main-image.webp';
 // import { Helmet } from "react-helmet";
 import SEO from '../components/SEO';
 import FAQStructuredData from '../components/FAQStructuredData';
@@ -23,6 +22,7 @@ import Footer from '../components/Footer/Footer';
 import FAQ from '../components/FAQ/FAQ';
 import { landingContent } from '../constants/landingContent';
 import HelpSupportButton from '../components/HelpSupport/HelpSupportButton';
+import HeroSection from '../components/HeroSection/HeroSection';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -73,94 +73,7 @@ const LandingPage = () => {
       />
       <Navbar />
 
-      {/* Hero Section - Official & Professional */}
-      <section id="hero" className="relative pt-0 pb-12 bg-white min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Content - Official & Clean */}
-            <div className="lg:col-span-6 space-y-6">
-              {/* Official Badge */}
-              <div className="inline-flex items-center px-4 py-2 bg-gray-100 rounded-md border">
-                <span className="text-sm font-medium text-gray-700">
-                  Digital Solutions for Rural Development
-                </span>
-              </div>
-
-              {/* Main Heading */}
-              <div className="space-y-4">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                  <span className="text-gramin-600">GraminSetu</span>
-                  <br />
-                  Rural Development Platform
-                </h1>
-
-                <p className="text-xl text-gray-600 font-normal leading-relaxed">
-                  Connecting villages, government agencies, and businesses through digital solutions
-                  designed for rural India.
-                </p>
-
-                <p className="text-lg text-gray-500 leading-relaxed">
-                  Our platform provides specialized portals for village governance, government
-                  services, and business development to strengthen rural communities.
-                </p>
-              </div>
-
-              {/* Key Features */}
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gramin-500 rounded-full"></div>
-                  <span className="text-gray-700 text-lg">
-                    Village Portal for Panchayat Management
-                  </span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gramin-500 rounded-full"></div>
-                  <span className="text-gray-700 text-lg">
-                    Government Portal for Service Delivery
-                  </span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gramin-500 rounded-full"></div>
-                  <span className="text-gray-700 text-lg">
-                    Business Portal for Rural Development
-                  </span>
-                </div>
-              </div>
-
-              {/* CTA Buttons - Professional */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button
-                  className="px-10 py-4 bg-gramin-600 text-white font-medium rounded-md hover:bg-gramin-700 transition-colors duration-200 text-lg"
-                  onClick={() => handleAction(landingContent.hero.primaryAction)}
-                >
-                  Explore Portals
-                </button>
-
-                <button
-                  className="px-10 py-4 border border-gray-300 text-gray-700 font-medium rounded-md hover:bg-gray-50 transition-colors duration-200 text-lg"
-                  onClick={() => handleAction(landingContent.hero.secondaryAction)}
-                >
-                  Contact Us
-                </button>
-              </div>
-            </div>
-
-            {/* Right Image - Enhanced Size and Presentation */}
-            <div className="lg:col-span-6 flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-2xl">
-                <img
-                  src={graminsetuMainImage}
-                  alt="GraminSetu Digital Platform Interface"
-                  className="w-full h-auto object-contain"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Subtle bottom border */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
-      </section>
+      <HeroSection />
 
       {/* Three Specialized Portals Section - Perfect UX */}
       <section id="portals-overview" className="py-24 bg-gray-50">
@@ -424,7 +337,7 @@ const LandingPage = () => {
                       <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path
                           fillRule="evenodd"
-                          d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
+                          d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"
                           clipRule="evenodd"
                         />
                         <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
