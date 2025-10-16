@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import graminsetuMainImage from '../assets/images/graminsetu-main-image.webp';
+import graminsetuMainImage from '../assets/images/graminsetuMainImage.png';
+import VillagersportalIcon from '../assets/images/VillagersportalIcon.webp';
+import BusinessportalIcon from '../assets/images/BusinessportalIcon.webp';
+import GovernamentportalIcon from '../assets/images/GovernamentportalIcon.webp';
+import NetworkImage from '../assets/images/NetworkImage.webp';
 // import { Helmet } from "react-helmet";
 import SEO from '../components/SEO';
 import FAQStructuredData from '../components/FAQStructuredData';
@@ -74,82 +78,86 @@ const LandingPage = () => {
       <Navbar />
 
       {/* Hero Section - Official & Professional */}
-      <section id="hero" className="relative pt-0 pb-12 bg-white min-h-screen flex items-center">
+      <section
+        id="hero"
+        className="relative pt-0 pb-12 min-h-screen bg-green-50  flex items-center"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             {/* Left Content - Official & Clean */}
             <div className="lg:col-span-6 space-y-6">
-              {/* Official Badge */}
-              <div className="inline-flex items-center px-4 py-2 bg-gray-100 rounded-md border">
-                <span className="text-sm font-medium text-gray-700">
-                  Digital Solutions for Rural Development
-                </span>
-              </div>
-
               {/* Main Heading */}
               <div className="space-y-4">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                  <span className="text-gramin-600">GraminSetu</span>
+                  <span className="text-[#256B3E] font-inter">
+                    Building The Gap
+                    <br />
+                    Building The Future
+                  </span>
                   <br />
-                  Rural Development Platform
                 </h1>
 
-                <p className="text-xl text-gray-600 font-normal leading-relaxed">
-                  Connecting villages, government agencies, and businesses through digital solutions
-                  designed for rural India.
+                <p className="text-xl text-[#000000] font-bold leading-relaxed">
+                  Our platform for village governance, government services,and business development
+                  to strengthen rural communities
                 </p>
 
-                <p className="text-lg text-gray-500 leading-relaxed">
+                <p className="text-lg text-[#000000] font-semibold leading-relaxed">
                   Our platform provides specialized portals for village governance, government
                   services, and business development to strengthen rural communities.
                 </p>
               </div>
 
               {/* Key Features */}
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gramin-500 rounded-full"></div>
-                  <span className="text-gray-700 text-lg">
-                    Village Portal for Panchayat Management
-                  </span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gramin-500 rounded-full"></div>
-                  <span className="text-gray-700 text-lg">
-                    Government Portal for Service Delivery
-                  </span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gramin-500 rounded-full"></div>
-                  <span className="text-gray-700 text-lg">Business Portal for Rural</span>
+              <div>
+                <div className="flex items-center justify-start gap-20">
+                  <div>
+                    <div className="bg-[07670A]/10 h-24 w-24 flex justify-center items-center rounded-full border-2 border-[#07670A] ">
+                      <img src={VillagersportalIcon} alt="Businessportal"></img>
+                    </div>
+                    <span className="text-[#07670A] font-semibold text-2xl ml-2.5">Villages</span>
+                  </div>
+                  <div>
+                    <div className="bg-[07670A]/10 h-24 w-24 ml-5 flex justify-center items-center rounded-full border-2 border-[#07670A] ">
+                      <img src={GovernamentportalIcon} alt="Businessportal"></img>
+                    </div>
+                    <span className="text-[#07670A] font-semibold text-2xl">Government</span>
+                  </div>
+                  <div>
+                    <div className="bg-[07670A]/10 h-24 w-24 flex justify-center items-center rounded-full border-2 border-[#07670A] ">
+                      <img src={BusinessportalIcon} alt="Businessportal"></img>
+                    </div>
+                    <span className="text-[#07670A] font-semibold text-2xl ml-2.5">Business</span>
+                  </div>
                 </div>
               </div>
 
               {/* CTA Buttons - Professional */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <button
-                  className="px-10 py-4 bg-gramin-600 text-white font-medium rounded-md hover:bg-gramin-700 transition-colors duration-200 text-lg"
+                  className="px-16 py-4 bg-gramin-600 text-white font-medium rounded-full hover:bg-gramin-700 transition-colors duration-200 text-lg"
                   onClick={() => handleAction(landingContent.hero.primaryAction)}
                 >
                   Explore Portals
                 </button>
 
                 <button
-                  className="px-10 py-4 border border-gray-300 text-gray-700 font-medium rounded-md hover:bg-gray-50 transition-colors duration-200 text-lg"
+                  className="px-16 py-4 border bg-orange-500 text-white font-medium rounded-full hover:bg-orange-400 transition-colors duration-200 text-lg"
                   onClick={() => handleAction(landingContent.hero.secondaryAction)}
                 >
-                  Contact Us
+                  Join Our Team
                 </button>
               </div>
             </div>
 
             {/* Right Image - Enhanced Size and Presentation */}
-            <div className="lg:col-span-6 flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-2xl">
+            <div className="lg:col-span-6 flex justify-center ml-16 lg:justify-end">
+              <div className="relative w-full max-w-6xl overflow-hidden rounded-xl">
+                <img src={NetworkImage} alt="Background" className="w-full h-full object-cover" />
                 <img
                   src={graminsetuMainImage}
-                  alt="GraminSetu Digital Platform Interface"
-                  className="w-full h-auto object-contain"
+                  alt="Over"
+                  className="absolute top-6 right-4 w-full"
                 />
               </div>
             </div>
