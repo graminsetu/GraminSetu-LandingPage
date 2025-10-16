@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import HelpSupportButton from '../components/HelpSupport/HelpSupportButton';
 
 const pricingPlans = [
   {
@@ -144,7 +145,9 @@ const VillageBusinessModel = () => (
         {pricingPlans.map((plan, i) => (
           <div
             key={i}
-            className={`rounded-xl shadow-lg border-2 ${plan.highlight ? 'border-gramin-600 bg-gramin-50' : 'border-gramin-200 bg-white'} p-6 flex flex-col items-center`}
+            className={`rounded-xl shadow-lg border-2 ${
+              plan.highlight ? 'border-gramin-600 bg-gramin-50' : 'border-gramin-200 bg-white'
+            } p-6 flex flex-col items-center`}
           >
             <h3 className="text-xl font-bold mb-2 text-gramin-900">{plan.name}</h3>
             <ul className="mb-4 text-gramin-700 text-base list-disc list-inside">
@@ -228,6 +231,9 @@ const VillageBusinessModel = () => (
         Back to Explore Business Models
       </Link>
     </section>
+
+    {/* Help and Support Button */}
+    <HelpSupportButton />
   </div>
 );
 

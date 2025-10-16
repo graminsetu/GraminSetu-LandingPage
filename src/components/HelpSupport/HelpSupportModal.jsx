@@ -1,39 +1,33 @@
 import React, { useEffect, useRef, useState } from 'react';
-import supportVideo from '../../assets/images/support.mp4';
 import graminLogo from '../../assets/images/graminsetu-logo.png';
+import sampleVideo from '../../assets/images/support.mp4';
 
-const STORAGE_MESSAGES = 'helpSupportMessages_v1';
-
-const defaultWelcome = {
-  id: 1,
-  from: 'bot',
-  text: "Hi — I'm GraminSetu Assistant. How can I help you today?",
-  time: Date.now(),
-};
-
+import {
+  defaultWelcome,
+  initialQuestions,
+  generateReply,
+  generateQuickReplies,
+} from '../../constants/chatbotContent';
 const HelpSupportModal = ({ open, onClose }) => {
   const modalRef = useRef(null);
   const scrollRef = useRef(null);
-  const [messages, setMessages] = useState(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_MESSAGES);
-      if (raw) return JSON.parse(raw);
-    } catch (e) {}
-    return [defaultWelcome];
-  });
+  const [messages, setMessages] = useState([defaultWelcome]);
 
   const [input, setInput] = useState('');
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [quickReplies, setQuickReplies] = useState([]);
+  const [quickReplies, setQuickReplies] = useState([
+    'How do I register?',
+    'What are the pricing plans?',
+    'How can I contact support?',
+  ]);
   const [messageStatusMap, setMessageStatusMap] = useState({});
   const [isSending, setIsSending] = useState(false);
+  const [context, setContext] = useState('default'); // Track the current conversation context
 
   // persist messages
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_MESSAGES, JSON.stringify(messages));
-    } catch (e) {}
+    // No persistence for public chatbot
   }, [messages]);
 
   // (removed minimized persistence)
@@ -59,12 +53,7 @@ const HelpSupportModal = ({ open, onClose }) => {
         } catch (e) {}
       }, 140);
       // clear unread flag when user opens the panel
-      try {
-        localStorage.setItem('helpSupportHasUnread', 'false');
-      } catch (e) {}
-      try {
-        window.dispatchEvent(new CustomEvent('helpSupport:clear'));
-      } catch (e) {}
+      // No persistence for public chatbot
     }
     function onKey(e) {
       if (e.key === 'Escape') {
@@ -82,15 +71,15 @@ const HelpSupportModal = ({ open, onClose }) => {
   useEffect(() => {
     if (!scrollRef.current) return;
     const el = scrollRef.current;
-    // smooth scroll to bottom
+    // Enhanced smooth scroll to bottom with animation trigger
     try {
       el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+      // trigger entrance animation hook with staggered timing
+      setAnimate(false);
+      setTimeout(() => setAnimate(true), 50);
     } catch (e) {
       el.scrollTop = el.scrollHeight;
     }
-    // trigger simple entrance animation hook: reset then set to retrigger
-    setAnimate(false);
-    setTimeout(() => setAnimate(true), 30);
   }, [messages, isTyping]);
 
   const [animate, setAnimate] = useState(false);
@@ -138,20 +127,6 @@ const HelpSupportModal = ({ open, onClose }) => {
     return () => document.removeEventListener('keydown', handleTab);
   }, [open]);
 
-  const generateReply = (userText) => {
-    const lowered = userText.toLowerCase();
-    if (lowered.includes('register') || lowered.includes('sign up')) {
-      return 'You can register by clicking the Sign Up button on the homepage or visiting the Contact page — would you like me to navigate you there?';
-    }
-    if (lowered.includes('pricing') || lowered.includes('price')) {
-      return 'Basic features are free for villagers. For business/NGO plans, please visit our pricing page or contact sales@graminsetu.in for custom plans.';
-    }
-    if (lowered.includes('support') || lowered.includes('help')) {
-      return 'You can reach our support via WhatsApp or email. Use the links provided in this panel.';
-    }
-    return "Thanks for your message — our team will get back shortly. Meanwhile try keywords like 'register', 'pricing', or 'support'.";
-  };
-
   const sendMessage = (text) => {
     if (isSending) return;
     if (!text || !text.trim()) return;
@@ -189,369 +164,381 @@ const HelpSupportModal = ({ open, onClose }) => {
         const replyText = generateReply(text.trim());
         const botMsg = { id: Date.now() + 1, from: 'bot', text: replyText, time: Date.now() };
         setMessages((m) => [...m, botMsg]);
-        // generate quick reply suggestions based on reply
-        try {
-          const suggestions = [];
-          const t = replyText.toLowerCase();
-          if (t.includes('register')) suggestions.push('How do I register?');
-          if (t.includes('pricing') || t.includes('price')) suggestions.push('Show pricing');
-          if (t.includes('support')) suggestions.push('Contact support');
-          if (!suggestions.length)
-            suggestions.push('Tell me about registration', 'Pricing', 'Contact support');
-          setQuickReplies(suggestions);
-        } catch (e) {
-          setQuickReplies([]);
-        }
+        setQuickReplies([]); // Clear quick replies when a message is sent
+        setQuickReplies(generateQuickReplies(replyText));
         setIsTyping(false);
-        // ensure the sending state is cleared after bot reply arrives
-        try {
-          setIsSending(false);
-        } catch (e) {}
-        // If panel is not focused, mark unread and notify button
-        try {
-          const shouldMark = !document.hasFocus();
-          if (shouldMark) {
-            localStorage.setItem('helpSupportHasUnread', 'true');
-            window.dispatchEvent(new CustomEvent('helpSupport:unread'));
-          }
-        } catch (e) {}
-        // update user message status to delivered then read to simulate delivery receipts
-        try {
-          setMessageStatusMap((s) => ({ ...s, [id]: 'delivered' }));
-          setTimeout(
-            () => {
-              setMessageStatusMap((s) => ({ ...s, [id]: 'read' }));
-              // final clear to be safe
-              try {
-                setIsSending(false);
-              } catch (e) {}
-            },
-            700 + Math.random() * 400
-          );
-        } catch (e) {}
       },
-      900 + Math.min(1200, text.length * 30)
+      700 + Math.random() * 800
     );
   };
 
-  // clearConversation removed per UX request
+  const handleQuickReplyClick = (reply) => {
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { id: Date.now(), from: 'user', text: reply, time: Date.now() },
+    ]);
 
-  // handle enter key in textarea (Enter to send, Shift+Enter newline)
+    const botReply = generateReply(reply);
+    setIsTyping(true);
+    setTimeout(() => {
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { id: Date.now(), from: 'bot', text: botReply, time: Date.now() },
+      ]);
+      const newContext = reply.toLowerCase();
+      setContext(newContext); // Update the context based on the user's reply
+      setQuickReplies(generateQuickReplies(newContext)); // Update quick replies dynamically
+      setIsTyping(false);
+    }, 1000);
+  };
+
+  // Example usage of resetContext
   const handleKeyDown = (e) => {
-    // Respect IME composition
-    if (e.nativeEvent && e.nativeEvent.isComposing) return;
-    // Prevent send while a send is in-flight
-    if (isSending) return;
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMessage(input);
     }
   };
 
+  // Function to render message content, handling URLs
+  const renderMessageContent = (text) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.split(urlRegex).map((part, index) => {
+      if (part.match(urlRegex)) {
+        return (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:underline"
+          >
+            {part}
+          </a>
+        );
+      }
+      return part;
+    });
+  };
+
+  // Function to get avatar based on sender
+  const getAvatar = (from) => {
+    if (from === 'bot') {
+      return (
+        <img
+          src={graminLogo}
+          alt="GraminSetu Assistant"
+          className="w-8 h-8 rounded-full object-cover"
+        />
+      );
+    }
+    return (
+      <div className="w-8 h-8 rounded-full bg-gramin-200 flex items-center justify-center text-gramin-700 font-bold text-sm">
+        You
+      </div>
+    );
+  };
+
+  // Function to get message bubble styles
+  const getBubbleStyles = (from) => {
+    if (from === 'bot') {
+      return 'bg-gray-100 text-gray-800 rounded-br-xl rounded-tl-xl rounded-tr-xl';
+    }
+    return 'bg-gradient-to-r from-gramin-600 to-gramin-500 text-white rounded-bl-xl rounded-tl-xl rounded-tr-xl';
+  };
+
+  // Function to get message alignment
+  const getMessageAlignment = (from) => {
+    if (from === 'bot') {
+      return 'justify-start';
+    }
+    return 'justify-end';
+  };
+
+  // Function to get message container padding
+  const getMessageContainerPadding = (from) => {
+    if (from === 'bot') {
+      return 'pr-10';
+    }
+    return 'pl-10';
+  };
+
+  // Function to get message animation class
+  const getMessageAnimationClass = (index) => {
+    return animate ? `animate-message-in delay-${index * 50}` : '';
+  };
+
+  // Typing indicator component
+  const TypingIndicator = () => (
+    <div className="flex items-center space-x-1 animate-pulse">
+      <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+      <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+      <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+    </div>
+  );
+
+  // Effect to show initial questions if no user interaction
+  useEffect(() => {
+    if (!hasUserInteracted && messages.length === 1 && messages[0].id === defaultWelcome.id) {
+      setQuickReplies(initialQuestions);
+    } else if (hasUserInteracted && messages.length > 1) {
+      // Clear initial questions once user interacts and messages are exchanged
+      setQuickReplies([]);
+    }
+  }, [hasUserInteracted, messages]);
+
+  // Effect to update quick replies based on context changes
+  useEffect(() => {
+    if (context === 'default') {
+      setQuickReplies(initialQuestions);
+    }
+  }, [context]);
+
   if (!open) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-end md:items-center pb-12"
+      ref={modalRef}
+      tabIndex={-1}
       role="dialog"
       aria-modal="true"
-      aria-label="Help and support"
+      aria-labelledby="help-support-title"
+      className={`fixed bottom-24 right-0 z-50 flex items-end justify-end p-6 transition-all duration-500 ease-in-out ${open ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
     >
-      {/* backdrop */}
       <div
-        className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-        onClick={() => {
-          if (open) onClose();
-        }}
-        aria-hidden={!open}
-      />
+        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0'}`}
+        onClick={onClose}
+        aria-hidden="true"
+      ></div>
 
-      <aside
-        ref={modalRef}
-        tabIndex={-1}
-        className={`relative bg-white w-full max-w-xs h-full md:h-auto md:rounded-l-2xl p-0 shadow-2xl overflow-hidden flex flex-col transform transition-transform duration-400 ease-out ${
-          open ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-        }`}
-        style={{ maxHeight: '80vh' }}
-        aria-hidden={!open}
+      <div
+        className={`relative bg-white rounded-2xl shadow-xl flex flex-col w-full max-w-xs h-[90vh] max-h-[800px] border border-gray-300 transition-transform transition-opacity duration-500 ease-in-out transform ${open ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 translate-y-10'}`}
       >
-        {/* Header - refined */}
-        <div
-          className="flex items-center justify-between px-4 py-3"
-          style={{ background: 'linear-gradient(90deg,#06b67a,#0ea55e)' }}
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden relative ring-1 ring-white/10">
-              <img src={graminLogo} alt="GraminSetu" className="w-8 h-8 object-contain" />
-            </div>
-            <div>
-              <div className="text-sm font-semibold text-white">GraminSetu Assistant</div>
-              <div className="text-xs text-white/90">How can we help you today?</div>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onClose}
-              aria-label="Close support panel"
-              className="p-2 rounded-md hover:bg-white/10 text-white"
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-gramin-600 to-gramin-500 text-white rounded-t-2xl shadow-sm">
+          <h2 id="help-support-title" className="text-lg font-semibold flex items-center gap-2">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="text-gramin-100"
             >
-              ✕
-            </button>
+              <path
+                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M9.09 9C9.3251 8.33137 9.78923 7.74873 10.4041 7.3337C11.0189 6.91868 11.756 6.68915 12.5 6.68915C13.244 6.68915 13.9811 6.91868 14.5959 7.3337C15.2108 7.74873 15.6749 8.33137 15.91 9M12 16h.01M12 12V16"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            GraminSetu Assistant
+          </h2>
+          <button
+            onClick={onClose}
+            className="p-2 rounded-full hover:bg-gramin-700 focus:outline-none focus:ring-2 focus:ring-gramin-300 transition-colors"
+            aria-label="Close chat"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="text-white"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Chat Body */}
+        <div ref={scrollRef} className="flex-1 p-4 overflow-y-auto bg-gray-50">
+          <video src={sampleVideo} autoPlay loop muted className="w-full h-auto rounded-lg mb-4" />
+          <div className="flex flex-col space-y-4">
+            {messages.map((m, i) => {
+              const next = messages[i + 1];
+              const hideAvatar = next && next.from === m.from;
+              const showTimestamp = !next || next.from !== m.from || next.time - m.time > 60 * 1000;
+
+              return (
+                <div
+                  key={m.id}
+                  className={`flex ${getMessageAlignment(m.from)} ${getMessageContainerPadding(m.from)} ${getMessageAnimationClass(i)}`}
+                >
+                  {!hideAvatar && m.from === 'bot' && (
+                    <div className="mr-2 self-end flex-shrink-0">{getAvatar(m.from)}</div>
+                  )}
+                  <div
+                    className={`flex flex-col max-w-[75%] ${m.from === 'bot' ? 'items-start' : 'items-end'}`}
+                  >
+                    <div
+                      className={`p-3 rounded-xl shadow-sm text-sm relative ${getBubbleStyles(m.from)}`}
+                    >
+                      {renderMessageContent(m.text)}
+                      {m.from === 'user' && messageStatusMap[m.id] === 'sending' && (
+                        <span className="absolute -bottom-1.5 -right-1.5 text-xs text-gray-300">
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="animate-pulse"
+                          >
+                            <path
+                              d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </span>
+                      )}
+                    </div>
+                    {showTimestamp && (
+                      <span
+                        className={`text-xs text-gray-500 mt-1 ${m.from === 'bot' ? 'ml-1' : 'mr-1'}`}
+                      >
+                        {new Date(m.time).toLocaleTimeString([], {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}
+                      </span>
+                    )}
+                  </div>
+                  {!hideAvatar && m.from === 'user' && (
+                    <div className="ml-2 self-end flex-shrink-0">{getAvatar(m.from)}</div>
+                  )}
+                </div>
+              );
+            })}
+            {isTyping && (
+              <div className="flex justify-start pr-10">
+                <div className="mr-2 self-end flex-shrink-0">{getAvatar('bot')}</div>
+                <div className="p-3 rounded-xl shadow-sm text-sm bg-gray-100 text-gray-800 rounded-br-xl rounded-tl-xl rounded-tr-xl">
+                  <TypingIndicator />
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Main panel */}
-        <>
-          {/* Messages */}
-          <div className="p-4">
-            <div
-              ref={scrollRef}
-              className="space-y-4 overflow-auto"
-              style={{ maxHeight: '60vh', minHeight: '12rem' }}
-              aria-live="polite"
-              aria-atomic="false"
-            >
-              {!hasUserInteracted && (
-                <div className="flex items-center justify-center py-2 -mt-3 transition-opacity duration-300 opacity-100">
-                  <div className="w-full max-w-[240px] rounded-lg overflow-hidden shadow-sm">
-                    <video
-                      src={supportVideo}
-                      className="w-full h-auto"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
+        {/* Quick Replies */}
+        {quickReplies.length > 0 && (
+          <div className="px-4 py-3.5 border-t border-gray-200 bg-white flex flex-wrap gap-2 justify-center">
+            {quickReplies.map((reply, index) => (
+              <button
+                key={index}
+                onClick={() => handleQuickReplyClick(reply)}
+                className="px-4 py-2 text-sm font-medium text-gramin-700 bg-gramin-100 rounded-full hover:bg-gramin-200 focus:outline-none focus:ring-2 focus:ring-gramin-300 transition-colors duration-200"
+              >
+                {reply}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Input */}
+        <div className="px-4 py-3.5 border-t bg-white shadow-[0_-1px_2px_rgba(0,0,0,0.03)]">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (isSending) return;
+              sendMessage(input);
+            }}
+            className="flex items-center gap-3 relative"
+          >
+            <div className="relative flex-1 group">
+              <textarea
+                ref={textareaRef}
+                value={input}
+                onChange={(e) => {
+                  setInput(e.target.value);
+                  resizeTextarea(textareaRef.current);
+                }}
+                onKeyDown={handleKeyDown}
+                rows={1}
+                placeholder="Type your message..."
+                className="w-full resize-none rounded-xl border border-gray-200 px-4 py-3.5 text-sm focus:outline-none focus:border-gramin-300 focus:ring-2 focus:ring-gramin-100 pr-14 placeholder:text-gray-400 transition-all"
+                aria-label="Type your question"
+              />
+              <div className="absolute right-1.5 top-1/2 -translate-y-1/2">
+                <button
+                  type="submit"
+                  disabled={!input.trim() || isSending}
+                  aria-label="Send message"
+                  aria-disabled={!input.trim() || isSending}
+                  aria-busy={isSending}
+                  title={isSending ? 'Sending…' : 'Send message'}
+                  className={`inline-flex items-center justify-center rounded-full w-10 h-10 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gramin-200 ${
+                    input.trim() && !isSending
+                      ? 'bg-gradient-to-r from-gramin-600 to-gramin-500 text-white hover:scale-105 hover:shadow-md active:scale-95 shadow'
+                      : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  }`}
+                  style={{ marginRight: 2 }}
+                >
+                  <span className="sr-only">{isSending ? 'Sending' : 'Send message'}</span>
+                  {!isSending && (
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
                       aria-hidden
-                    />
-                  </div>
-                </div>
-              )}
-
-              {messages.map((m, idx) => {
-                const prev = messages[idx - 1];
-                const showAvatar = !prev || prev.from !== m.from;
-                const isUser = m.from === 'user';
-                const status = messageStatusMap[m.id];
-                return (
-                  <div
-                    key={m.id}
-                    className={`flex ${isUser ? 'justify-end' : 'justify-start'} transition-all duration-300 ${animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'}`}
-                  >
-                    {!isUser && showAvatar && (
-                      <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gramin-600 text-sm mr-3 shadow">
-                        🤖
-                      </div>
-                    )}
-
-                    <div className={`max-w-[78%] ${isUser ? 'ml-4' : ''}`}>
-                      <div
-                        className={`px-4 py-2 rounded-2xl shadow ${isUser ? 'bg-gradient-to-br from-gramin-600 to-gramin-500 text-white' : 'bg-white border border-gray-100 text-gramin-900'}`}
-                      >
-                        <div className="text-sm leading-relaxed whitespace-pre-wrap">{m.text}</div>
-                        <div className="flex items-center justify-between mt-2">
-                          <div className="text-[10px] text-gray-400">
-                            {new Date(m.time).toLocaleTimeString([], {
-                              hour: '2-digit',
-                              minute: '2-digit',
-                            })}
-                          </div>
-                          {isUser && (
-                            <div className="flex items-center gap-1 ml-2">
-                              {status === 'sending' && (
-                                <span className="text-[10px] text-gray-300">Sending…</span>
-                              )}
-                              {status === 'sent' && (
-                                <svg
-                                  className="w-3 h-3 text-white/90"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                >
-                                  <path
-                                    d="M20 6L9 17l-5-5"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />
-                                </svg>
-                              )}
-                              {status === 'delivered' && (
-                                <svg
-                                  className="w-3 h-3 text-white/80"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                >
-                                  <path
-                                    d="M20 6L9 17l-5-5"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />
-                                  <path
-                                    d="M22 6L12 17l-4-4"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />
-                                </svg>
-                              )}
-                              {status === 'read' && (
-                                <svg
-                                  className="w-3 h-3 text-green-200"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                >
-                                  <path
-                                    d="M20 6L9 17l-5-5"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />
-                                  <path
-                                    d="M22 6L12 17l-4-4"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />
-                                </svg>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    {isUser && showAvatar && (
-                      <div className="w-8 h-8 rounded-full bg-gramin-600 flex items-center justify-center text-white text-sm ml-3 shadow">
-                        You
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-
-              {/* Quick reply chips */}
-              {quickReplies && quickReplies.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {quickReplies.map((q, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={() => {
-                        sendMessage(q);
-                        setQuickReplies([]);
-                      }}
-                      className="text-xs px-3 py-1 rounded-full bg-gramin-50 border border-gray-200 text-gramin-700 hover:bg-gramin-100"
                     >
-                      {q}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {isTyping && (
-                <div className="flex justify-start items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gramin-600 text-sm mr-2">
-                    🤖
-                  </div>
-                  <div className="bg-gray-100 px-3 py-2 rounded-lg">
-                    <div className="flex items-center gap-1">
-                      <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                      <span
-                        className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                        style={{ animationDelay: '100ms' }}
+                      <path
+                        d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
-                      <span
-                        className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                        style={{ animationDelay: '200ms' }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Input */}
-          <div className="px-4 py-3 border-t bg-white">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (isSending) return;
-                sendMessage(input);
-              }}
-              className="flex items-center gap-3"
-            >
-              <div className="relative flex-1">
-                <textarea
-                  ref={textareaRef}
-                  value={input}
-                  onChange={(e) => {
-                    setInput(e.target.value);
-                    resizeTextarea(textareaRef.current);
-                  }}
-                  onKeyDown={handleKeyDown}
-                  rows={1}
-                  placeholder="Ask a question or type a message..."
-                  className="w-full resize-none rounded-xl border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gramin-200 pr-14 placeholder:text-gray-400"
-                  aria-label="Type your question"
-                />
-                <div className="absolute right-2 top-1/2 -translate-y-1/2">
-                  <button
-                    type="submit"
-                    disabled={!input.trim() || isSending}
-                    aria-label="Send message"
-                    aria-disabled={!input.trim() || isSending}
-                    aria-busy={isSending}
-                    title={isSending ? 'Sending…' : 'Send message'}
-                    className={`inline-flex items-center justify-center rounded-full w-11 h-11 transition transform focus:outline-none focus:ring-2 focus:ring-gramin-200 ${input.trim() && !isSending ? 'bg-gramin-600 text-white hover:scale-105 active:scale-95 shadow-md' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
-                    style={{ marginRight: 2 }}
-                  >
-                    <span className="sr-only">{isSending ? 'Sending' : 'Send message'}</span>
-                    {!isSending && (
-                      <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
+                    </svg>
+                  )}
+                  {isSending && (
+                    <svg
+                      className="animate-spin"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      aria-hidden
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeDasharray="60"
+                        strokeDashoffset="45"
                         fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden
-                      >
-                        <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" fill="currentColor" />
-                      </svg>
-                    )}
-                    {isSending && (
-                      <svg
-                        className="animate-spin text-white"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        aria-hidden
-                      >
-                        <circle
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                          strokeDasharray="75"
-                          strokeDashoffset="55"
-                          fill="none"
-                        />
-                      </svg>
-                    )}
-                  </button>
-                </div>
+                      />
+                    </svg>
+                  )}
+                </button>
               </div>
-            </form>
-          </div>
-        </>
-      </aside>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

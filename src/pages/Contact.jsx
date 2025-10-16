@@ -18,6 +18,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import PageTitle from '../components/PageTitle';
 import Toast from '../components/Toast';
+import HelpSupportButton from '../components/HelpSupport/HelpSupportButton';
 
 // Initial state for the contact form
 const initialFormState = { name: '', email: '', subject: '', message: '' };
@@ -308,6 +309,11 @@ function Contact() {
               Your message is confidential. We respect your privacy.
             </p>
           </form>
+        </div>
+
+        {/* Help and Support Button */}
+        <div className="mt-10">
+          <HelpSupportButton />
         </div>
       </main>
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import PageTitle from '../components/PageTitle';
+import HelpSupportButton from '../components/HelpSupport/HelpSupportButton';
 
 const LoginGovernment = () => {
   const location = useLocation();
@@ -34,6 +35,7 @@ const LoginGovernment = () => {
         >
           Home
         </a>
+        <HelpSupportButton />
       </div>
     </div>
   );

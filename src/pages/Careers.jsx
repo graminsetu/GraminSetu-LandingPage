@@ -7,6 +7,7 @@ import Footer from '../components/Footer/Footer';
 import Toast from '../components/Toast';
 import { useLocation } from 'react-router-dom';
 import PageTitle from '../components/PageTitle';
+import HelpSupportButton from '../components/HelpSupport/HelpSupportButton';
 
 // ...other code (hooks, helpers, etc.)
 
@@ -713,6 +714,7 @@ function Careers() {
         {viewJob && <JobModal job={viewJob} onClose={() => setViewJob(null)} />}
       </main>
       <Footer />
+      <HelpSupportButton />
     </div>
   );
 }

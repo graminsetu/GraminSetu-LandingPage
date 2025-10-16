@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import { useLocation } from 'react-router-dom';
 import PageTitle from '../components/PageTitle';
 import Footer from '../components/Footer/Footer';
+import HelpSupportButton from '../components/HelpSupport/HelpSupportButton';
 
 function Blog() {
   const location = useLocation();
@@ -45,6 +46,7 @@ function Blog() {
         {/* No blog cards, just the hero section and main message */}
       </main>
       <Footer />
+      <HelpSupportButton />
     </div>
   );
 }

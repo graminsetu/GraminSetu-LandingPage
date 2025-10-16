@@ -3,6 +3,7 @@ import graminsetuLogo from '../assets/images/graminsetu-logo.png';
 import Footer from '../components/Footer/Footer';
 import { useLocation } from 'react-router-dom';
 import PageTitle from '../components/PageTitle';
+import HelpSupportButton from '../components/HelpSupport/HelpSupportButton';
 
 function Terms() {
   const location = useLocation();
@@ -242,6 +243,9 @@ function Terms() {
             </a>
           </div>
         </section>
+
+        {/* Help and Support Button */}
+        <HelpSupportButton />
       </main>
       <Footer />
     </div>
