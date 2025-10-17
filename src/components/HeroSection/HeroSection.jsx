@@ -75,13 +75,12 @@ const HeroSection = () => {
           <div className="lg:col-span-5 flex justify-end items-center relative overflow-visible">
             {/* Background neural network */}
             <div
-              className="absolute inset- rounded-xl"
+              className="absolute top-[-63px] right-0 w-[120%] h-[120%] rounded-xl"
               style={{
                 backgroundImage: `url(${neuronetwork})`,
-                backgroundSize: 'cover',
+                backgroundSize: 'contain',
                 backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                opacity: 0.25,
+                backgroundPosition: 'top right',
                 zIndex: 0,
               }}
             ></div>
@@ -90,8 +89,8 @@ const HeroSection = () => {
             <img
               src={graminsetuMainImage}
               alt="GraminSetu Main"
-              className="relative w-full max-w-[1400px] lg:max-w-[1600px] object-contain rounded-xl transform scale-125"
-              style={{ maxHeight: '95vh', zIndex: 1 }}
+              className="relative w-full max-w-[2000px] lg:max-w-[2200px] object-contain rounded-xl transform scale-125"
+              style={{ maxHeight: '95vh', marginTop: '100px', zIndex: 1 }}
             />
           </div>
         </div>
