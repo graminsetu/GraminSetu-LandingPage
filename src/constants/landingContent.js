@@ -47,14 +47,8 @@ export const landingContent = {
       subtitle: 'Empowering Panchayats & Communities',
       description:
         'Digital governance tools, citizen services, and community management for village leaders and residents.',
-      features: [
-        'Digital Panchayat Management',
-        'Citizen Service Delivery',
-        'Grievance Redressal System',
-        'Community Engagement Tools',
-        'Financial Transparency Dashboard',
-      ],
-      cta: 'Access Village Portal',
+      features: ['Community news', 'Marketplace', 'Issue reporting', 'Events & schemes'],
+      cta: 'Explore Village Portal',
       link: '/village-business-model',
     },
     government: {
@@ -62,29 +56,17 @@ export const landingContent = {
       subtitle: 'Streamlining Public Administration',
       description:
         'Comprehensive platform for government departments to manage schemes, monitor progress, and serve citizens efficiently.',
-      features: [
-        'Scheme Management & Monitoring',
-        'Real-time Progress Tracking',
-        'Inter-department Coordination',
-        'Data Analytics & Reporting',
-        'Policy Implementation Tools',
-      ],
-      cta: 'Access Government Portal',
+      features: ['Scheme monitoring', 'Issue resolution', 'Transparency dashboards', 'Reports'],
+      cta: 'Explore Government Portal',
       link: '/government-csr-business-model',
     },
     business: {
-      title: 'Business Portal',
+      title: 'Business & NGO Portal',
       subtitle: 'Driving Rural Economic Growth',
       description:
         'Platform for businesses, NGOs, and CSR initiatives to connect with rural markets and communities.',
-      features: [
-        'Rural Market Access',
-        'CSR Project Management',
-        'Supply Chain Integration',
-        'Impact Measurement Tools',
-        'Community Partnership Hub',
-      ],
-      cta: 'Access Business Portal',
+      features: ['CSR campaigns', 'Outreach', 'Analytics', 'Donations'],
+      cta: 'Explore Business Portal',
       link: '/business/ngo-business-model',
     },
   },
