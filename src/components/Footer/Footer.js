@@ -256,7 +256,7 @@ function Footer() {
               </li>
               <li>
                 <a
-                  href="/faq"
+                  href="/faqs"
                   className="text-gramin-300 hover:text-white transition-colors text-sm font-medium"
                 >
                   FAQs

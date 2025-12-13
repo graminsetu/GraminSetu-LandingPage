@@ -9,6 +9,7 @@ import Policies from './pages/Policies.jsx';
 import Careers from './pages/Careers.jsx';
 import Terms from './pages/Terms.jsx';
 import Privacy from './pages/Privacy.jsx';
+import FAQs from './pages/FAQs.jsx';
 
 import { Suspense, lazy } from 'react';
 import PageTitle from './components/PageTitle';
@@ -49,6 +50,7 @@ function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/faqs" element={<FAQs />} />
           <Route path="/village-business-model" element={<VillageBusinessModel />} />
           <Route path="/business/ngo-business-model" element={<BusinessNgoBusinessModel />} />
           <Route path="/government-csr-business-model" element={<GovernmentCsrBusinessModel />} />

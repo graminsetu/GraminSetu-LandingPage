@@ -24,7 +24,6 @@ import {
 import graminSetuLogo from '../assets/images/graminsetu-logo.png';
 
 import SEO from '../components/SEO';
-import FAQStructuredData from '../components/FAQStructuredData';
 import PageSEO from '../components/PageSEO';
 import GraminSetuBrandSchema from '../components/GraminSetuBrandSchema';
 import Analytics from '../components/Analytics';
@@ -37,7 +36,7 @@ import Navbar from '../components/Navbar';
 import Loader from '../components/Loader/Loader';
 import Footer from '../components/Footer/Footer';
 import HowItWorks from '../components/HowItWorks/HowItWorks';
-import FAQ from '../components/FAQ/FAQ';
+// FAQ moved to dedicated /faqs page
 import { landingContent } from '../constants/landingContent';
 import HelpSupportButton from '../components/HelpSupport/HelpSupportButton';
 import HeroSection from '../components/HeroSection/HeroSection';
@@ -111,7 +110,6 @@ const LandingPage = () => {
   return (
     <main className="min-h-screen bg-white font-sans">
       <SEO />
-      <FAQStructuredData />
       <GraminSetuBrandSchema />
       <Analytics />
       <TamminanaBhogeshPersonalBrand />
@@ -1458,7 +1456,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <FAQ />
+      {/* FAQs moved to the dedicated /faqs page */}
       <Footer />
       {/* Help & Support bot (AI assistant) */}
       <HelpSupportButton />
