@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Logo from './Logo/Logo';
 
@@ -212,84 +213,74 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="flex lg:hidden">
+        <div className="flex lg:hidden items-center">
           <button
-            onClick={() => setMobileMenuOpen(true)}
-            className="p-2 rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gramin-500"
-            aria-label="Open menu"
+            onClick={() => setMobileMenuOpen((s) => !s)}
+            className={`${
+              mobileMenuOpen
+                ? 'p-2 rounded-md text-gray-700 bg-white/0'
+                : 'p-3 rounded-full text-gray-700 hover:bg-gray-100'
+            } focus:outline-none focus:ring-2 focus:ring-gramin-500 focus:ring-offset-2 transition-all`}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-drawer"
           >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
+            <span className="sr-only">{mobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
+            {mobileMenuOpen ? (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`fixed inset-0 z-50 lg:hidden transition-opacity duration-300 ${
-          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        {/* Backdrop */}
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={closeMobileMenu} />
-
-        {/* Drawer */}
+      {/* Mobile Menu Overlay (portal to document.body to avoid stacking context issues) */}
+      {createPortal(
         <div
-          className={`absolute top-0 right-0 w-[80%] max-w-sm h-full bg-white shadow-2xl transform transition-transform duration-300 ease-out ${
-            mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          id="mobile-drawer-wrapper"
+          className={`fixed inset-0 z-[99999] lg:hidden transition-opacity duration-300 ${
+            mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
           }`}
         >
-          <div className="flex flex-col h-full overflow-y-auto">
-            {/* Drawer Header */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-100">
-              <span className="text-xl font-bold text-gray-900">Menu</span>
-              <button
-                onClick={closeMobileMenu}
-                className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-              >
-                <svg
-                  className="w-6 h-6 text-gray-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            onClick={closeMobileMenu}
+          />
 
-            {/* Drawer Links */}
-            <div className="flex-1 px-6 py-6 space-y-6">
-              <Link
-                to="/"
-                onClick={closeMobileMenu}
-                className={`block text-lg font-medium ${
-                  location.pathname === '/' ? 'text-gramin-700' : 'text-gray-800'
-                }`}
-              >
-                Home
-              </Link>
-
-              {/* Mobile Portals Accordion */}
-              <div className="space-y-3">
+          {/* Drawer */}
+          <div
+            id="mobile-drawer"
+            className={`absolute top-0 right-0 w-[48%] max-w-xs h-full bg-white shadow-2xl transform transition-transform duration-300 ease-out ${
+              mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+            }`}
+          >
+            <div className="flex flex-col h-full overflow-y-auto">
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between p-6 border-b border-gray-100">
+                <span className="text-xl font-bold text-gray-900">Menu</span>
                 <button
-                  onClick={() => setPortalsOpen(!portalsOpen)}
-                  className="flex items-center justify-between w-full text-lg font-medium text-gray-800"
+                  onClick={closeMobileMenu}
+                  className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                  aria-label="Close menu"
                 >
-                  Portals
                   <svg
-                    className={`w-5 h-5 text-gray-500 transition-transform ${portalsOpen ? 'rotate-180' : ''}`}
+                    className="w-6 h-6 text-gray-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -298,114 +289,151 @@ const Navbar = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      d="M19 9l-7 7-7-7"
+                      d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
                 </button>
-                <div
-                  className={`pl-4 space-y-3 overflow-hidden transition-all duration-300 ${
-                    portalsOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+              </div>
+
+              {/* Drawer Links */}
+              <div className="flex-1 px-6 py-6 space-y-6">
+                <Link
+                  to="/"
+                  onClick={closeMobileMenu}
+                  className={`block text-lg font-medium ${
+                    location.pathname === '/' ? 'text-gramin-700' : 'text-gray-800'
                   }`}
                 >
+                  Home
+                </Link>
+
+                {/* Mobile Portals Accordion */}
+                <div className="space-y-3">
+                  <button
+                    onClick={() => setPortalsOpen(!portalsOpen)}
+                    className="flex items-center justify-between w-full text-lg font-medium text-gray-800"
+                  >
+                    Portals
+                    <svg
+                      className={`w-5 h-5 text-gray-500 transition-transform ${portalsOpen ? 'rotate-180' : ''}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  <div
+                    className={`pl-4 space-y-3 overflow-hidden transition-all duration-300 ${
+                      portalsOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <button
+                      onClick={() => {
+                        closeMobileMenu();
+                        navigate('/village-business-model');
+                      }}
+                      className="block w-full text-left text-base text-gray-600 py-1"
+                    >
+                      Village Portal
+                    </button>
+                    <button
+                      onClick={() => {
+                        closeMobileMenu();
+                        navigate('/government-csr-business-model');
+                      }}
+                      className="block w-full text-left text-base text-gray-600 py-1"
+                    >
+                      Government/CSR
+                    </button>
+                    <button
+                      onClick={() => {
+                        closeMobileMenu();
+                        navigate('/business/ngo-business-model');
+                      }}
+                      className="block w-full text-left text-base text-gray-600 py-1"
+                    >
+                      Business/NGO
+                    </button>
+                  </div>
+                </div>
+
+                <Link
+                  to="/careers"
+                  onClick={closeMobileMenu}
+                  className={`block text-lg font-medium ${
+                    location.pathname === '/careers' ? 'text-gramin-700' : 'text-gray-800'
+                  }`}
+                >
+                  Careers
+                </Link>
+
+                <Link
+                  to="/blog"
+                  onClick={closeMobileMenu}
+                  className={`block text-lg font-medium ${
+                    location.pathname === '/blog' ? 'text-gramin-700' : 'text-gray-800'
+                  }`}
+                >
+                  Blog
+                </Link>
+
+                <Link
+                  to="/about"
+                  onClick={closeMobileMenu}
+                  className={`block text-lg font-medium ${
+                    location.pathname === '/about' ? 'text-gramin-700' : 'text-gray-800'
+                  }`}
+                >
+                  About
+                </Link>
+              </div>
+
+              {/* Mobile Footer (Login) */}
+              <div className="p-6 bg-gray-50 border-t border-gray-100">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">
+                  Access Portals
+                </p>
+                <div className="grid gap-3">
                   <button
                     onClick={() => {
                       closeMobileMenu();
-                      navigate('/village-business-model');
+                      navigate('/login/village');
                     }}
-                    className="block w-full text-left text-base text-gray-600 py-1"
+                    className="w-full text-center py-3 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
                   >
-                    Village Portal
+                    Village Login
                   </button>
                   <button
                     onClick={() => {
                       closeMobileMenu();
-                      navigate('/government-csr-business-model');
+                      navigate('/login/business');
                     }}
-                    className="block w-full text-left text-base text-gray-600 py-1"
+                    className="w-full text-center py-3 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
                   >
-                    Government/CSR
+                    Business Login
                   </button>
                   <button
                     onClick={() => {
                       closeMobileMenu();
-                      navigate('/business/ngo-business-model');
+                      navigate('/login/government');
                     }}
-                    className="block w-full text-left text-base text-gray-600 py-1"
+                    className="w-full text-center py-3 bg-gramin-600 text-white rounded-xl text-sm font-semibold hover:bg-gramin-700 transition-colors"
                   >
-                    Business/NGO
+                    Government Login
                   </button>
                 </div>
               </div>
-
-              <Link
-                to="/careers"
-                onClick={closeMobileMenu}
-                className={`block text-lg font-medium ${
-                  location.pathname === '/careers' ? 'text-gramin-700' : 'text-gray-800'
-                }`}
-              >
-                Careers
-              </Link>
-
-              <Link
-                to="/blog"
-                onClick={closeMobileMenu}
-                className={`block text-lg font-medium ${
-                  location.pathname === '/blog' ? 'text-gramin-700' : 'text-gray-800'
-                }`}
-              >
-                Blog
-              </Link>
-
-              <Link
-                to="/about"
-                onClick={closeMobileMenu}
-                className={`block text-lg font-medium ${
-                  location.pathname === '/about' ? 'text-gramin-700' : 'text-gray-800'
-                }`}
-              >
-                About
-              </Link>
-            </div>
-
-            {/* Mobile Footer (Login) */}
-            <div className="p-6 bg-gray-50 border-t border-gray-100">
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">
-                Access Portals
-              </p>
-              <div className="grid gap-3">
-                <button
-                  onClick={() => {
-                    closeMobileMenu();
-                    navigate('/login/village');
-                  }}
-                  className="w-full text-center py-3 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-                >
-                  Village Login
-                </button>
-                <button
-                  onClick={() => {
-                    closeMobileMenu();
-                    navigate('/login/business');
-                  }}
-                  className="w-full text-center py-3 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-                >
-                  Business Login
-                </button>
-                <button
-                  onClick={() => {
-                    closeMobileMenu();
-                    navigate('/login/government');
-                  }}
-                  className="w-full text-center py-3 bg-gramin-600 text-white rounded-xl text-sm font-semibold hover:bg-gramin-700 transition-colors"
-                >
-                  Government Login
-                </button>
-              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div>,
+        document.body
+      )}
     </nav>
   );
 };
