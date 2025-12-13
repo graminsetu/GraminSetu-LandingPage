@@ -154,6 +154,26 @@ export const landingContent = {
       },
     ],
   },
+  howItWorks: {
+    title: 'How GraminSetu Works',
+    steps: [
+      {
+        title: 'Villages get a digital portal',
+        description: 'Empowering local communities with direct access to digital tools.',
+        icon: 'Layout',
+      },
+      {
+        title: 'Government & NGOs connect',
+        description: 'Through unified dashboards for better coordination.',
+        icon: 'Network',
+      },
+      {
+        title: 'Businesses support & grow',
+        description: 'Boosting the local economy through direct engagement.',
+        icon: 'TrendingUp',
+      },
+    ],
+  },
   partnership: {
     title: 'Join the Rural Digital Revolution',
     description: 'Partner with us to create lasting impact in rural communities across India',
