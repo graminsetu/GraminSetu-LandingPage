@@ -1071,7 +1071,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Why Choose GraminSetu - Unique Value Props */}
+      {/* Why Choose GraminSetu - Official Brand Colors */}
       <section
         id="why-choose"
         className="py-16 md:py-24 lg:py-32 bg-white relative overflow-hidden"
@@ -1090,13 +1090,13 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-emerald-100 text-xs sm:text-sm font-bold text-emerald-700 mb-4 md:mb-6 tracking-wide shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gramin-100 text-xs sm:text-sm font-bold text-gramin-700 mb-4 md:mb-6 tracking-wide shadow-md hover:shadow-lg transition-shadow">
+              <div className="w-2 h-2 rounded-full bg-gramin-500 animate-pulse"></div>
               WHY GRAMINSETU
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 md:mb-6 leading-tight px-4">
               Built Different,{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-blue-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gramin-600 to-setu-600">
                 Built for Rural India
               </span>
             </h2>
@@ -1110,10 +1110,10 @@ const LandingPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12">
             {/* Value 1: No Middlemen */}
             <div className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 to-emerald-100/50 rounded-2xl md:rounded-3xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-gramin-50 to-gramin-100/50 rounded-2xl md:rounded-3xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
               <div className="relative h-full bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500">
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 bg-gradient-to-br from-gramin-500 to-gramin-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform">
                     <CheckCircle2 size={28} className="text-white" strokeWidth={2.5} />
                   </div>
                   <div>
@@ -1131,10 +1131,10 @@ const LandingPage = () => {
 
             {/* Value 2: Complete Transparency */}
             <div className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-2xl md:rounded-3xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-gramin-50 to-gramin-100/50 rounded-2xl md:rounded-3xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
               <div className="relative h-full bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500">
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 bg-gradient-to-br from-gramin-500 to-gramin-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Globe size={28} className="text-white" strokeWidth={2.5} />
                   </div>
                   <div>
@@ -1152,10 +1152,10 @@ const LandingPage = () => {
 
             {/* Value 3: Works Offline */}
             <div className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-orange-100/50 rounded-2xl md:rounded-3xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-setu-50 to-setu-100/50 rounded-2xl md:rounded-3xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
               <div className="relative h-full bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500">
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 bg-gradient-to-br from-setu-500 to-setu-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Smartphone size={28} className="text-white" strokeWidth={2.5} />
                   </div>
                   <div>
@@ -1173,10 +1173,10 @@ const LandingPage = () => {
 
             {/* Value 4: Free Forever */}
             <div className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-purple-100/50 rounded-2xl md:rounded-3xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-gramin-50 to-gramin-100/50 rounded-2xl md:rounded-3xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
               <div className="relative h-full bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500">
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 bg-gradient-to-br from-gramin-500 to-gramin-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform">
                     <IndianRupee size={28} className="text-white" strokeWidth={2.5} />
                   </div>
                   <div>
@@ -1198,8 +1198,8 @@ const LandingPage = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               {/* Trust 1 */}
               <div className="text-center">
-                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <CheckCircle2 size={24} className="text-emerald-600" />
+                <div className="w-12 h-12 bg-gramin-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                  <CheckCircle2 size={24} className="text-gramin-600" />
                 </div>
                 <div className="text-2xl md:text-3xl font-black text-slate-900 mb-1">100%</div>
                 <div className="text-xs md:text-sm text-slate-600 font-medium">Secure & Safe</div>
@@ -1207,8 +1207,8 @@ const LandingPage = () => {
 
               {/* Trust 2 */}
               <div className="text-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <Users size={24} className="text-blue-600" />
+                <div className="w-12 h-12 bg-gramin-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                  <Users size={24} className="text-gramin-600" />
                 </div>
                 <div className="text-2xl md:text-3xl font-black text-slate-900 mb-1">24/7</div>
                 <div className="text-xs md:text-sm text-slate-600 font-medium">
@@ -1218,8 +1218,8 @@ const LandingPage = () => {
 
               {/* Trust 3 */}
               <div className="text-center">
-                <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <Languages size={24} className="text-orange-600" />
+                <div className="w-12 h-12 bg-setu-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                  <Languages size={24} className="text-setu-600" />
                 </div>
                 <div className="text-2xl md:text-3xl font-black text-slate-900 mb-1">12+</div>
                 <div className="text-xs md:text-sm text-slate-600 font-medium">
@@ -1229,8 +1229,8 @@ const LandingPage = () => {
 
               {/* Trust 4 */}
               <div className="text-center">
-                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <Landmark size={24} className="text-purple-600" />
+                <div className="w-12 h-12 bg-gramin-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                  <Landmark size={24} className="text-gramin-600" />
                 </div>
                 <div className="text-2xl md:text-3xl font-black text-slate-900 mb-1">Gov</div>
                 <div className="text-xs md:text-sm text-slate-600 font-medium">
@@ -1247,7 +1247,7 @@ const LandingPage = () => {
             </p>
             <button
               onClick={() => navigate('/contact')}
-              className="group inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-emerald-200 transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto text-sm sm:text-base"
+              className="group inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gramin-600 to-gramin-700 hover:from-gramin-700 hover:to-gramin-800 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-gramin-200 transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto text-sm sm:text-base"
             >
               <span>Get Started Today</span>
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -1256,8 +1256,8 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Our Promise Section - Light & Trustworthy */}
-      <section className="py-16 md:py-24 lg:py-32 bg-gradient-to-br from-blue-50/30 via-emerald-50/20 to-orange-50/30 relative overflow-hidden">
+      {/* Our Promise Section - Official Brand Colors */}
+      <section className="py-16 md:py-24 lg:py-32 bg-gradient-to-br from-gramin-50/30 via-white to-setu-50/30 relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
           <div
@@ -1272,13 +1272,13 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-emerald-100 text-xs sm:text-sm font-bold text-emerald-700 mb-4 md:mb-6 tracking-wide shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gramin-100 text-xs sm:text-sm font-bold text-gramin-700 mb-4 md:mb-6 tracking-wide shadow-md hover:shadow-lg transition-shadow">
+              <div className="w-2 h-2 rounded-full bg-gramin-500 animate-pulse"></div>
               OUR PROMISE
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 md:mb-6 leading-tight px-4">
               What We{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-blue-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gramin-600 to-setu-600">
                 Guarantee You
               </span>
             </h2>
@@ -1291,9 +1291,9 @@ const LandingPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
             {/* Promise 1: Data Security */}
             <div className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 to-emerald-100/50 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-gramin-50 to-gramin-100/50 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
               <div className="relative h-full bg-white rounded-2xl p-6 border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform">
+                <div className="w-16 h-16 bg-gradient-to-br from-gramin-500 to-gramin-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform">
                   <CheckCircle2 size={32} className="text-white" strokeWidth={2.5} />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">
@@ -1307,9 +1307,9 @@ const LandingPage = () => {
 
             {/* Promise 2: Always Free */}
             <div className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-gramin-50 to-gramin-100/50 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
               <div className="relative h-full bg-white rounded-2xl p-6 border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform">
+                <div className="w-16 h-16 bg-gradient-to-br from-gramin-500 to-gramin-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform">
                   <IndianRupee size={32} className="text-white" strokeWidth={2.5} />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">Forever Free</h3>
@@ -1321,9 +1321,9 @@ const LandingPage = () => {
 
             {/* Promise 3: Fast Support */}
             <div className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-orange-100/50 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-setu-50 to-setu-100/50 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
               <div className="relative h-full bg-white rounded-2xl p-6 border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform">
+                <div className="w-16 h-16 bg-gradient-to-br from-setu-500 to-setu-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform">
                   <HeadphonesIcon size={32} className="text-white" strokeWidth={2.5} />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">Quick Help</h3>
@@ -1335,9 +1335,9 @@ const LandingPage = () => {
 
             {/* Promise 4: Regular Updates */}
             <div className="group relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-purple-100/50 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-gramin-50 to-gramin-100/50 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
               <div className="relative h-full bg-white rounded-2xl p-6 border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform">
+                <div className="w-16 h-16 bg-gradient-to-br from-gramin-500 to-gramin-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform">
                   <TrendingUp size={32} className="text-white" strokeWidth={2.5} />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">
@@ -1352,28 +1352,28 @@ const LandingPage = () => {
 
           {/* Bottom Guarantee Statement */}
           <div className="bg-white rounded-2xl p-8 md:p-12 border border-slate-200 shadow-xl max-w-4xl mx-auto text-center">
-            <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+            <div className="w-20 h-20 bg-gradient-to-br from-gramin-500 to-gramin-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
               <Handshake size={40} className="text-white" strokeWidth={2.5} />
             </div>
             <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
               Our Commitment to Rural India
             </h3>
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-              We're building GraminSetu <span className="font-bold text-emerald-600">with</span>{' '}
+              We're building GraminSetu <span className="font-bold text-gramin-600">with</span>{' '}
               rural communities, not just <span className="font-bold text-slate-900">for</span>{' '}
               them. Your voice shapes every feature we build.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <div className="flex items-center gap-2 px-4 py-2 bg-emerald-50 rounded-full">
-                <CheckCircle2 size={18} className="text-emerald-600" />
+              <div className="flex items-center gap-2 px-4 py-2 bg-gramin-50 rounded-full">
+                <CheckCircle2 size={18} className="text-gramin-600" />
                 <span className="text-sm font-semibold text-slate-700">Community First</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full">
-                <CheckCircle2 size={18} className="text-blue-600" />
+              <div className="flex items-center gap-2 px-4 py-2 bg-gramin-50 rounded-full">
+                <CheckCircle2 size={18} className="text-gramin-600" />
                 <span className="text-sm font-semibold text-slate-700">100% Transparent</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full">
-                <CheckCircle2 size={18} className="text-orange-600" />
+              <div className="flex items-center gap-2 px-4 py-2 bg-setu-50 rounded-full">
+                <CheckCircle2 size={18} className="text-setu-600" />
                 <span className="text-sm font-semibold text-slate-700">Always Accountable</span>
               </div>
             </div>
@@ -1381,37 +1381,78 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Final Call to Action */}
-      <section className="py-16 md:py-24 bg-gramin-900 text-white relative overflow-hidden">
-        {/* Abstract shapes background */}
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-gramin-800 opacity-20 blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-gramin-700 opacity-20 blur-3xl"></div>
+      {/* Final Call to Action - Official Brand Colors */}
+      <section className="py-16 md:py-24 lg:py-32 bg-gradient-to-br from-gramin-50 via-white to-setu-50 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: 'radial-gradient(#cbd5e1 1.5px, transparent 1.5px)',
+              backgroundSize: '32px 32px',
+            }}
+          ></div>
+        </div>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-left">
-          <div className="flex-1 max-w-2xl">
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
-              Ready to Transform Rural India?
+        {/* Decorative Gradient Blobs */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-gramin-200/20 to-gramin-300/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-setu-200/20 to-setu-300/20 rounded-full blur-3xl"></div>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gramin-100 text-xs sm:text-sm font-bold text-gramin-700 mb-6 md:mb-8 tracking-wide shadow-md hover:shadow-lg transition-shadow">
+              <div className="w-2 h-2 rounded-full bg-gramin-500 animate-pulse"></div>
+              JOIN GRAMINSETU
+            </div>
+
+            {/* Heading */}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-6 md:mb-8 leading-tight px-4">
+              Ready to{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gramin-600 to-setu-600">
+                Make a Difference
+              </span>
+              ?
             </h2>
-            <p className="text-xl text-gramin-100 mb-8 leading-relaxed">
-              Join thousands of villages, NGOs, and government departments already using GraminSetu
-              to build stronger, more connected communities.
-            </p>
-          </div>
 
-          <div className="flex-shrink-0">
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* Description */}
+            <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8 md:mb-12 leading-relaxed px-4">
+              Be part of the movement connecting rural India. Whether you're from a village,
+              government, or business — there's a place for you here.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4">
               <button
-                className="px-8 py-4 bg-white text-gramin-900 font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                 onClick={() => navigate('/contact')}
+                className="group inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gramin-600 to-gramin-700 hover:from-gramin-700 hover:to-gramin-800 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-gramin-200 transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto text-sm sm:text-base"
               >
-                Get Started Today
+                <span>Get Started Free</span>
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </button>
+
               <button
-                className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300"
                 onClick={() => navigate('/about')}
+                className="group inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-white border-2 border-gramin-200 hover:border-gramin-300 text-gramin-700 hover:text-gramin-800 font-bold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto text-sm sm:text-base"
               >
-                Learn More
+                <span>Learn More</span>
               </button>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="mt-12 md:mt-16 flex flex-wrap items-center justify-center gap-6 md:gap-8 text-sm text-slate-600">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 size={18} className="text-gramin-600" />
+                <span className="font-medium">100% Free for Villages</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 size={18} className="text-gramin-600" />
+                <span className="font-medium">No Credit Card Required</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 size={18} className="text-gramin-600" />
+                <span className="font-medium">Setup in 5 Minutes</span>
+              </div>
             </div>
           </div>
         </div>
