@@ -7,6 +7,9 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loginDropdownOpen, setLoginDropdownOpen] = useState(false);
   const loginDropdownTimeout = useRef(null);
+  const closeTimeout = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Handlers for login dropdown (hover and click)
   const handleLoginMouseEnter = () => {
@@ -21,11 +24,8 @@ const Navbar = () => {
       setLoginDropdownOpen(false);
     }, 150);
   };
-  const closeTimeout = useRef(null);
-  const navigate = useNavigate();
-  const location = useLocation();
 
-  // Handlers for hover open/close with delay for user-friendly UX
+  // Handlers for portals dropdown
   const handlePortalsMouseEnter = () => {
     if (closeTimeout.current) {
       clearTimeout(closeTimeout.current);
@@ -36,348 +36,370 @@ const Navbar = () => {
   const handlePortalsMouseLeave = () => {
     closeTimeout.current = setTimeout(() => {
       setPortalsOpen(false);
-    }, 150); // 150ms delay to prevent accidental close
+    }, 150);
   };
 
+  // Close mobile menu helper
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
   return (
-    <nav className="w-full bg-white border-b border-gray-200 shadow-sm sticky top-0 z-30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-16">
-        {/* Logo and name on the left */}
-        <div className="flex items-center flex-shrink-0">
-          <Link to="/">
+    <nav className="w-full bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+        {/* Logo Section */}
+        <div className="flex-shrink-0 flex items-center">
+          <Link to="/" onClick={closeMobileMenu}>
             <Logo size="lg" showText={true} />
           </Link>
         </div>
-        {/* Desktop nav links centered, login right */}
-        <div className="hidden lg:flex flex-1 items-center justify-center relative">
-          <div className="absolute left-0 flex items-center h-full">
-            {/* Empty div for spacing, or add left-side content if needed */}
-          </div>
-          <div className="flex items-center space-x-6 xl:space-x-8">
-            <Link
-              to="/"
-              className={`font-bold text-lg hover:text-gramin-900 ${location.pathname === '/' ? 'text-gramin-900 underline underline-offset-8 decoration-2' : 'text-gramin-700'}`}
+
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center space-x-8">
+          <Link
+            to="/"
+            className={`text-sm font-semibold transition-colors duration-200 ${
+              location.pathname === '/' ? 'text-gramin-700' : 'text-gray-600 hover:text-gramin-600'
+            }`}
+          >
+            Home
+          </Link>
+
+          {/* Portals Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={handlePortalsMouseEnter}
+            onMouseLeave={handlePortalsMouseLeave}
+          >
+            <button
+              className={`flex items-center gap-1 text-sm font-semibold transition-colors duration-200 focus:outline-none ${
+                portalsOpen ? 'text-gramin-700' : 'text-gray-600 hover:text-gramin-600'
+              }`}
             >
-              Home
-            </Link>
-            <div
-              className="relative group"
-              onMouseEnter={handlePortalsMouseEnter}
-              onMouseLeave={handlePortalsMouseLeave}
-            >
-              <button
-                type="button"
-                className={`font-medium text-gramin-700 hover:text-gramin-900 focus:outline-none transition-colors duration-200 ${portalsOpen ? 'bg-gramin-50 text-gramin-800' : ''}`}
-                style={{
-                  backgroundColor: portalsOpen ? '#eafaf1' : undefined,
-                  cursor: portalsOpen ? 'default' : 'pointer',
-                }}
-                tabIndex={0}
+              Portals
+              <svg
+                className={`w-4 h-4 transition-transform duration-200 ${portalsOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                Portals
-                <svg
-                  className="inline ml-1 w-4 h-4 transition-transform duration-200"
-                  style={{ transform: portalsOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                  fill="none"
-                  stroke="currentColor"
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <div
-                className={`absolute left-0 mt-2 w-48 rounded shadow-lg z-40 transition-all duration-200 ${portalsOpen ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'}`}
-                style={{
-                  backgroundColor: '#eafaf1',
-                  border: portalsOpen ? '1px solid #b2e5c2' : '1px solid transparent',
-                }}
-                onMouseEnter={handlePortalsMouseEnter}
-                onMouseLeave={handlePortalsMouseLeave}
-              >
-                <button
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gramin-100 transition-colors duration-150"
-                  onClick={() => {
-                    setPortalsOpen(false);
-                    navigate('/village-business-model');
-                  }}
-                  style={{ backgroundColor: portalsOpen ? undefined : 'transparent' }}
-                >
-                  Village
-                </button>
-                <button
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gramin-100 transition-colors duration-150"
-                  onClick={() => {
-                    setPortalsOpen(false);
-                    navigate('/government-csr-business-model');
-                  }}
-                  style={{ backgroundColor: portalsOpen ? undefined : 'transparent' }}
-                >
-                  Government/CSR
-                </button>
-                <button
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gramin-100 transition-colors duration-150"
-                  onClick={() => {
-                    setPortalsOpen(false);
-                    navigate('/business/ngo-business-model');
-                  }}
-                  style={{ backgroundColor: portalsOpen ? undefined : 'transparent' }}
-                >
-                  Business/NGO
-                </button>
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+
+            {/* Desktop Dropdown Menu */}
+            <div
+              className={`absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden transform transition-all duration-200 origin-top-left ${
+                portalsOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
+              }`}
+            >
+              <div className="py-2">
+                {[
+                  { label: 'Village Portal', path: '/village-business-model' },
+                  { label: 'Government/CSR', path: '/government-csr-business-model' },
+                  { label: 'Business/NGO', path: '/business/ngo-business-model' },
+                ].map((item) => (
+                  <button
+                    key={item.path}
+                    onClick={() => {
+                      setPortalsOpen(false);
+                      navigate(item.path);
+                    }}
+                    className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gramin-50 hover:text-gramin-700 transition-colors"
+                  >
+                    {item.label}
+                  </button>
+                ))}
               </div>
             </div>
-            <Link
-              to="/careers"
-              className={`font-medium hover:text-gramin-900 ${location.pathname === '/careers' ? 'text-gramin-900 underline underline-offset-8 decoration-2' : 'text-gramin-700'}`}
-            >
-              Careers
-            </Link>
-            <Link
-              to="/blog"
-              className={`font-medium hover:text-gramin-900 ${location.pathname === '/blog' ? 'text-gramin-900 underline underline-offset-8 decoration-2' : 'text-gramin-700'}`}
-            >
-              Blog
-            </Link>
-            <Link
-              to="/about"
-              className={`font-medium hover:text-gramin-900 ${location.pathname === '/about' ? 'text-gramin-900 underline underline-offset-8 decoration-2' : 'text-gramin-700'}`}
-            >
-              About
-            </Link>
           </div>
-        </div>
-        {/* Hamburger for mobile */}
-        <div className="flex lg:hidden ml-auto">
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gramin-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gramin-500"
-            aria-controls="mobile-menu"
-            aria-expanded={mobileMenuOpen}
+
+          <Link
+            to="/careers"
+            className={`text-sm font-semibold transition-colors duration-200 ${
+              location.pathname === '/careers'
+                ? 'text-gramin-700'
+                : 'text-gray-600 hover:text-gramin-600'
+            }`}
           >
-            <span className="sr-only">Open main menu</span>
-            {mobileMenuOpen ? (
-              <svg className="block h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg className="block h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
-          </button>
+            Careers
+          </Link>
+
+          <Link
+            to="/blog"
+            className={`text-sm font-semibold transition-colors duration-200 ${
+              location.pathname === '/blog'
+                ? 'text-gramin-700'
+                : 'text-gray-600 hover:text-gramin-600'
+            }`}
+          >
+            Blog
+          </Link>
+
+          <Link
+            to="/about"
+            className={`text-sm font-semibold transition-colors duration-200 ${
+              location.pathname === '/about'
+                ? 'text-gramin-700'
+                : 'text-gray-600 hover:text-gramin-600'
+            }`}
+          >
+            About
+          </Link>
         </div>
 
-        {/* Login button on right for desktop (always far right) */}
-        <div className="hidden lg:flex items-center ml-auto relative">
+        {/* Desktop Login Button */}
+        <div className="hidden lg:flex items-center">
           <div
-            className="relative group"
+            className="relative"
             onMouseEnter={handleLoginMouseEnter}
             onMouseLeave={handleLoginMouseLeave}
           >
             <button
-              className="px-5 py-2 rounded-full bg-gramin-600 text-white font-semibold hover:bg-gramin-700 focus:outline-none focus:ring-2 focus:ring-gramin-400 transition-all duration-200 shadow-md hover:shadow-lg"
-              aria-haspopup="true"
-              aria-expanded={loginDropdownOpen}
-              onClick={() => setLoginDropdownOpen((v) => !v)}
-              onBlur={() => setTimeout(() => setLoginDropdownOpen(false), 150)}
-              tabIndex={0}
-              style={{ boxShadow: loginDropdownOpen ? '0 4px 24px 0 #b2e5c2' : undefined }}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white transition-all duration-300 shadow-md ${
+                loginDropdownOpen
+                  ? 'bg-gramin-700 shadow-lg ring-2 ring-offset-2 ring-gramin-500'
+                  : 'bg-gramin-600 hover:bg-gramin-700 hover:shadow-lg'
+              }`}
+              onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}
             >
               Login
               <svg
-                className={`inline ml-2 w-4 h-4 transition-transform duration-200 ${loginDropdownOpen ? 'rotate-180' : ''}`}
+                className={`w-4 h-4 transition-transform duration-200 ${loginDropdownOpen ? 'rotate-180' : ''}`}
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="2"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div
-              className={`absolute right-0 mt-2 w-56 rounded-xl shadow-2xl z-50 border border-gramin-100 py-2 bg-white transition-all duration-200 origin-top-right ${loginDropdownOpen ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'}`}
-              style={{
-                boxShadow: loginDropdownOpen ? '0 8px 32px 0 #b2e5c2' : undefined,
-                backgroundColor: '#fff',
-              }}
-              onMouseEnter={handleLoginMouseEnter}
-              onMouseLeave={handleLoginMouseLeave}
-            >
-              <button
-                className="block w-full text-left px-4 py-2 rounded hover:bg-gramin-100 focus:bg-gramin-100 text-gramin-700 font-medium transition-colors duration-150"
-                onClick={() => {
-                  setLoginDropdownOpen(false);
-                  navigate('/login/village');
-                }}
-              >
-                Village Portal
-              </button>
-              <button
-                className="block w-full text-left px-4 py-2 rounded hover:bg-gramin-100 focus:bg-gramin-100 text-gramin-700 font-medium transition-colors duration-150"
-                onClick={() => {
-                  setLoginDropdownOpen(false);
-                  navigate('/login/business');
-                }}
-              >
-                Business Portal
-              </button>
-              <button
-                className="block w-full text-left px-4 py-2 rounded hover:bg-gramin-100 focus:bg-gramin-100 text-gramin-700 font-medium transition-colors duration-150"
-                onClick={() => {
-                  setLoginDropdownOpen(false);
-                  navigate('/login/government');
-                }}
-              >
-                Government Portal
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile menu overlay and drawer (right side only) */}
-        <div
-          className={`lg:hidden fixed inset-0 z-40 bg-black bg-opacity-40 transition-opacity duration-200 ${mobileMenuOpen ? 'block' : 'hidden'}`}
-          onClick={() => setMobileMenuOpen(false)}
-        />
-        <div
-          id="mobile-menu"
-          className={`lg:hidden fixed top-0 right-0 w-4/5 max-w-xs h-full bg-white shadow-lg z-50 transform transition-transform duration-200 ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
-          style={{ willChange: 'transform' }}
-        >
-          <div className="flex flex-col h-full p-6 space-y-6">
-            <button className="self-end mb-4" onClick={() => setMobileMenuOpen(false)}>
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
+                  d="M19 9l-7 7-7-7"
                 />
               </svg>
             </button>
-            <div className="flex flex-col flex-1 space-y-4">
+
+            {/* Login Dropdown */}
+            <div
+              className={`absolute right-0 top-full mt-2 w-60 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all duration-200 origin-top-right ${
+                loginDropdownOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
+              }`}
+            >
+              <div className="p-2">
+                {[
+                  { label: 'Village Portal', path: '/login/village', icon: '🏡' },
+                  { label: 'Business Portal', path: '/login/business', icon: '💼' },
+                  { label: 'Government Portal', path: '/login/government', icon: '🏛️' },
+                ].map((item) => (
+                  <button
+                    key={item.path}
+                    onClick={() => {
+                      setLoginDropdownOpen(false);
+                      navigate(item.path);
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gramin-50 hover:text-gramin-700 transition-colors"
+                  >
+                    <span>{item.icon}</span>
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="flex lg:hidden">
+          <button
+            onClick={() => setMobileMenuOpen(true)}
+            className="p-2 rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gramin-500"
+            aria-label="Open menu"
+          >
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`fixed inset-0 z-50 lg:hidden transition-opacity duration-300 ${
+          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        {/* Backdrop */}
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={closeMobileMenu} />
+
+        {/* Drawer */}
+        <div
+          className={`absolute top-0 right-0 w-[80%] max-w-sm h-full bg-white shadow-2xl transform transition-transform duration-300 ease-out ${
+            mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div className="flex flex-col h-full overflow-y-auto">
+            {/* Drawer Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-100">
+              <span className="text-xl font-bold text-gray-900">Menu</span>
+              <button
+                onClick={closeMobileMenu}
+                className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+              >
+                <svg
+                  className="w-6 h-6 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Drawer Links */}
+            <div className="flex-1 px-6 py-6 space-y-6">
               <Link
                 to="/"
-                className={`font-bold text-lg hover:text-gramin-900 ${location.pathname === '/' ? 'text-gramin-900 underline underline-offset-8 decoration-2' : 'text-gramin-700'}`}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={closeMobileMenu}
+                className={`block text-lg font-medium ${
+                  location.pathname === '/' ? 'text-gramin-700' : 'text-gray-800'
+                }`}
               >
                 Home
               </Link>
-              <div className="relative">
+
+              {/* Mobile Portals Accordion */}
+              <div className="space-y-3">
                 <button
-                  className="font-medium text-gramin-700 hover:text-gramin-900 w-full text-left"
                   onClick={() => setPortalsOpen(!portalsOpen)}
+                  className="flex items-center justify-between w-full text-lg font-medium text-gray-800"
                 >
                   Portals
                   <svg
-                    className="inline ml-1 w-4 h-4 transition-transform duration-200"
-                    style={{ transform: portalsOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                    className={`w-5 h-5 text-gray-500 transition-transform ${portalsOpen ? 'rotate-180' : ''}`}
                     fill="none"
                     stroke="currentColor"
-                    strokeWidth="2"
                     viewBox="0 0 24 24"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
-                {portalsOpen && (
-                  <div className="mt-2 rounded shadow-lg bg-gramin-50 border border-gramin-200">
-                    <button
-                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gramin-100"
-                      onClick={() => {
-                        setPortalsOpen(false);
-                        setMobileMenuOpen(false);
-                        navigate('/village-business-model');
-                      }}
-                    >
-                      Village
-                    </button>
-                    <button
-                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gramin-100"
-                      onClick={() => {
-                        setPortalsOpen(false);
-                        setMobileMenuOpen(false);
-                        navigate('/government-csr-business-model');
-                      }}
-                    >
-                      Government/CSR
-                    </button>
-                    <button
-                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gramin-100"
-                      onClick={() => {
-                        setPortalsOpen(false);
-                        setMobileMenuOpen(false);
-                        navigate('/business/ngo-business-model');
-                      }}
-                    >
-                      Business/NGO
-                    </button>
-                  </div>
-                )}
+                <div
+                  className={`pl-4 space-y-3 overflow-hidden transition-all duration-300 ${
+                    portalsOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <button
+                    onClick={() => {
+                      closeMobileMenu();
+                      navigate('/village-business-model');
+                    }}
+                    className="block w-full text-left text-base text-gray-600 py-1"
+                  >
+                    Village Portal
+                  </button>
+                  <button
+                    onClick={() => {
+                      closeMobileMenu();
+                      navigate('/government-csr-business-model');
+                    }}
+                    className="block w-full text-left text-base text-gray-600 py-1"
+                  >
+                    Government/CSR
+                  </button>
+                  <button
+                    onClick={() => {
+                      closeMobileMenu();
+                      navigate('/business/ngo-business-model');
+                    }}
+                    className="block w-full text-left text-base text-gray-600 py-1"
+                  >
+                    Business/NGO
+                  </button>
+                </div>
               </div>
+
               <Link
                 to="/careers"
-                className={`font-medium hover:text-gramin-900 ${location.pathname === '/careers' ? 'text-gramin-900 underline underline-offset-8 decoration-2' : 'text-gramin-700'}`}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={closeMobileMenu}
+                className={`block text-lg font-medium ${
+                  location.pathname === '/careers' ? 'text-gramin-700' : 'text-gray-800'
+                }`}
               >
                 Careers
               </Link>
+
               <Link
                 to="/blog"
-                className={`font-medium hover:text-gramin-900 ${location.pathname === '/blog' ? 'text-gramin-900 underline underline-offset-8 decoration-2' : 'text-gramin-700'}`}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={closeMobileMenu}
+                className={`block text-lg font-medium ${
+                  location.pathname === '/blog' ? 'text-gramin-700' : 'text-gray-800'
+                }`}
               >
                 Blog
               </Link>
+
               <Link
                 to="/about"
-                className={`font-medium hover:text-gramin-900 ${location.pathname === '/about' ? 'text-gramin-900 underline underline-offset-8 decoration-2' : 'text-gramin-700'}`}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={closeMobileMenu}
+                className={`block text-lg font-medium ${
+                  location.pathname === '/about' ? 'text-gramin-700' : 'text-gray-800'
+                }`}
               >
                 About
               </Link>
             </div>
-            {/* Mobile login button at the bottom */}
-            <div className="mt-auto flex flex-col items-end w-full">
-              <div className="w-full flex flex-col gap-2 p-2 bg-white rounded-t-xl shadow-inner">
-                <span className="font-semibold text-gramin-700 mb-1 ml-1">Login</span>
+
+            {/* Mobile Footer (Login) */}
+            <div className="p-6 bg-gray-50 border-t border-gray-100">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">
+                Access Portals
+              </p>
+              <div className="grid gap-3">
                 <button
-                  className="block w-full text-left px-4 py-2 rounded bg-gramin-600 text-white font-semibold hover:bg-gramin-700 focus:bg-gramin-700 transition-colors"
                   onClick={() => {
-                    setMobileMenuOpen(false);
+                    closeMobileMenu();
                     navigate('/login/village');
                   }}
+                  className="w-full text-center py-3 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
                 >
-                  Village Portal
+                  Village Login
                 </button>
                 <button
-                  className="block w-full text-left px-4 py-2 rounded bg-gramin-600 text-white font-semibold hover:bg-gramin-700 focus:bg-gramin-700 transition-colors"
                   onClick={() => {
-                    setMobileMenuOpen(false);
+                    closeMobileMenu();
                     navigate('/login/business');
                   }}
+                  className="w-full text-center py-3 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
                 >
-                  Business Portal
+                  Business Login
                 </button>
                 <button
-                  className="block w-full text-left px-4 py-2 rounded bg-gramin-600 text-white font-semibold hover:bg-gramin-700 focus:bg-gramin-700 transition-colors"
                   onClick={() => {
-                    setMobileMenuOpen(false);
+                    closeMobileMenu();
                     navigate('/login/government');
                   }}
+                  className="w-full text-center py-3 bg-gramin-600 text-white rounded-xl text-sm font-semibold hover:bg-gramin-700 transition-colors"
                 >
-                  Government Portal
+                  Government Login
                 </button>
               </div>
             </div>

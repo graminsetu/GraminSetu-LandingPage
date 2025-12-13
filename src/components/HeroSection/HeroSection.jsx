@@ -1,152 +1,229 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Sprout, Handshake, Landmark, ShieldCheck } from 'lucide-react';
 import graminsetuMainImage from '../../assets/images/graminsetuMainImage.png';
-import neuronetwork from '../../assets/images/neuronetwork.png';
-import VillagersportalIcon from '../../assets/images/VillagersportalIcon.webp';
-import BusinessportalIcon from '../../assets/images/BusinessportalIcon.webp';
-import GovernamentportalIcon from '../../assets/images/GovernamentportalIcon.webp';
+import './HeroSection.scss';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+  const [activePhase, setActivePhase] = useState(0);
+
+  // Cycle through the ecosystem phases (Villager -> Business -> Govt)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActivePhase((prev) => (prev + 1) % 3);
+    }, 3500); // 3.5 seconds per phase for readability
+    return () => clearInterval(interval);
+  }, []);
+
+  const phaseConfig = [
+    {
+      text: 'Connecting Villagers to Market',
+      color: 'text-green-600',
+      bg: 'bg-green-50',
+      border: 'border-green-200',
+    },
+    {
+      text: 'Empowering Local Business',
+      color: 'text-orange-600',
+      bg: 'bg-orange-50',
+      border: 'border-orange-200',
+    },
+    {
+      text: 'Enabling Good Governance',
+      color: 'text-blue-600',
+      bg: 'bg-blue-50',
+      border: 'border-blue-200',
+    },
+  ];
+
+  /* Typewriter Logic */
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  const phrases = ['Built for Bharat', 'Made for Villages', 'Digital India Ready'];
+
+  useEffect(() => {
+    const handleType = () => {
+      const i = loopNum % phrases.length;
+      const fullText = phrases[i];
+
+      setText(
+        isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1)
+      );
+
+      setTypingSpeed(isDeleting ? 30 : 150);
+
+      if (!isDeleting && text === fullText) {
+        setTimeout(() => setIsDeleting(true), 1500); // Pause at end
+      } else if (isDeleting && text === '') {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+        setTypingSpeed(500); // Pause before next word
+      }
+    };
+
+    const timer = setTimeout(handleType, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, loopNum, typingSpeed, phrases]);
+
   return (
-    <section id="hero" className="relative bg-[#EEF5F0] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[72vh] py-12">
-          {/* Left content */}
-          <div className="lg:col-span-7 z-10">
-            <div className="max-w-2xl">
-              <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-[#256B3E] leading-tight">
-                Uniting Villages. Inspiring Progress.
-                <br />
-                Digital Innovation for Every Community.
-              </h1>
+    <section className="hero-section">
+      {/* Abstract Professional Background - Subtle Grid */}
+      <div className="hero-section__background-grid"></div>
 
-              <p className="mt-6 text-lg sm:text-xl text-gray-800">
-                GraminSetu bridges the digital divide in rural India bringing community news,
-                transparent governance, and local market access right to your doorstep, even offline
-                and in your own language.
-              </p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+          {/* LEFT CONTENT: Strategic & Mission Focused */}
+          <div className="w-full lg:w-1/2 text-center lg:text-left">
+            {/* Official Tagline / Mission Statement */}
+            <div className="hero-section__badge">
+              <span className="hero-section__badge-dot"></span>
+              <span className="hero-section__badge-text">
+                {text}
+                <span className="hero-section__cursor">|</span>
+              </span>
+            </div>
 
-              {/* What You Can Do with GraminSetu */}
-              <div className="mt-8 space-y-6">
-                <div className="flex items-start gap-4">
-                  <span className="text-[#256B3E] font-bold text-lg">•</span>
-                  <p className="text-gray-800 text-base sm:text-lg">
-                    <strong>Community News & Events:</strong> Stay informed with real stories,
-                    updates, and opportunities from your village.
-                  </p>
-                </div>
-                <div className="flex items-start gap-4">
-                  <span className="text-[#256B3E] font-bold text-lg">•</span>
-                  <p className="text-gray-800 text-base sm:text-lg">
-                    <strong>Transparent Government Services:</strong> Report local issues, track
-                    welfare schemes, and get real-time updates with ease.
-                  </p>
-                </div>
-                <div className="flex items-start gap-4">
-                  <span className="text-[#256B3E] font-bold text-lg">•</span>
-                  <p className="text-gray-800 text-base sm:text-lg">
-                    <strong>Village Marketplace:</strong> Buy, sell, and grow at fair prices, with
-                    secure digital payments and verified listings.
-                  </p>
-                </div>
+            {/* Headline aligned with Vision */}
+            <h1 className="hero-section__headline">
+              Digital Progress for <br />
+              <span>Every Village</span>
+            </h1>
+
+            {/* Value Proposition from Executive Summary */}
+            <p className="hero-section__description">
+              GraminSetu connects you to what matters most.{' '}
+              <strong>Access Government Schemes</strong>, <strong>Sell Your Crops</strong> at fair
+              prices, and <strong>Connect with your Community</strong>—all in one simple place.
+            </p>
+
+            {/* Strategic CTAs */}
+            <div className="hero-section__cta-group">
+              <button
+                onClick={() => navigate('/login/village')}
+                className="hero-section__button hero-section__button--primary"
+              >
+                Join GraminSetu
+              </button>
+
+              <button
+                onClick={() => {
+                  const el = document.getElementById('portals-overview');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="hero-section__button hero-section__button--secondary"
+              >
+                How It Works
+              </button>
+            </div>
+
+            {/* Core Pillars / Services */}
+            <div className="hero-section__stats">
+              <div className="text-center lg:text-left">
+                <div className="font-bold text-gray-900 text-3xl mb-1">800M+</div>
+                <div className="text-sm text-gray-500 font-medium">Villagers Reached</div>
               </div>
-
-              {/* Buttons */}
-              <div className="mt-8 flex flex-wrap gap-4">
-                <button className="bg-[#256B3E] text-white px-10 py-3 rounded-full shadow-md hover:bg-[#1E5630] transition">
-                  Start Exploring Portals
-                </button>
-                <button className="bg-[#F57C00] text-white px-10 py-3 rounded-full shadow-md hover:bg-[#E66A00] transition">
-                  Join the GraminSetu Movement
-                </button>
+              <div className="text-center lg:text-left">
+                <div className="font-bold text-gray-900 text-3xl mb-1">3</div>
+                <div className="text-sm text-gray-500 font-medium">Specialized Portals</div>
               </div>
-
-              {/* Trust Statement */}
-              <p className="mt-6 text-sm text-gray-700 italic">
-                Trusted by village leaders, NGOs, and government agencies, GraminSetu is built for
-                India’s rural realities optimized for low bandwidth, multilingual access, and
-                offline use so everyone can stay connected.
-              </p>
-
-              {/* Accessibility Matters */}
-              <p className="mt-4 text-sm text-gray-600">
-                <strong>Accessibility Matters:</strong> Women, youth, and marginalized groups are at
-                the heart of our mission. Everyone deserves a voice and a connection.
-              </p>
+              <div className="text-center lg:text-left">
+                <div className="font-bold text-gray-900 text-3xl mb-1">100%</div>
+                <div className="text-sm text-gray-500 font-medium">Governance Transparency</div>
+              </div>
             </div>
           </div>
 
-          {/* Right image */}
-          <div className="lg:col-span-5 flex justify-end items-center relative overflow-visible">
-            {/* Background neural network */}
-            <div
-              className="absolute top-[-260px] right-0 w-[120%] h-[120%] rounded-xl"
-              style={{
-                backgroundImage: `url(${neuronetwork})`,
-                backgroundSize: 'contain',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'top right',
-                zIndex: 0,
-              }}
-            ></div>
+          {/* RIGHT VISUAL: Professional Representation of the Platform */}
+          <div className="hero-section__visual-container">
+            {/* Backdrop for Contrast */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-gramin-100 to-transparent rounded-full opacity-60 blur-3xl pointer-events-none"></div>
 
-            {/* Foreground main image */}
-            <img
-              src={graminsetuMainImage}
-              alt="GraminSetu Main"
-              className="relative w-full max-w-[2000px] lg:max-w-[2200px] object-contain rounded-xl transform scale-125"
-              style={{ maxHeight: '95vh', marginTop: '-120px', zIndex: 1 }}
-            />
-          </div>
+            <div className="image-wrapper">
+              {/* Dynamic Story Overlay - Replaces the 'GIF' request with code-based animation */}
+              <div
+                className={`absolute top-4 left-1/2 -translate-x-1/2 z-30 px-4 py-2 rounded-full shadow-lg border backdrop-blur-md transition-all duration-500 ${phaseConfig[activePhase].bg} ${phaseConfig[activePhase].border}`}
+              >
+                <p
+                  className={`text-xs font-bold ${phaseConfig[activePhase].color} flex items-center gap-2`}
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span
+                      className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${phaseConfig[activePhase].bg === 'bg-green-50' ? 'bg-green-400' : phaseConfig[activePhase].bg === 'bg-orange-50' ? 'bg-orange-400' : 'bg-blue-400'}`}
+                    ></span>
+                    <span
+                      className={`relative inline-flex rounded-full h-2 w-2 ${phaseConfig[activePhase].bg === 'bg-green-50' ? 'bg-green-500' : phaseConfig[activePhase].bg === 'bg-orange-50' ? 'bg-orange-500' : 'bg-blue-500'}`}
+                    ></span>
+                  </span>
+                  {phaseConfig[activePhase].text}
+                </p>
+              </div>
 
-          {/* Portal Icons Box beside content and below image */}
-          <div
-            className="lg:col-span-10 flex justify-end items-start mt-[-210px]"
-            style={{ position: 'relative', left: '270px' }}
-          >
-            <div className="rounded-xl shadow-lg px-8 py-3 border-2 border-[#07670A] bg-transparent w-[580px] flex items-center">
-              <div className="w-full flex justify-center gap-12">
-                <div className="flex flex-col items-center text-center flex-1 min-w-[120px]">
-                  <a href="/village-business-model" className="block">
-                    <div className="bg-[#07670A]/10 h-16 w-16 sm:h-20 sm:w-20 lg:h-24 lg:w-24 flex justify-center items-center rounded-full border-2 border-[#07670A] hover:scale-105 transition-transform">
-                      <img
-                        src={VillagersportalIcon}
-                        alt="Villages"
-                        className="h-10 sm:h-12 lg:h-16"
-                      />
-                    </div>
-                  </a>
-                  <span className="mt-2 text-[#07670A] font-medium text-xs sm:text-base lg:text-lg">
-                    Villages
-                  </span>
+              <img src={graminsetuMainImage} alt="GraminSetu Integrated Platform Dashboard" />
+
+              {/* 3-Portal Ecosystem Indicators - Professional 'Cards' */}
+
+              {/* 1. Villager Portal */}
+              <div
+                className={`ecosystem-card ecosystem-card--left-top ${activePhase === 0 ? 'is-active' : ''}`}
+              >
+                <div className="ecosystem-card__content">
+                  <div className="ecosystem-card__icon-box ecosystem-card__icon-box--green">
+                    <Sprout size={20} className="stroke-[2.5]" />
+                  </div>
+                  <div className="ecosystem-card__text">
+                    <p className="ecosystem-card__text-title">Villager Portal</p>
+                    <p className="ecosystem-card__text-subtitle">Marketplace & News</p>
+                  </div>
                 </div>
-                <div className="flex flex-col items-center text-center flex-1 min-w-[120px]">
-                  <a href="/government-csr-business-model" className="block">
-                    <div className="bg-[#07670A]/10 h-16 w-16 sm:h-20 sm:w-20 lg:h-24 lg:w-24 flex justify-center items-center rounded-full border-2 border-[#07670A] hover:scale-105 transition-transform">
-                      <img
-                        src={GovernamentportalIcon}
-                        alt="Government"
-                        className="h-10 sm:h-12 lg:h-16"
-                      />
-                    </div>
-                  </a>
-                  <span className="mt-2 text-[#07670A] font-medium text-xs sm:text-base lg:text-lg">
-                    Government
-                  </span>
+                <div className="ecosystem-card__bar">
+                  <div className="ecosystem-card__bar-fill ecosystem-card__bar-fill--green"></div>
                 </div>
-                <div className="flex flex-col items-center text-center flex-1 min-w-[120px]">
-                  <a href="/business/ngo-business-model" className="block">
-                    <div className="bg-[#07670A]/10 h-16 w-16 sm:h-20 sm:w-20 lg:h-24 lg:w-24 flex justify-center items-center rounded-full border-2 border-[#07670A] hover:scale-105 transition-transform">
-                      <img
-                        src={BusinessportalIcon}
-                        alt="Businesses"
-                        className="h-10 sm:h-12 lg:h-16"
-                      />
-                    </div>
-                  </a>
-                  <span className="mt-2 text-[#07670A] font-medium text-xs sm:text-base lg:text-lg">
-                    Businesses
-                  </span>
+              </div>
+
+              {/* 2. Business/NGO Portal */}
+              <div
+                className={`ecosystem-card ecosystem-card--right-center ${activePhase === 1 ? 'is-active' : ''}`}
+              >
+                <div className="ecosystem-card__content">
+                  <div className="ecosystem-card__icon-box ecosystem-card__icon-box--orange">
+                    <Handshake size={20} className="stroke-[2.5]" />
+                  </div>
+                  <div className="ecosystem-card__text">
+                    <p className="ecosystem-card__text-title">Business & NGO</p>
+                    <p className="ecosystem-card__text-subtitle">Impact & Outreach</p>
+                  </div>
                 </div>
+                <div className="ecosystem-card__bar">
+                  <div className="ecosystem-card__bar-fill ecosystem-card__bar-fill--orange"></div>
+                </div>
+              </div>
+
+              {/* 3. Governance Portal */}
+              <div
+                className={`ecosystem-card ecosystem-card--left-bottom ${activePhase === 2 ? 'is-active' : ''}`}
+              >
+                <div className="ecosystem-card__content">
+                  <div className="ecosystem-card__icon-box ecosystem-card__icon-box--blue">
+                    <Landmark size={20} className="stroke-[2.5]" />
+                  </div>
+                  <div className="ecosystem-card__text">
+                    <p className="ecosystem-card__text-title">Governance</p>
+                    <p className="ecosystem-card__text-subtitle">Transparency</p>
+                  </div>
+                </div>
+                <div className="ecosystem-card__bar">
+                  <div className="ecosystem-card__bar-fill ecosystem-card__bar-fill--blue"></div>
+                </div>
+              </div>
+
+              {/* Trust/Verification Badge */}
+              <div className="trust-badge">
+                <ShieldCheck size={20} className="text-green-400" />
+                <span className="text-sm font-medium">Digital India Compliant</span>
               </div>
             </div>
           </div>

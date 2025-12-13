@@ -1,0 +1,434 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.hero-section {
+  position: relative;
+  background-color: #f0f9ff;
+  /* Lightest blue base */
+  /* 'Digital Horizon' Gradient: Tech Blue Sky flows into Village Green Earth */
+  background-image:
+    linear-gradient(180deg, #e0f2fe 0%, #dcfce7 60%, #f0fdf4 100%);
+  overflow: hidden;
+  padding-top: 4rem;
+  padding-bottom: 6rem;
+
+  @media (min-width: 1024px) {
+    padding-top: 6rem;
+    padding-bottom: 8rem;
+  }
+
+  &__background-grid {
+    position: absolute;
+    inset: 0;
+    /* Strong 'Network Connection' Grid */
+    background-image:
+      linear-gradient(to right, rgba(14, 165, 233, 0.15) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(22, 163, 74, 0.15) 1px, transparent 1px);
+    background-size: 40px 40px;
+    /* subtle movement to show 'active connection' */
+    animation: move-grid 20s linear infinite;
+    mask-image: linear-gradient(to bottom, transparent 5%, black 40%, black 80%, transparent 100%);
+  }
+
+  /* Decorative 'Data Points' floating */
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(#0ea5e9 2px, transparent 2px);
+    background-size: 60px 60px;
+    background-position: 30px 30px;
+    opacity: 0.2;
+    animation: floating-points 10s ease-in-out infinite alternate;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 9999px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+
+    &-dot {
+      width: 0.625rem;
+      height: 0.625rem;
+      border-radius: 9999px;
+      background-color: #16a34a;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    &-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #1f2937;
+      letter-spacing: 0.025em;
+      text-transform: uppercase;
+      display: flex;
+      /* Ensures cursor stays inline */
+      align-items: center;
+    }
+  }
+
+  &__cursor {
+    display: inline-block;
+    color: #16a34a;
+    font-weight: 400;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+  }
+
+
+  &__headline {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 800;
+    color: #111827;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.5rem;
+
+    @media (min-width: 640px) {
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 3.75rem;
+      line-height: 1.1;
+    }
+
+    span {
+      color: #15803d;
+    }
+  }
+
+  &__description {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    color: #4b5563;
+    margin-bottom: 2rem;
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (min-width: 1024px) {
+      margin-left: 0;
+    }
+  }
+
+  &__cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+
+    @media (min-width: 640px) {
+      flex-direction: row;
+    }
+
+    @media (min-width: 1024px) {
+      justify-content: flex-start;
+    }
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 2rem;
+
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+
+  .ecosystem-card {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(4px);
+    padding: 0.875rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f3f4f6;
+    max-width: 200px;
+    display: none;
+    transition: transform 0.3s ease;
+    z-index: 20;
+
+    @media (min-width: 1024px) {
+      display: block;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    /* Dynamic Cycle Animation State */
+    &.is-active {
+      transform: scale(1.1);
+      border-color: #22c55e;
+      /* Default green */
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      z-index: 30;
+
+      /* Specific colored borders based on location/type context */
+      &.ecosystem-card--left-top {
+        border-color: #86efac;
+        box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+      }
+
+      &.ecosystem-card--right-center {
+        border-color: #fdba74;
+        box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
+      }
+
+      &.ecosystem-card--left-bottom {
+        border-color: #93c5fd;
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+      }
+    }
+
+    &--left-top {
+      left: -1.5rem;
+      top: 2.5rem;
+    }
+
+    &--right-center {
+      right: -2rem;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &:hover {
+        transform: translateY(-50%) scale(1.05);
+      }
+    }
+
+    &--left-bottom {
+      left: -1rem;
+      bottom: 4rem;
+    }
+
+    &__content {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    &__icon-box {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &--green {
+        background-color: #f0fdf4;
+        color: #15803d;
+      }
+
+      &--orange {
+        background-color: #fff7ed;
+        color: #c2410c;
+      }
+
+      &--blue {
+        background-color: #eff6ff;
+        color: #1d4ed8;
+      }
+    }
+
+    &__text {
+      &-title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #111827;
+        line-height: 1.25;
+      }
+
+      &-subtitle {
+        font-size: 0.625rem;
+        color: #6b7280;
+      }
+    }
+
+    &__bar {
+      height: 0.25rem;
+      width: 100%;
+      background-color: #f3f4f6;
+      border-radius: 9999px;
+      overflow: hidden;
+
+      &-fill {
+        height: 100%;
+        border-radius: 9999px;
+
+        &--green {
+          background-color: #22c55e;
+          width: 75%;
+        }
+
+        &--orange {
+          background-color: #f97316;
+          width: 66%;
+        }
+
+        &--blue {
+          background-color: #3b82f6;
+          width: 90%;
+        }
+      }
+    }
+  }
+
+  .trust-badge {
+    position: absolute;
+    bottom: -1.15rem;
+    /* Perfectly overlaps the border for a 'Seal' look */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #111827;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #000000;
+    }
+  }
+
+  @keyframes pulse {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: .5;
+    }
+  }
+
+  /* Added in final polish to remove all utility strings from JSX */
+  .hero-section__button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    &--primary {
+      background-color: #166534;
+      /* gramin-800 */
+      color: white;
+
+      &:hover {
+        background-color: #14532d;
+        /* gramin-900 */
+      }
+    }
+
+    &--secondary {
+      background-color: white;
+      color: #1f2937;
+      /* gramin-800/gray-800 */
+      border: 2px solid #1f2937;
+
+      &:hover {
+        background-color: #f9fafb;
+        /* gramin-50 */
+      }
+    }
+  }
+
+  .hero-section__visual-container {
+    width: 100%;
+    position: relative;
+
+    @media (min-width: 1024px) {
+      width: 50%;
+    }
+
+    /* Backdrop blur container for the image */
+    .image-wrapper {
+      position: relative;
+      z-index: 10;
+      /* PREMIUM ANIMATED BACKGROUND: Subtle Shifting 'Live Glass' */
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.9) 0%, rgba(224, 242, 254, 0.8) 50%, rgba(255, 255, 255, 0.9) 100%);
+      background-size: 200% 200%;
+      animation: shine 8s ease-in-out infinite;
+
+      backdrop-filter: blur(12px);
+      border-radius: 1rem;
+      box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 0.5rem;
+
+      @media (min-width: 1024px) {
+        padding: 1rem;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.75rem;
+        border: 1px solid #f9fafb;
+        object-fit: cover;
+        max-height: 600px;
+        margin-top: 2rem;
+        /* Added spacing to push image down inside the box */
+      }
+    }
+  }
+
+  @keyframes blink {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
