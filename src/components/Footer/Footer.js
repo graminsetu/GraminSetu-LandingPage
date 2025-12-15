@@ -299,7 +299,7 @@ function Footer() {
               <li className="font-medium mt-3 text-gramin-200">Phone:</li>
               <li>
                 <a href="tel:+911234567890" className="hover:text-white transition-colors">
-                  +91 123 456 7890
+                  +91 0704635156
                 </a>
               </li>
             </ul>
