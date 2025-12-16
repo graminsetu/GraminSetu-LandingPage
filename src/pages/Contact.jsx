@@ -1,42 +1,28 @@
-import React from 'react';
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Clock,
-  Linkedin,
-  Twitter,
-  Facebook,
-  Instagram,
-  User,
-  MessageSquare,
-  Type,
-} from 'lucide-react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer/Footer';
+import PageTitle from '../components/PageTitle';
+import HelpSupportButton from '../components/HelpSupport/HelpSupportButton';
+import Toast from '../components/Toast';
+import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Facebook, Instagram } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import PageTitle from '../components/PageTitle';
-import Toast from '../components/Toast';
-import HelpSupportButton from '../components/HelpSupport/HelpSupportButton';
+import './Contact.scss';
 
-// Initial state for the contact form
 const initialFormState = { name: '', email: '', subject: '', message: '' };
 
 function Contact() {
   const location = useLocation();
-  const [form, setForm] = React.useState(initialFormState);
-  const [submitting, setSubmitting] = React.useState(false);
-  const [status, setStatus] = React.useState(null);
-  const [showToast, setShowToast] = React.useState(false);
+  const [form, setForm] = useState(initialFormState);
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState(null);
+  const [showToast, setShowToast] = useState(false);
 
-  // Handle input changes for all fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -53,22 +39,18 @@ function Contact() {
           },
         },
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
         }
       );
       setStatus({
         type: 'success',
-        message: 'Thank you for contacting us! We will get back to you soon.',
+        message: 'Message sent successfully! We will get back to you shortly.',
       });
       setForm(initialFormState);
       setShowToast(true);
     } catch (err) {
-      // Show a more detailed error if available
       const errorMsg =
-        err?.response?.data?.error?.message ||
-        'There was a problem submitting your message. Please try again.';
+        err?.response?.data?.error?.message || 'Something went wrong. Please try again later.';
       setStatus({ type: 'error', message: errorMsg });
       setShowToast(true);
     } finally {
@@ -77,247 +59,174 @@ function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gramin-50 via-white to-setu-50 font-sans flex flex-col">
+    <div className="contact-page-polished">
       <PageTitle pathname={location.pathname} />
-
-      {/* Navbar */}
       <Navbar />
 
-      <main className="flex-1 w-full max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        {/* ...existing code... */}
+      {/* Hero Header */}
+      <section className="contact-hero">
+        <h1>Get in Touch</h1>
+        <p>
+          Whether you have a question about features, trials, pricing, or anything else, our team is
+          ready to answer all your questions.
+        </p>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {/* Contact Details */}
-          <div className="bg-white/95 rounded-2xl shadow-xl p-8 flex flex-col justify-between border border-gramin-100 w-full h-full">
-            <h2 className="text-3xl font-bold mb-6 text-gramin-800 flex items-center gap-2">
-              <MessageSquare className="w-8 h-8 text-gramin-600" /> Our Contact Details
-            </h2>
-            <div className="space-y-6">
-              {/* Email */}
-              <div className="flex items-center gap-4 text-lg">
-                <div className="flex-shrink-0">
-                  <Mail className="w-6 h-6 text-gramin-600" />
-                </div>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                  <span className="font-semibold text-gramin-700">Email:</span>
-                  <a
-                    href="mailto:support@graminsetu.in"
-                    className="text-gramin-600 underline hover:text-gramin-800 transition-colors duration-200"
-                  >
-                    support@graminsetu.in
-                  </a>
-                </div>
-              </div>
-
-              {/* Phone */}
-              <div className="flex items-center gap-4 text-lg">
-                <div className="flex-shrink-0">
-                  <Phone className="w-6 h-6 text-gramin-600" />
-                </div>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                  <span className="font-semibold text-gramin-700">Phone:</span>
-                  <a
-                    href="tel:+919704635156"
-                    className="text-gramin-600 underline hover:text-gramin-800 transition-colors duration-200"
-                  >
-                    +91-9704635156
-                  </a>
-                </div>
-              </div>
-
-              {/* WhatsApp */}
-              <div className="flex items-center gap-4 text-lg">
-                <div className="flex-shrink-0">
-                  <MessageSquare className="w-6 h-6 text-gramin-600" />
-                </div>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                  <span className="font-semibold text-gramin-700">WhatsApp:</span>
-                  <a
-                    href="https://wa.me/919704635156"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gramin-600 underline hover:text-gramin-800 transition-colors duration-200"
-                  >
-                    +91-9704635156
-                  </a>
-                </div>
-              </div>
-
-              {/* Office Address */}
-              <div className="flex items-start gap-4 text-lg">
-                <div className="flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-gramin-600 mt-1" />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <span className="font-semibold text-gramin-700">Office Address:</span>
-                  <span className="text-gramin-600 leading-relaxed">
-                    Visakhapatnam, Andhra Pradesh, India
-                  </span>
-                </div>
-              </div>
-
-              {/* Business Hours */}
-              <div className="flex items-start gap-4 text-lg">
-                <div className="flex-shrink-0">
-                  <Clock className="w-6 h-6 text-gramin-600 mt-1" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <span className="font-semibold text-gramin-700">Business Hours:</span>
-                  <div className="text-gramin-600 space-y-1">
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium">Monday - Friday:</span>
-                      <span>9:00 AM - 6:00 PM (IST)</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium">Saturday - Sunday:</span>
-                      <span>Closed</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Social Media Section */}
-            <div className="mt-8 pt-6 border-t border-gramin-100">
-              <h3 className="text-xl font-semibold mb-4 text-gramin-800">Connect With Us</h3>
-              <div className="flex space-x-4">
-                <a
-                  href="https://www.linkedin.com/company/graminsetu/"
-                  aria-label="LinkedIn"
-                  className="group flex items-center justify-center w-12 h-12 bg-gramin-50 rounded-full text-gramin-600 hover:bg-gramin-600 hover:text-white transition-all duration-200 shadow-sm hover:shadow-md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Linkedin className="w-6 h-6" />
-                </a>
-                <a
-                  href="https://twitter.com/graminsetu"
-                  aria-label="Twitter"
-                  className="group flex items-center justify-center w-12 h-12 bg-gramin-50 rounded-full text-gramin-600 hover:bg-gramin-600 hover:text-white transition-all duration-200 shadow-sm hover:shadow-md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Twitter className="w-6 h-6" />
-                </a>
-                <button
-                  disabled
-                  aria-label="Facebook (Coming Soon)"
-                  className="group flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full text-gray-400 cursor-not-allowed shadow-sm"
-                  title="Coming Soon"
-                >
-                  <Facebook className="w-6 h-6" />
-                </button>
-                <button
-                  disabled
-                  aria-label="Instagram (Coming Soon)"
-                  className="group flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full text-gray-400 cursor-not-allowed shadow-sm"
-                  title="Coming Soon"
-                >
-                  <Instagram className="w-6 h-6" />
-                </button>
-              </div>
-              <p className="text-sm text-gramin-500 mt-4">
-                Follow us on social media for updates and news about rural development initiatives.
-              </p>
-            </div>
+      {/* 3 Floating Info Cards */}
+      <section className="info-cards-grid">
+        <div className="info-card">
+          <div className="icon-box">
+            <Mail size={28} />
           </div>
+          <h3>Email Support</h3>
+          <p>Our team usually replies in 24h</p>
+          <a href="mailto:support@graminsetu.in">support@graminsetu.in</a>
+        </div>
 
-          {/* Contact Form */}
-          <form
-            className="bg-white/95 rounded-2xl shadow-xl p-8 flex flex-col gap-5 border border-gramin-100 w-full h-full"
-            onSubmit={handleSubmit}
-          >
-            <h2 className="text-3xl font-bold mb-6 text-gramin-800 flex items-center gap-2">
-              <MessageSquare className="w-8 h-8 text-gramin-600" /> Send Us a Message
-            </h2>
-            <div className="flex flex-col gap-5">
-              <label className="text-base font-semibold text-gramin-700">
-                <span className="flex items-center gap-2">
-                  <User className="w-5 h-5 text-gramin-600" /> Name
-                </span>
+        <div className="info-card">
+          <div className="icon-box">
+            <Phone size={28} />
+          </div>
+          <h3>Phone Support</h3>
+          <p>Mon-Fri from 9am to 6pm</p>
+          <a href="tel:+919704635156">+91-9704635156</a>
+        </div>
+
+        <div className="info-card">
+          <div className="icon-box">
+            <MapPin size={28} />
+          </div>
+          <h3>Visit Our Office</h3>
+          <p>Visakhapatnam, Andhra Pradesh</p>
+          <a href="#map" onClick={(e) => e.preventDefault()}>
+            View on Map
+          </a>
+        </div>
+      </section>
+
+      {/* Main Split Layout */}
+      <main className="main-grid-layout">
+        {/* Left: Contact Form */}
+        <div className="contact-form-container">
+          <h2>Send us a Message</h2>
+          <p className="subtitle">
+            Fill out the form below and we'll get back to you as soon as possible.
+          </p>
+
+          <form onSubmit={handleSubmit}>
+            <div className="grid md:grid-cols-2 gap-5">
+              <div className="form-group">
+                <label>Your Name</label>
                 <input
                   type="text"
                   name="name"
+                  placeholder="e.g. Rahul Kumar"
                   required
-                  placeholder="Enter your full name"
-                  className="mt-2 w-full px-4 py-3 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow"
                   value={form.name}
                   onChange={handleChange}
-                  disabled={submitting}
                 />
-              </label>
-              <label className="text-base font-semibold text-gramin-700">
-                <span className="flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-gramin-600" /> Email
-                </span>
+              </div>
+              <div className="form-group">
+                <label>Email Address</label>
                 <input
                   type="email"
                   name="email"
+                  placeholder="name@example.com"
                   required
-                  placeholder="Enter your email address"
-                  className="mt-2 w-full px-4 py-3 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow"
                   value={form.email}
                   onChange={handleChange}
-                  disabled={submitting}
                 />
-              </label>
-              <label className="text-base font-semibold text-gramin-700">
-                <span className="flex items-center gap-2">
-                  <Type className="w-5 h-5 text-gramin-600" /> Subject
-                </span>
-                <input
-                  type="text"
-                  name="subject"
-                  required
-                  placeholder="Subject of your message"
-                  className="mt-2 w-full px-4 py-3 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow"
-                  value={form.subject}
-                  onChange={handleChange}
-                  disabled={submitting}
-                />
-              </label>
-              <label className="text-base font-semibold text-gramin-700">
-                <span className="flex items-center gap-2">
-                  <MessageSquare className="w-5 h-5 text-gramin-600" /> Message
-                </span>
-                <textarea
-                  name="message"
-                  required
-                  placeholder="Write your message here"
-                  rows={6}
-                  className="mt-2 w-full px-4 py-3 rounded-lg border border-gramin-200 focus:ring-2 focus:ring-gramin-400 text-gramin-900 placeholder-gramin-400 bg-white text-lg shadow resize-none"
-                  value={form.message}
-                  onChange={handleChange}
-                  disabled={submitting}
-                />
-              </label>
+              </div>
             </div>
-            <button
-              type="submit"
-              className="mt-4 bg-gramin-600 text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:bg-gramin-700 focus:ring-2 focus:ring-gramin-400 transition text-lg tracking-wide"
-              disabled={submitting}
-            >
-              {submitting ? 'Submitting...' : 'Submit'}
+
+            <div className="form-group">
+              <label>Subject</label>
+              <input
+                type="text"
+                name="subject"
+                placeholder="How can we help you?"
+                required
+                value={form.subject}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Message</label>
+              <textarea
+                name="message"
+                rows="6"
+                placeholder="Tell us more about your inquiry..."
+                required
+                value={form.message}
+                onChange={handleChange}
+              ></textarea>
+            </div>
+
+            <button type="submit" className="submit-btn" disabled={submitting}>
+              {submitting ? (
+                'Sending...'
+              ) : (
+                <>
+                  Send Message <Send size={18} />
+                </>
+              )}
             </button>
-            {/* Toast notification for success or error */}
-            <Toast
-              message={showToast ? status?.message : ''}
-              type={status?.type === 'error' ? 'error' : 'success'}
-              onClose={() => setShowToast(false)}
-            />
-            <p className="text-xs text-gramin-500 mt-3 text-center">
-              Your message is confidential. We respect your privacy.
-            </p>
           </form>
         </div>
 
-        {/* Help and Support Button */}
-        <div className="mt-10">
-          <HelpSupportButton />
+        {/* Right: Map & Socials Stack */}
+        <div className="map-social-stack">
+          {/* Map Widget */}
+          <div className="map-wrapper" id="map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243208.1706596468!2d83.13969299442111!3d17.738612187648356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a39431389e6973f%3A0x92d9c20395498468!2sVisakhapatnam%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1708456182435!5m2!1sen!2sin"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="GraminSetu Office Location"
+            ></iframe>
+          </div>
+
+          {/* Social Connect Card */}
+          <div className="social-card">
+            <h3>Connect With Us</h3>
+            <div className="social-icons">
+              <a
+                href="https://www.linkedin.com/company/graminsetu/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={22} />
+              </a>
+              <a
+                href="https://twitter.com/graminsetu"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Twitter"
+              >
+                <Twitter size={22} />
+              </a>
+              <button disabled aria-label="Facebook">
+                <Facebook size={22} />
+              </button>
+              <button disabled aria-label="Instagram">
+                <Instagram size={22} />
+              </button>
+            </div>
+          </div>
         </div>
       </main>
 
+      <Toast
+        message={showToast ? status?.message : ''}
+        type={status?.type === 'error' ? 'error' : 'success'}
+        onClose={() => setShowToast(false)}
+      />
+
       <Footer />
+      <HelpSupportButton />
     </div>
   );
 }
