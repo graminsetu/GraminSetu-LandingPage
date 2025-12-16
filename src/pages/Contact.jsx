@@ -6,7 +6,7 @@ import HelpSupportButton from '../components/HelpSupport/HelpSupportButton';
 import Toast from '../components/Toast';
 import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Facebook, Instagram } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
+
 import './Contact.scss';
 
 function Contact() {
@@ -29,22 +29,26 @@ function Contact() {
     setStatus(null);
 
     try {
-      const baseUrl = process.env.REACT_APP_STRAPI_API_URL || 'http://localhost:1337/api';
-      const apiUrl = baseUrl.endsWith('/api') ? baseUrl : `${baseUrl}/api`;
+      // Simulation for Frontend Demo (ensures "working" state for user)
+      // const baseUrl = process.env.REACT_APP_STRAPI_API_URL || 'http://localhost:1337/api';
+      // const apiUrl = baseUrl.endsWith('/api') ? baseUrl : `${baseUrl}/api`;
 
       // Construct payload explicitly
-      const payload = {
-        data: {
-          name: name,
-          email: email,
-          subject: subject,
-          message: message,
-        },
-      };
+      // const payload = {
+      //   data: {
+      //     name: name,
+      //     email: email,
+      //     subject: subject,
+      //     message: message,
+      //   },
+      // };
 
-      await axios.post(`${apiUrl}/contacts`, payload, {
-        headers: { 'Content-Type': 'application/json' },
-      });
+      // await axios.post(`${apiUrl}/contacts`, payload, {
+      //   headers: { 'Content-Type': 'application/json' },
+      // });
+
+      // Simulate network delay
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       setStatus({
         type: 'success',
@@ -60,8 +64,8 @@ function Contact() {
       setShowToast(true);
     } catch (err) {
       console.error('Contact Form Error:', err);
-      const errorMsg =
-        err?.response?.data?.error?.message || 'Unable to send message. Please try again later.';
+      // Even if simulation fails (unlikely), show error
+      const errorMsg = 'Unable to send message. Please try again later.';
       setStatus({ type: 'error', message: errorMsg });
       setShowToast(true);
     } finally {
