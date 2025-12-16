@@ -1,653 +1,502 @@
 import React, { memo, useState } from 'react';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer/Footer';
+import {
+  Megaphone,
+  MonitorCheck,
+  Store,
+  Users,
+  Wrench,
+  SearchCheck,
+  CheckCircle2,
+  ShieldCheck,
+  X,
+  Loader2,
+} from 'lucide-react';
 
+// --- Professional Feature Data ---
 const features = [
   {
-    icon: '📢',
-    title: 'Integrated Government Communication Hub',
-    desc: 'Receive verified official announcements, policy updates, and scheme notifications directly from government sources. Our platform ensures 100% authentic information reaches every villager through multiple communication channels, eliminating misinformation and ensuring equal access to opportunities.',
-    stats: '95% faster information delivery',
+    icon: <Megaphone className="w-5 h-5 text-gramin-700" />,
+    title: 'Verified Government Updates',
+    desc: 'Direct channel for official announcements. Eliminates misinformation through verified government sources.',
   },
   {
-    icon: '🎯',
-    title: 'Digital-First Government Service Access',
-    desc: 'Streamline your interactions with government services through our comprehensive digital portal. Apply for welfare programs, track application status in real-time, and receive automated updates. Our system integrates with 50+ government databases to ensure seamless service delivery.',
-    stats: '70% reduction in processing time',
+    icon: <MonitorCheck className="w-5 h-5 text-gramin-700" />,
+    title: 'Digital Service Access',
+    desc: 'Unified portal for certificates, welfare programs, and application tracking. Reduces administrative processing time.',
   },
   {
-    icon: '🛒',
-    title: 'Authenticated Rural Commerce Platform',
-    desc: 'Participate in a verified marketplace designed specifically for rural economies. Our platform features quality assurance, secure payment gateways, and logistics support to boost agricultural and artisan commerce. Connect directly with urban markets and government procurement programs.',
-    stats: '40% increase in rural income',
+    icon: <Store className="w-5 h-5 text-gramin-700" />,
+    title: 'Local Commerce Network',
+    desc: 'Secure marketplace connecting verified sellers with buyers. Supports local economic growth and fair pricing.',
   },
   {
-    icon: '🤝',
-    title: 'Structured Community Governance',
-    desc: 'Engage in democratic decision-making through our digital panchayat system. Participate in village meetings, vote on development priorities, and collaborate on community projects. Our platform ensures transparent, inclusive governance with documented decision trails.',
-    stats: '85% community participation rate',
+    icon: <Users className="w-5 h-5 text-gramin-700" />,
+    title: 'Community Governance',
+    desc: 'Digital tools for panchayat meetings and polls. Enables transparent decision-making and civic participation.',
   },
   {
-    icon: '🛠️',
-    title: 'Systematic Infrastructure Issue Management',
-    desc: 'Report and track infrastructure concerns through our georeferenced complaint system. Each issue gets a unique tracking ID, automated escalation protocols, and priority-based resolution timelines. Premium users receive dedicated support channels and faster response guarantees.',
-    stats: '60% faster issue resolution',
+    icon: <Wrench className="w-5 h-5 text-gramin-700" />,
+    title: 'Infrastructure Reporting',
+    desc: 'Geo-tagged issue reporting system for civic maintenance. Real-time status tracking for rapid resolution.',
   },
   {
-    icon: '🔍',
-    title: 'Comprehensive Financial Transparency Portal',
-    desc: 'Monitor all public expenditure in your village through our advanced analytics dashboard. Track fund utilization, project progress, and budget allocations with real-time updates. Our system ensures complete accountability and enables informed citizen participation in governance.',
-    stats: '100% transaction transparency',
+    icon: <SearchCheck className="w-5 h-5 text-gramin-700" />,
+    title: 'Financial Transparency',
+    desc: 'Open ledger system for village funds and projects. Promotes accountability in public spending.',
   },
 ];
 
+// --- Pricing Data ---
 const pricingPlans = {
   monthly: [
     {
-      name: 'Community Basic',
+      name: 'Basic Access',
       price: 0,
-      priceLabel: 'Free Forever',
-      summary:
-        'Perfect for individual villagers starting their digital journey with essential community features',
-      bestFor: 'Individual villagers and families',
+      period: 'Forever',
+      desc: 'Essential digital identity and updates.',
       features: [
-        '🏠 Village news & community updates (unlimited)',
-        '📅 Local events & festival announcements',
-        '🛒 Basic marketplace (5 product listings)',
-        '📢 Civic issue reporting with tracking',
-        '💬 Community messaging (50 messages/month)',
-        '📱 Mobile app access with offline features',
-        '🆔 Digital village identity verification',
-        '📋 Government scheme notifications',
+        'Official Government Notifications',
+        'Job Board Access',
+        'Community Forums',
+        'Emergency Alerts',
       ],
+      button: 'Start Free',
       highlight: false,
-      offer: 'Always Free • No Credit Card Required • Join 10,000+ villagers',
     },
     {
-      name: 'Village Pro',
-      price: 29,
-      priceLabel: '₹29/month',
-      summary:
-        'Enhanced features for active community members, small business owners, and village entrepreneurs',
-      bestFor: 'Active villagers, shop owners, local businesses',
+      name: 'Professional',
+      price: 49,
+      period: '/ month',
+      desc: 'For local businesses and service providers.',
       features: [
-        '✨ All Community Basic features (unlimited)',
-        '🚀 Unlimited marketplace listings with photos',
-        '📊 Business analytics & sales tracking',
-        '⚡ Priority issue resolution (24-48 hours)',
-        '💬 Unlimited messaging, groups & announcements',
-        '🎯 Targeted local advertising & promotions',
-        '📞 Priority phone & WhatsApp support',
-        '💰 Advanced payment gateway integration',
-        '📈 Monthly business growth reports',
+        'Unlimited Marketplace Listings',
+        'Business Loans Access',
+        'Verified Merchant Badge',
+        'Sales Analytics',
+        'Priority Support',
       ],
+      button: 'Get Professional',
       highlight: true,
-      offer: '7-Day Free Trial • Cancel Anytime • 50% off first month for early adopters',
     },
     {
-      name: 'Community Leader',
-      price: 99,
-      priceLabel: '₹99/month',
-      summary:
-        'Complete solution for village organizations, leaders, and institutions managing community initiatives',
-      bestFor: 'SHGs, Panchayats, cooperatives, village committees',
+      name: 'Organization',
+      price: 199,
+      period: '/ month',
+      desc: 'For Panchayats, SHGs, and Committees.',
       features: [
-        '🌟 All Village Pro features (unlimited access)',
-        '👥 Multi-user management (up to 25 members)',
-        '📈 Advanced community analytics & insights',
-        '📧 Bulk messaging & campaign management',
-        '🏆 Event planning & management tools',
-        '💼 Financial tracking & expense reports',
-        '🎓 Free monthly training & skill sessions',
-        '📋 Custom forms & survey creation',
-        '🤝 Partnership & collaboration tools',
-        '📊 Village development progress tracking',
+        'Member Management (50+)',
+        'Bulk Communication Tools',
+        'Event Coordination',
+        'Financial Reports',
+        'Surveys & Polls',
       ],
+      button: 'Get Organization',
       highlight: false,
-      offer: 'Free Setup • Dedicated Support • 30-Day Money-Back Guarantee',
-    },
-  ],
-  quarterly: [
-    {
-      name: 'Community Basic',
-      price: 0,
-      priceLabel: 'Free Forever',
-      summary:
-        'Perfect for individual villagers starting their digital journey with essential community features',
-      bestFor: 'Individual villagers and families',
-      features: [
-        '🏠 Village news & community updates (unlimited)',
-        '📅 Local events & festival announcements',
-        '🛒 Basic marketplace (5 product listings)',
-        '📢 Civic issue reporting with tracking',
-        '💬 Community messaging (50 messages/month)',
-        '📱 Mobile app access with offline features',
-        '🆔 Digital village identity verification',
-        '📋 Government scheme notifications',
-      ],
-      highlight: false,
-      offer: 'Always Free • No Credit Card Required • Join 10,000+ villagers',
-    },
-    {
-      name: 'Village Pro',
-      price: 75,
-      priceLabel: '₹75/quarter',
-      summary:
-        'Enhanced features for active community members, small business owners, and village entrepreneurs',
-      bestFor: 'Active villagers, shop owners, local businesses',
-      features: [
-        '✨ All Community Basic features (unlimited)',
-        '🚀 Unlimited marketplace listings with photos',
-        '📊 Business analytics & sales tracking',
-        '⚡ Priority issue resolution (24-48 hours)',
-        '💬 Unlimited messaging, groups & announcements',
-        '🎯 Targeted local advertising & promotions',
-        '📞 Priority phone & WhatsApp support',
-        '💰 Advanced payment gateway integration',
-        '📈 Quarterly business growth reports',
-      ],
-      highlight: true,
-      offer: 'Save ₹12 (14% Off) • Free Business Consultation • Priority Support',
-    },
-    {
-      name: 'Community Leader',
-      price: 267,
-      priceLabel: '₹267/quarter',
-      summary:
-        'Complete solution for village organizations, leaders, and institutions managing community initiatives',
-      bestFor: 'SHGs, Panchayats, cooperatives, village committees',
-      features: [
-        '🌟 All Village Pro features (unlimited access)',
-        '👥 Multi-user management (up to 25 members)',
-        '📈 Advanced community analytics & insights',
-        '📧 Bulk messaging & campaign management',
-        '🏆 Event planning & management tools',
-        '💼 Financial tracking & expense reports',
-        '🎓 Free quarterly training & skill sessions',
-        '📋 Custom forms & survey creation',
-        '🤝 Partnership & collaboration tools',
-        '📊 Village development progress tracking',
-      ],
-      highlight: false,
-      offer: 'Save ₹30 (10% Off) • Free Onboarding • Dedicated Account Manager',
     },
   ],
   yearly: [
     {
-      name: 'Community Basic',
+      name: 'Basic Access',
       price: 0,
-      priceLabel: 'Free Forever',
-      summary:
-        'Perfect for individual villagers starting their digital journey with essential community features',
-      bestFor: 'Individual villagers and families',
+      period: 'Forever',
+      desc: 'Essential digital identity and updates.',
       features: [
-        '🏠 Village news & community updates (unlimited)',
-        '📅 Local events & festival announcements',
-        '🛒 Basic marketplace (5 product listings)',
-        '📢 Civic issue reporting with tracking',
-        '💬 Community messaging (50 messages/month)',
-        '📱 Mobile app access with offline features',
-        '🆔 Digital village identity verification',
-        '📋 Government scheme notifications',
+        'Official Government Notifications',
+        'Job Board Access',
+        'Community Forums',
+        'Emergency Alerts',
       ],
+      button: 'Start Free',
       highlight: false,
-      offer: 'Always Free • No Credit Card Required • Join 10,000+ villagers',
     },
     {
-      name: 'Village Pro',
-      price: 249,
-      priceLabel: '₹249/year',
-      summary:
-        'Enhanced features for active community members, small business owners, and village entrepreneurs',
-      bestFor: 'Active villagers, shop owners, local businesses',
+      name: 'Professional',
+      price: 499,
+      period: '/ year',
+      desc: 'For local businesses and service providers.',
       features: [
-        '✨ All Community Basic features (unlimited)',
-        '🚀 Unlimited marketplace listings with photos',
-        '📊 Business analytics & sales tracking',
-        '⚡ Priority issue resolution (24-48 hours)',
-        '💬 Unlimited messaging, groups & announcements',
-        '🎯 Targeted local advertising & promotions',
-        '📞 Priority phone & WhatsApp support',
-        '💰 Advanced payment gateway integration',
-        '📈 Annual business growth reports & insights',
-        '🎁 Exclusive annual member benefits',
+        'Unlimited Marketplace Listings',
+        'Business Loans Access',
+        'Verified Merchant Badge',
+        'Sales Analytics',
+        'Priority Support',
       ],
+      button: 'Get Professional',
       highlight: true,
-      offer: 'Save ₹99 (28% Off) • Free Business Setup • Annual Success Review',
     },
     {
-      name: 'Community Leader',
-      price: 899,
-      priceLabel: '₹899/year',
-      summary:
-        'Complete solution for village organizations, leaders, and institutions managing community initiatives',
-      bestFor: 'SHGs, Panchayats, cooperatives, village committees',
+      name: 'Organization',
+      price: 1999,
+      period: '/ year',
+      desc: 'For Panchayats, SHGs, and Committees.',
       features: [
-        '🌟 All Village Pro features (unlimited access)',
-        '👥 Multi-user management (up to 25 members)',
-        '📈 Advanced community analytics & insights',
-        '📧 Bulk messaging & campaign management',
-        '🏆 Event planning & management tools',
-        '💼 Financial tracking & expense reports',
-        '🎓 Free monthly training & skill sessions',
-        '📋 Custom forms & survey creation',
-        '🤝 Partnership & collaboration tools',
-        '📊 Village development progress tracking',
-        '🏅 Annual leadership certification',
-        '💎 Priority access to new features',
+        'Member Management (50+)',
+        'Bulk Communication Tools',
+        'Event Coordination',
+        'Financial Reports',
+        'Surveys & Polls',
       ],
+      button: 'Get Organization',
       highlight: false,
-      offer: 'Save ₹289 (24% Off) • Annual Strategy Session • VIP Support Channel',
     },
   ],
 };
 
-const whyUpgrade = [
-  'Priority Issue Handling: Enjoy expedited support and faster resolution of civic problems reported via the portal.',
-  'Enhanced Marketplace: Gain better visibility for your products and services with premium listing features.',
-  'Advanced Analytics: Access detailed insights about community engagement and your personal usage patterns.',
-  'Exclusive Content: Get early access to government announcements, training materials, and special programs.',
-  'Dedicated Support: Receive personalized assistance from our community support team.',
-];
-
-const userJourney = [
-  'Easy Registration: Sign up quickly and select your village to access the portal.',
-  'Explore Features: Browse through various features like marketplace, news, events, and community forums.',
-  'Engage with Community: Start participating in discussions, report issues, or list products in the marketplace.',
-  'Upgrade When Ready: Consider upgrading to Premium for enhanced features and priority support.',
-];
-
-const planLabels = {
-  monthly: 'Monthly',
-  quarterly: 'Quarterly',
-  yearly: 'Annual',
+// --- Modal Component ---
+const Modal = ({ isOpen, onClose, title, children }) => {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fade-in">
+      <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl animate-scale-in relative overflow-hidden">
+        <div className="flex justify-between items-center p-6 border-b border-slate-100">
+          <h3 className="text-xl font-bold text-slate-900">{title}</h3>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-500"
+          >
+            <X size={20} />
+          </button>
+        </div>
+        <div className="p-6">{children}</div>
+      </div>
+    </div>
+  );
 };
 
 const VillageBusinessModel = () => {
-  const [selectedPlan, setSelectedPlan] = useState('monthly');
+  const [billingCycle, setBillingCycle] = useState('monthly');
+  const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Mock Submission Handler
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsJoinModalOpen(false);
+      setIsDemoModalOpen(false);
+      alert('Request Submitted Successfully! Our team will contact you shortly.');
+    }, 1500);
+  };
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen font-sans text-slate-900">
       <Navbar />
 
-      {/* Hero Section - Perfect UX */}
-      <section className="pt-24 pb-20 bg-gradient-to-b from-gramin-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-8">
-            {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-gramin-100 rounded-full">
-              <span className="text-sm font-semibold text-gramin-700 uppercase tracking-wide">
-                🚀 Beta Launch - Early Access Program
-              </span>
-            </div>
+      {/* --- HERO SECTION --- */}
+      <section className="relative pt-32 pb-24 border-b border-slate-100 bg-slate-50 overflow-hidden">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+            opacity: 0.4,
+          }}
+        ></div>
 
-            {/* Main Heading */}
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                <span className="text-gramin-600">Village Digital Transformation Platform</span>
-              </h1>
-              <p className="text-xl text-gray-700 font-medium max-w-3xl mx-auto">
-                India's Emerging Rural Digitization Solution — Innovative • Secure • Future-Ready
-              </p>
-            </div>
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-slate-200 rounded-full shadow-sm mb-8">
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span className="text-sm font-medium text-slate-700">
+              Operational in 1,200+ Villages
+            </span>
+          </div>
 
-            {/* Description */}
-            <p className="text-lg text-gray-600 leading-relaxed max-w-4xl mx-auto">
-              <strong>
-                Developing in partnership with rural communities and technology experts
-              </strong>
-              , our comprehensive digital platform is designed to transform rural governance,
-              commerce, and community engagement. With focus on security, accessibility, and real
-              impact, we're building the foundation for Digital India at the grassroots level.
-            </p>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6">
+            The Operating System for <br className="hidden md:block" />
+            <span className="text-gramin-700">Rural Development</span>
+          </h1>
+
+          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+            A unified digital infrastructure enabling secure government services, local commerce,
+            and transparent governance for villages across India.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button
+              onClick={() => setIsJoinModalOpen(true)}
+              className="w-full sm:w-auto px-8 py-3 bg-gramin-700 hover:bg-gramin-800 text-white font-semibold rounded-lg shadow-sm transition-all text-sm md:text-base"
+            >
+              Deploy in Your Village
+            </button>
+            <button
+              onClick={() => setIsDemoModalOpen(true)}
+              className="w-full sm:w-auto px-8 py-3 bg-white border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-all flex items-center justify-center gap-2 text-sm md:text-base"
+            >
+              Request Platform Demo
+            </button>
+          </div>
+
+          <div className="mt-12 flex items-center justify-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+            <span className="text-sm font-semibold text-slate-400 uppercase tracking-widest">
+              Trusted By District Administrations
+            </span>
           </div>
         </div>
       </section>
 
-      {/* Features Section - Modern Grid */}
-      <section className="py-20 bg-gray-50">
+      {/* --- CORE CAPABILITIES --- */}
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              📊 Advanced Digital Village Solutions
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive digital infrastructure designed specifically for rural transformation
-              and sustainable development
-            </p>
-            <div className="mt-6 inline-flex items-center px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium">
-              🌟 Trusted by 1000+ Villages Across India
+          <div className="mb-16 border-b border-slate-100 pb-8">
+            <div className="max-w-3xl">
+              <h2 className="text-3xl font-bold text-slate-900 mb-4 tracking-tight">
+                Core Capabilities
+              </h2>
+              <p className="text-slate-600 text-lg">
+                Enterprise-grade tools adapted for rural connectivity and governance.
+              </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => (
-              <Feature
+              <div
                 key={index}
-                icon={feature.icon}
-                title={feature.title}
-                desc={feature.desc}
-                stats={feature.stats}
-              />
+                className="group p-8 bg-white rounded-xl border border-slate-200 hover:border-gramin-200 hover:shadow-lg transition-all duration-300"
+              >
+                <div className="w-12 h-12 bg-slate-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gramin-50 transition-colors">
+                  {feature.icon}
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-gramin-700 transition-colors">
+                  {feature.title}
+                </h3>
+                <p className="text-slate-600 leading-relaxed text-sm">{feature.desc}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing Section - Modern Design */}
-      <section className="py-20 bg-white">
+      {/* --- PRICING STRUCTURE --- */}
+      <section className="py-24 bg-slate-50 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Flexible Pricing Plans
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4 tracking-tight">
+              {' '}
+              Transparent Pricing Structure
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Choose the perfect plan for your village community
+            <p className="text-slate-600 mb-8">
+              Select the tier that matches your operational needs.
             </p>
-          </div>
 
-          {/* Plan Toggle */}
-          <div className="flex justify-center mb-12">
-            <div className="inline-flex rounded-lg bg-gray-100 p-1">
-              {Object.keys(planLabels).map((key) => (
+            {/* Toggle */}
+            <div className="inline-flex bg-white p-1 rounded-lg border border-slate-200 shadow-sm">
+              {['monthly', 'yearly'].map((cycle) => (
                 <button
-                  key={key}
-                  className={`px-6 py-3 text-sm font-semibold rounded-md transition-all ${
-                    selectedPlan === key
-                      ? 'bg-gramin-600 text-white shadow-sm'
-                      : 'text-gray-700 hover:text-gray-900'
+                  key={cycle}
+                  onClick={() => setBillingCycle(cycle)}
+                  className={`px-8 py-2 rounded-md text-sm font-medium capitalize transition-all ${
+                    billingCycle === cycle
+                      ? 'bg-gramin-700 text-white shadow-sm'
+                      : 'text-slate-500 hover:text-slate-900'
                   }`}
-                  onClick={() => setSelectedPlan(key)}
                 >
-                  {planLabels[key]}
+                  {cycle}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pricingPlans[selectedPlan].map((plan, index) => (
-              <PricingCard key={index} {...plan} planType={selectedPlan} />
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {pricingPlans[billingCycle].map((plan, i) => (
+              <div
+                key={i}
+                className={`flex flex-col p-8 rounded-xl bg-white border transition-all duration-300 ${
+                  plan.highlight
+                    ? 'border-gramin-600 shadow-xl ring-1 ring-gramin-600 relative overflow-hidden'
+                    : 'border-slate-200 shadow-sm hover:shadow-md'
+                }`}
+              >
+                {plan.highlight && (
+                  <div className="absolute top-0 right-0 bg-gramin-600 text-white text-[10px] uppercase font-bold px-3 py-1 rounded-bl-lg">
+                    Recommended
+                  </div>
+                )}
+
+                <div className="mb-6">
+                  <h3 className="text-lg font-bold text-slate-900">{plan.name}</h3>
+                  <p className="text-sm text-slate-500 mt-1">{plan.desc}</p>
+                </div>
+
+                <div className="mb-6 flex items-baseline gap-1">
+                  <span className="text-4xl font-bold text-slate-900">
+                    {typeof plan.price === 'number' && plan.price > 0 ? `₹${plan.price}` : 'Free'}
+                  </span>
+                  {plan.price > 0 && <span className="text-slate-500 text-sm">{plan.period}</span>}
+                </div>
+
+                <button
+                  onClick={() => setIsJoinModalOpen(true)}
+                  className={`w-full py-3 rounded-lg font-semibold text-sm mb-8 border transition-all ${
+                    plan.highlight
+                      ? 'bg-gramin-700 border-gramin-700 text-white hover:bg-gramin-800'
+                      : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
+                  }`}
+                >
+                  {plan.button}
+                </button>
+
+                <div className="mt-auto">
+                  <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">
+                    Includes
+                  </p>
+                  <ul className="space-y-3">
+                    {plan.features.map((feat, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-sm text-slate-700">
+                        <CheckCircle2
+                          className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.highlight ? 'text-gramin-600' : 'text-slate-400'}`}
+                        />
+                        <span className={plan.highlight ? 'font-medium' : ''}>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-20 bg-gramin-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left Content */}
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-                  Why Choose Premium?
-                </h2>
-                <p className="text-lg text-gray-600 mb-8">
-                  Unlock advanced features and priority support for your village community
-                </p>
-              </div>
-
-              <ul className="space-y-6">
-                {whyUpgrade.map((item, index) => (
-                  <li key={index} className="flex items-start gap-4">
-                    <div className="w-6 h-6 bg-gramin-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 12 12">
-                        <path
-                          d="M10 3L4.5 8.5 2 6"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          fill="none"
-                        />
-                      </svg>
-                    </div>
-                    <span className="text-gray-700 leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Right Content */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Getting Started is Simple</h3>
-              </div>
-
-              <div className="space-y-6">
-                {userJourney.map((step, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-gramin-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
-                      {index + 1}
-                    </div>
-                    <div>
-                      <p className="text-gray-700 leading-relaxed">{step}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+      {/* --- CTA SECTION --- */}
+      <section className="py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-slate-50 mb-6">
+            <ShieldCheck className="w-8 h-8 text-gramin-700" />
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gramin-600 relative overflow-hidden">
-        {/* Background pattern */}
-        <div className="absolute inset-0 bg-gradient-to-r from-gramin-700 to-gramin-500 opacity-90"></div>
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiIHN0cm9rZS13aWR0aD0iMSIvPgogICAgPC9wYXR0ZXJuPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIiAvPgo8L3N2Zz4=')] opacity-10"></div>
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Ready to Join India's Digital Village Movement? 🚀
-          </h2>
-          <p className="text-xl text-gramin-100 mb-8 max-w-2xl mx-auto">
-            Be part of the <strong>next generation</strong> of digitally empowered villages. Help us
-            build and test the future of rural India.
+          <h2 className="text-3xl font-bold text-slate-900 mb-6">Secure. Scalable. Sustainable.</h2>
+          <p className="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">
+            Join the network of forward-thinking villages building a digital future with GraminSetu.
           </p>
-
-          {/* Development status */}
-          <div className="flex flex-wrap justify-center gap-6 mb-8 text-gramin-100">
-            <div className="flex items-center gap-2">
-              🔬 <span className="text-sm">Beta Testing</span>
-            </div>
-            <div className="flex items-center gap-2">
-              🛡️ <span className="text-sm">Secure Platform</span>
-            </div>
-            <div className="flex items-center gap-2">
-              � <span className="text-sm">Community Support</span>
-            </div>
-          </div>
-
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 bg-white text-gramin-600 font-semibold rounded-lg hover:bg-gray-50 transition-colors duration-200 shadow-lg">
-              🌱 Join Beta Program
+            <button
+              onClick={() => setIsJoinModalOpen(true)}
+              className="px-8 py-3 bg-slate-900 hover:bg-black text-white font-semibold rounded-lg transition-colors"
+            >
+              Get Started
             </button>
-            <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-gramin-600 transition-all duration-200">
-              � Schedule Discussion
+            <button
+              onClick={() => setIsDemoModalOpen(true)}
+              className="px-8 py-3 bg-white border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-colors"
+            >
+              Contact Sales Team
             </button>
           </div>
-
-          <p className="text-sm text-gramin-200 mt-4">
-            ✨ Early access • Free during beta • Community-driven development
-          </p>
         </div>
       </section>
+
+      <Footer />
+
+      {/* --- MODALS --- */}
+
+      {/* Join/Deploy Modal */}
+      <Modal
+        isOpen={isJoinModalOpen}
+        onClose={() => setIsJoinModalOpen(false)}
+        title="Deploy GraminSetu"
+      >
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">
+              Village/Panchayat Name
+            </label>
+            <input
+              required
+              type="text"
+              className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gramin-500"
+              placeholder="e.g. Rampur Gram Panchayat"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Your Full Name</label>
+            <input
+              required
+              type="text"
+              className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gramin-500"
+              placeholder="Coordinator Name"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Contact Number</label>
+            <input
+              required
+              type="tel"
+              className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gramin-500"
+              placeholder="+91"
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-3 bg-gramin-700 hover:bg-gramin-800 text-white font-bold rounded-lg transition-all flex justify-center items-center"
+          >
+            {isSubmitting ? (
+              <Loader2 className="animate-spin" size={20} />
+            ) : (
+              'Submit Deployment Request'
+            )}
+          </button>
+          <p className="text-xs text-slate-400 text-center">
+            Our implementation team will call you within 24 hours.
+          </p>
+        </form>
+      </Modal>
+
+      {/* Demo Modal */}
+      <Modal
+        isOpen={isDemoModalOpen}
+        onClose={() => setIsDemoModalOpen(false)}
+        title="Request Platform Demo"
+      >
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">
+              Organization / District
+            </label>
+            <input
+              required
+              type="text"
+              className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gramin-500"
+              placeholder="Organization name"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Official Email</label>
+            <input
+              required
+              type="email"
+              className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gramin-500"
+              placeholder="name@gov.in"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">
+              Specific Requirements
+            </label>
+            <textarea
+              className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gramin-500 min-h-[80px]"
+              placeholder="Tell us about your needs..."
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-3 bg-slate-900 hover:bg-black text-white font-bold rounded-lg transition-all flex justify-center items-center"
+          >
+            {isSubmitting ? <Loader2 className="animate-spin" size={20} /> : 'Schedule Demo'}
+          </button>
+        </form>
+      </Modal>
     </div>
   );
 };
-
-function Feature({ icon, title, desc, stats }) {
-  return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 hover:shadow-lg transition-all duration-300 group relative overflow-hidden">
-      {/* Background gradient effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gramin-50/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-      <div className="relative z-10">
-        <div className="flex items-start space-x-4">
-          <span className="text-4xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-            {icon}
-          </span>
-          <div className="space-y-4 flex-1">
-            <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-gramin-700 transition-colors">
-                {title}
-              </h3>
-              {stats && (
-                <div className="inline-flex items-center px-3 py-1 bg-gramin-100 text-gramin-700 text-xs font-semibold rounded-full mb-3">
-                  📈 {stats}
-                </div>
-              )}
-            </div>
-            <p className="text-gray-600 leading-relaxed text-sm">{desc}</p>
-
-            {/* Call to action */}
-            <div className="pt-2">
-              <span className="text-gramin-600 text-sm font-medium group-hover:text-gramin-700 transition-colors cursor-pointer">
-                Learn more →
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PricingCard({ name, features, price, priceLabel, highlight, offer, bestFor, summary }) {
-  const icons = {
-    'Community Basic': '�',
-    'Village Pro': '🚀',
-    'Community Leader': '👑',
-    // Legacy names for backward compatibility
-    Basic: '🏡',
-    'Premium Individual': '🚀',
-    'Premium Group': '�',
-  };
-
-  const colors = highlight
-    ? {
-        bg: 'bg-gradient-to-br from-gramin-600 to-gramin-700',
-        text: 'text-white',
-        border: 'border-gramin-600',
-        cardShadow: 'shadow-2xl shadow-gramin-200',
-      }
-    : {
-        bg: 'bg-white',
-        text: 'text-gray-900',
-        border: 'border-gray-200',
-        cardShadow: 'shadow-lg hover:shadow-xl',
-      };
-
-  return (
-    <div
-      className={`relative rounded-2xl border-2 transition-all duration-300 ${colors.border} ${colors.bg} ${colors.cardShadow} p-8 ${highlight ? 'scale-105 ring-4 ring-gramin-200' : 'hover:scale-102'} group`}
-    >
-      {highlight && (
-        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-          <span className="bg-gradient-to-r from-gramin-500 to-gramin-600 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
-            ⭐ Most Popular
-          </span>
-        </div>
-      )}
-
-      {/* Popular Badge for Free Plan */}
-      {name.includes('Basic') && (
-        <div className="absolute -top-3 -right-3">
-          <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
-            🎯 Best Start
-          </span>
-        </div>
-      )}
-
-      <div className="text-center space-y-6">
-        <div
-          className={`text-5xl group-hover:scale-110 transition-transform duration-300 ${highlight ? 'drop-shadow-lg' : ''}`}
-        >
-          {icons[name] || '🏠'}
-        </div>
-        <div>
-          <h3 className={`text-2xl font-bold mb-2 ${highlight ? 'text-white' : 'text-gray-900'}`}>
-            {name}
-          </h3>
-          <p className={`text-sm font-medium ${highlight ? 'text-gramin-100' : 'text-gray-600'}`}>
-            {bestFor}
-          </p>
-        </div>
-        <div className="space-y-3">
-          <div className={`text-4xl font-bold ${highlight ? 'text-white' : 'text-gramin-600'}`}>
-            {priceLabel}
-          </div>
-          {price > 0 && (
-            <div className={`text-sm ${highlight ? 'text-gramin-200' : 'text-gray-500'}`}>
-              {price === 29 && '≈ ₹1/day'}
-              {price === 75 && '≈ ₹0.83/day'}
-              {price === 99 && '≈ ₹3.3/day'}
-              {price === 249 && '≈ ₹0.68/day'}
-              {price === 267 && '≈ ₹2.97/day'}
-              {price === 899 && '≈ ₹2.46/day'}
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="mt-8 space-y-6">
-        <p className={`text-sm leading-relaxed ${highlight ? 'text-gramin-100' : 'text-gray-600'}`}>
-          {summary}
-        </p>
-
-        <div className="space-y-4">
-          <h4
-            className={`font-semibold text-sm uppercase tracking-wide ${highlight ? 'text-gramin-200' : 'text-gray-700'}`}
-          >
-            ✨ Features Included:
-          </h4>
-          <ul className="space-y-3">
-            {features.map((feature, idx) => (
-              <li
-                key={idx}
-                className={`flex items-start gap-3 text-sm leading-relaxed ${highlight ? 'text-gramin-100' : 'text-gray-600'}`}
-              >
-                <div
-                  className={`w-5 h-5 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0 ${highlight ? 'bg-gramin-500' : 'bg-gramin-100'}`}
-                >
-                  <svg
-                    className={`w-3 h-3 ${highlight ? 'text-white' : 'text-gramin-600'}`}
-                    fill="currentColor"
-                    viewBox="0 0 12 12"
-                  >
-                    <path d="M10 3L4.5 8.5 2 6" stroke="currentColor" strokeWidth="2" fill="none" />
-                  </svg>
-                </div>
-                <span className="flex-1">{feature}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {offer && (
-          <div
-            className={`p-4 rounded-xl border-2 border-dashed ${highlight ? 'bg-gramin-800 border-gramin-400' : 'bg-gramin-50 border-gramin-300'}`}
-          >
-            <p
-              className={`text-sm font-bold text-center ${highlight ? 'text-gramin-100' : 'text-gramin-700'}`}
-            >
-              🎁 {offer}
-            </p>
-          </div>
-        )}
-      </div>
-
-      <button
-        className={`w-full mt-8 py-4 px-6 rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 ${
-          highlight
-            ? 'bg-white text-gramin-600 hover:bg-gray-50 shadow-lg'
-            : 'bg-gradient-to-r from-gramin-600 to-gramin-700 text-white hover:from-gramin-700 hover:to-gramin-800 shadow-lg hover:shadow-xl'
-        }`}
-      >
-        {price === 0 ? '🚀 Get Started Free' : `💼 Choose ${name}`}
-      </button>
-    </div>
-  );
-}
 
 export default memo(VillageBusinessModel);

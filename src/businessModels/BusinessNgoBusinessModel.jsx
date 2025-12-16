@@ -1,585 +1,492 @@
 import React, { memo, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer/Footer';
+import {
+  Handshake,
+  BarChart3,
+  Globe2,
+  Users2,
+  FileBadge,
+  CheckCircle2,
+  X,
+  Loader2,
+  HeartHandshake,
+  Megaphone,
+} from 'lucide-react';
 
+// --- Professional Feature Data ---
 const features = [
   {
-    icon: '💰',
-    title: 'Advanced Fundraising & Donor Relationship Management',
-    desc: 'Deploy sophisticated fundraising strategies with AI-powered donor analytics, automated campaign optimization, and integrated payment processing. Our platform supports multiple currencies, recurring donations, and compliance with international fundraising regulations including FCRA and tax exemption protocols.',
-    certification: 'FCRA Compliant',
-    stats: '300% increase in donor retention',
+    icon: <BarChart3 className="w-5 h-5 text-gramin-700" />,
+    title: 'Advanced Fundraising Analytics',
+    desc: 'Deploy sophisticated fundraising strategies with AI-powered donor analytics and automated campaign optimization.',
   },
   {
-    icon: '📊',
-    title: 'Scientific Impact Measurement & ESG Reporting',
-    desc: 'Implement evidence-based impact measurement frameworks aligned with UN SDGs and GRI standards. Our platform provides real-time beneficiary tracking, outcome evaluation, and automated ESG reporting for corporate partners and international donors.',
-    certification: 'UN SDG Aligned',
-    stats: 'ISO 14064 Verified Impact',
+    icon: <Globe2 className="w-5 h-5 text-gramin-700" />,
+    title: 'Impact Measurement Frameworks',
+    desc: 'Implement evidence-based impact measurement aligned with UN SDGs and GRI standards for real-time reporting.',
   },
   {
-    icon: '🎯',
-    title: 'Strategic Campaign & Advocacy Management',
-    desc: 'Execute data-driven advocacy campaigns with targeted messaging, multi-channel distribution, and performance analytics. Our platform includes media monitoring, influencer engagement tools, and regulatory compliance tracking for policy advocacy initiatives.',
-    certification: 'Media Monitoring Certified',
-    stats: '85% campaign success rate',
+    icon: <Megaphone className="w-5 h-5 text-gramin-700" />,
+    title: 'Strategic Advocacy Tools',
+    desc: 'Execute data-driven advocacy campaigns with targeted messaging and multi-channel distribution.',
   },
   {
-    icon: '🤝',
-    title: 'Comprehensive Stakeholder Ecosystem',
-    desc: 'Manage complex stakeholder relationships through our integrated CRM system featuring donor portals, volunteer management, beneficiary tracking, and corporate partnership modules. Includes automated reporting and stakeholder communication workflows.',
-    certification: 'CRM Excellence Award',
-    stats: '95% stakeholder satisfaction',
+    icon: <Users2 className="w-5 h-5 text-gramin-700" />,
+    title: 'Stakeholder Relationship CRM',
+    desc: 'Manage complex relationships with donors, volunteers, and beneficiaries through an integrated CRM ecosystem.',
   },
   {
-    icon: '📈',
-    title: 'Social Enterprise Acceleration & Networking',
-    desc: 'Access exclusive business development opportunities through our curated network of impact investors, corporate partners, and government agencies. Includes pitch deck builder, due diligence support, and growth mentorship programs.',
-    certification: 'Impact Investor Network',
-    stats: '₹50Cr+ funding facilitated',
+    icon: <Handshake className="w-5 h-5 text-gramin-700" />,
+    title: 'Corporate Partnership Network',
+    desc: 'Access exclusive business development opportunities through a curated network of impact investors and CSR partners.',
   },
   {
-    icon: '🔧',
-    title: 'Enterprise Integration & Automation Suite',
-    desc: 'Seamlessly connect with 200+ business applications including Salesforce, Tally, Zoho, and international platforms like GlobalGiving and Network for Good. Our API ecosystem ensures automated data synchronization and workflow optimization.',
-    certification: 'API Excellence Partner',
-    stats: '200+ seamless integrations',
+    icon: <FileBadge className="w-5 h-5 text-gramin-700" />,
+    title: 'Automated Compliance',
+    desc: 'Ensure regulatory adherence with automated tracking for FCRA, tax exemptions, and grant reporting.',
   },
 ];
 
+// --- Pricing Data ---
 const pricingPlans = {
   monthly: [
     {
-      name: 'Community Starter',
-      icon: '�',
+      name: 'Starter Impact',
       price: 0,
-      priceLabel: 'Free Forever',
-      summary: 'Perfect for new NGOs and grassroots organizations starting their impact journey',
-      who: 'New NGOs, community groups, volunteers',
-      details: [
-        '💚 Create & manage 3 active campaigns',
-        '📊 Basic impact tracking dashboard',
-        '💬 Community messaging (100 messages/month)',
-        '💰 Simple donation collection tools',
-        '📱 Mobile-friendly volunteer portal',
-        '📧 Email support & resource library',
+      period: 'Forever',
+      desc: 'For new NGOs and grassroots organizations.',
+      features: [
+        '3 Active Campaigns',
+        'Basic Impact Dashboard',
+        'Community Messaging',
+        'Donation Collection Tools',
       ],
+      button: 'Start Free',
       highlight: false,
-      cta: 'Start Your Impact Journey',
     },
     {
-      name: 'Impact Accelerator',
-      icon: '🚀',
+      name: 'Growth Accelerator',
       price: 199,
-      priceLabel: '₹199/month',
-      summary: 'Enhanced tools for growing NGOs ready to scale their social impact',
-      who: 'Growing NGOs, social enterprises',
-      details: [
-        '✨ All Community Starter features',
-        '🎯 Unlimited campaigns & projects',
-        '📈 Advanced impact analytics & reports',
-        '💬 Unlimited messaging & donor engagement',
-        '🎨 Professional campaign templates',
-        '🔗 Basic integrations (payment gateways)',
-        '📞 Priority phone & email support',
+      period: '/ month',
+      desc: 'For growing NGOs scaling their operations.',
+      features: [
+        'Unlimited Campaigns',
+        'Advanced Analytics',
+        'Donor Engagement Tools',
+        'Payment Gateway Integration',
+        'Priority Support',
       ],
+      button: 'Get Growth',
       highlight: true,
-      cta: 'Accelerate Your Impact',
     },
     {
-      name: 'Social Enterprise',
-      icon: '🌟',
+      name: 'Enterprise Scale',
       price: 499,
-      priceLabel: '₹499/month',
-      summary:
-        'Comprehensive platform for established organizations with multi-location operations',
-      who: 'Large NGOs, social enterprises, foundations',
-      details: [
-        '🌟 All Impact Accelerator features',
-        '👥 Multi-team management (up to 50 users)',
-        '🏢 Multi-location project management',
-        '⚙️ Custom integrations & API access',
-        '📊 White-label reporting & branding',
-        '👨‍💼 Dedicated success manager',
-        '🎓 Training & capacity building sessions',
+      period: '/ month',
+      desc: 'For large foundations and social enterprises.',
+      features: [
+        'Multi-Team Management',
+        'Custom API Access',
+        'White-label Reporting',
+        'Dedicated Success Manager',
+        'Impact Audit Support',
       ],
+      button: 'Get Enterprise',
       highlight: false,
-      cta: 'Scale Your Organization',
-    },
-  ],
-  quarterly: [
-    {
-      name: 'Community Starter',
-      icon: '�',
-      price: 0,
-      priceLabel: 'Free Forever',
-      summary: 'Perfect for new NGOs and grassroots organizations starting their impact journey',
-      who: 'New NGOs, community groups, volunteers',
-      details: [
-        '💚 Create & manage 3 active campaigns',
-        '📊 Basic impact tracking dashboard',
-        '💬 Community messaging (100 messages/month)',
-        '💰 Simple donation collection tools',
-        '📱 Mobile-friendly volunteer portal',
-        '📧 Email support & resource library',
-      ],
-      highlight: false,
-      cta: 'Start Your Impact Journey',
-    },
-    {
-      name: 'Impact Accelerator',
-      icon: '🚀',
-      price: 537,
-      priceLabel: '₹537/quarter',
-      summary: 'Enhanced tools for growing NGOs ready to scale their social impact',
-      who: 'Growing NGOs, social enterprises',
-      details: [
-        '✨ All Community Starter features',
-        '🎯 Unlimited campaigns & projects',
-        '📈 Advanced impact analytics & reports',
-        '💬 Unlimited messaging & donor engagement',
-        '🎨 Professional campaign templates',
-        '🔗 Basic integrations (payment gateways)',
-        '📞 Priority phone & email support',
-      ],
-      highlight: true,
-      cta: 'Save ₹60 • 10% off monthly',
-    },
-    {
-      name: 'Social Enterprise',
-      icon: '🌟',
-      price: 1347,
-      priceLabel: '₹1,347/quarter',
-      summary:
-        'Comprehensive platform for established organizations with multi-location operations',
-      who: 'Large NGOs, social enterprises, foundations',
-      details: [
-        '🌟 All Impact Accelerator features',
-        '👥 Multi-team management (up to 50 users)',
-        '🏢 Multi-location project management',
-        '⚙️ Custom integrations & API access',
-        '📊 White-label reporting & branding',
-        '👨‍💼 Dedicated success manager',
-        '🎓 Training & capacity building sessions',
-      ],
-      highlight: false,
-      cta: 'Save ₹150 • 10% off + training',
     },
   ],
   yearly: [
     {
-      name: 'Community Starter',
-      icon: '�',
+      name: 'Starter Impact',
       price: 0,
-      priceLabel: 'Free Forever',
-      summary: 'Perfect for new NGOs and grassroots organizations starting their impact journey',
-      who: 'New NGOs, community groups, volunteers',
-      details: [
-        '💚 Create & manage 3 active campaigns',
-        '📊 Basic impact tracking dashboard',
-        '💬 Community messaging (100 messages/month)',
-        '💰 Simple donation collection tools',
-        '📱 Mobile-friendly volunteer portal',
-        '📧 Email support & resource library',
+      period: 'Forever',
+      desc: 'For new NGOs and grassroots organizations.',
+      features: [
+        '3 Active Campaigns',
+        'Basic Impact Dashboard',
+        'Community Messaging',
+        'Donation Collection Tools',
       ],
+      button: 'Start Free',
       highlight: false,
-      cta: 'Start Your Impact Journey',
     },
     {
-      name: 'Impact Accelerator',
-      icon: '🚀',
-      price: 1799,
-      priceLabel: '₹1,799/year',
-      summary: 'Enhanced tools for growing NGOs ready to scale their social impact',
-      who: 'Growing NGOs, social enterprises',
-      details: [
-        '✨ All Community Starter features',
-        '🎯 Unlimited campaigns & projects',
-        '📈 Advanced impact analytics & reports',
-        '💬 Unlimited messaging & donor engagement',
-        '🎨 Professional campaign templates',
-        '🔗 Basic integrations (payment gateways)',
-        '📞 Priority phone & email support',
+      name: 'Growth Accelerator',
+      price: 1999,
+      period: '/ year',
+      desc: 'For growing NGOs scaling their operations.',
+      features: [
+        'Unlimited Campaigns',
+        'Advanced Analytics',
+        'Donor Engagement Tools',
+        'Payment Gateway Integration',
+        'Priority Support',
       ],
+      button: 'Get Growth',
       highlight: true,
-      cta: 'Save ₹589 • 25% off monthly',
     },
     {
-      name: 'Social Enterprise',
-      icon: '🌟',
-      price: 4499,
-      priceLabel: '₹4,499/year',
-      summary:
-        'Comprehensive platform for established organizations with multi-location operations',
-      who: 'Large NGOs, social enterprises, foundations',
-      details: [
-        '🌟 All Impact Accelerator features',
-        '👥 Multi-team management (up to 50 users)',
-        '🏢 Multi-location project management',
-        '⚙️ Custom integrations & API access',
-        '📊 White-label reporting & branding',
-        '👨‍💼 Dedicated success manager',
-        '🎓 Training & capacity building sessions',
+      name: 'Enterprise Scale',
+      price: 4999,
+      period: '/ year',
+      desc: 'For large foundations and social enterprises.',
+      features: [
+        'Multi-Team Management',
+        'Custom API Access',
+        'White-label Reporting',
+        'Dedicated Success Manager',
+        'Impact Audit Support',
       ],
+      button: 'Get Enterprise',
       highlight: false,
-      cta: 'Save ₹1,489 • 25% off + annual perks',
     },
   ],
 };
 
-const whyChooseUs = [
-  'Purpose-Built Platform: Specifically designed for NGOs and social enterprises with features that matter.',
-  'Cost-Effective Solutions: Transparent pricing with significant savings for annual commitments.',
-  'Real Impact Tracking: Measure and showcase your social impact with comprehensive analytics.',
-  'Seamless Integrations: Connect with popular tools like Salesforce, Mailchimp, and accounting software.',
-  'Dedicated Support: Expert support team understanding the unique challenges of social organizations.',
-  'Scalable Infrastructure: Grow from small campaigns to large-scale social movements on the same platform.',
-];
-
-const successStories = [
-  'Fundraising Success: NGOs increased average donation amounts by 35% using our targeted campaign tools.',
-  'Volunteer Engagement: Organizations saw 60% improvement in volunteer retention with our engagement features.',
-  'Impact Visibility: Social enterprises improved stakeholder reporting efficiency by 50% with automated analytics.',
-  'Cost Savings: Organizations reduced operational costs by 25% through streamlined processes and automation.',
-];
-
-const planLabels = {
-  monthly: 'Monthly',
-  quarterly: 'Quarterly',
-  yearly: 'Annual',
+// --- Modal Component ---
+const Modal = ({ isOpen, onClose, title, children }) => {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fade-in">
+      <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl animate-scale-in relative overflow-hidden">
+        <div className="flex justify-between items-center p-6 border-b border-slate-100">
+          <h3 className="text-xl font-bold text-slate-900">{title}</h3>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-500"
+          >
+            <X size={20} />
+          </button>
+        </div>
+        <div className="p-6">{children}</div>
+      </div>
+    </div>
+  );
 };
 
 const BusinessNgoBusinessModel = () => {
-  const [selectedPlan, setSelectedPlan] = useState('monthly');
+  const [billingCycle, setBillingCycle] = useState('monthly');
+  const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Mock Submission Handler
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsJoinModalOpen(false);
+      setIsPartnerModalOpen(false);
+      alert('Request Submitted Successfully! Our impact team will contact you shortly.');
+    }, 1500);
+  };
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen font-sans text-slate-900">
       <Navbar />
 
-      {/* Hero Section - Perfect UX */}
-      <section className="pt-24 pb-20 bg-gradient-to-b from-gramin-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-8">
-            {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-gramin-100 rounded-full">
-              <span className="text-sm font-semibold text-gramin-700 uppercase tracking-wide">
-                🌟 Social Impact Focused • Community-Driven Development
-              </span>
-            </div>
+      {/* --- HERO SECTION --- */}
+      <section className="relative pt-32 pb-24 border-b border-slate-100 bg-slate-50 overflow-hidden">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+            opacity: 0.4,
+          }}
+        ></div>
 
-            {/* Main Heading */}
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                <span className="text-gramin-600">Social Impact Acceleration Platform</span>
-              </h1>
-              <p className="text-xl text-gray-700 font-medium max-w-3xl mx-auto">
-                Emerging NGO & Social Enterprise Solution — Purpose-Built • Community-Tested •
-                Impact-Driven
-              </p>
-            </div>
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-slate-200 rounded-full shadow-sm mb-8">
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+            </span>
+            <span className="text-sm font-medium text-slate-700">Empowering 5,000+ NGOs</span>
+          </div>
 
-            {/* Description */}
-            <p className="text-lg text-gray-600 leading-relaxed max-w-4xl mx-auto">
-              <strong>
-                Co-created with leading social organizations and impact measurement experts
-              </strong>
-              , our comprehensive platform empowers NGOs and social enterprises to maximize their
-              effectiveness. With focus on authentic impact tracking, transparent operations, and
-              sustainable growth, we're building tools that truly serve the social sector.
-            </p>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6">
+            The Enterprise Solution for <br className="hidden md:block" />
+            <span className="text-gramin-700">Social Impact</span>
+          </h1>
+
+          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+            A comprehensive platform designed for modern NGOs and social enterprises to maximize
+            fundraising, measure impact, and scale operations.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button
+              onClick={() => setIsJoinModalOpen(true)}
+              className="w-full sm:w-auto px-8 py-3 bg-gramin-700 hover:bg-gramin-800 text-white font-semibold rounded-lg shadow-sm transition-all text-sm md:text-base"
+            >
+              Start Your Journey
+            </button>
+            <button
+              onClick={() => setIsPartnerModalOpen(true)}
+              className="w-full sm:w-auto px-8 py-3 bg-white border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-all flex items-center justify-center gap-2 text-sm md:text-base"
+            >
+              Partner With Us
+            </button>
+          </div>
+
+          <div className="mt-12 flex items-center justify-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+            <span className="text-sm font-semibold text-slate-400 uppercase tracking-widest">
+              Trusted By Global Foundations
+            </span>
           </div>
         </div>
       </section>
 
-      {/* Features Section - Modern Grid */}
-      <section className="py-20 bg-gray-50">
+      {/* --- CORE CAPABILITIES --- */}
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Powerful Features for Social Impact
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Everything you need to grow your organization and amplify your social impact
-            </p>
+          <div className="mb-16 border-b border-slate-100 pb-8">
+            <div className="max-w-3xl">
+              <h2 className="text-3xl font-bold text-slate-900 mb-4 tracking-tight">
+                Impact Capabilities
+              </h2>
+              <p className="text-slate-600 text-lg">
+                Professional tools for verified social impact measurement and growth.
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => (
-              <Feature
+              <div
                 key={index}
-                icon={feature.icon}
-                title={feature.title}
-                desc={feature.desc}
-                certification={feature.certification}
-                stats={feature.stats}
-              />
+                className="group p-8 bg-white rounded-xl border border-slate-200 hover:border-gramin-200 hover:shadow-lg transition-all duration-300"
+              >
+                <div className="w-12 h-12 bg-slate-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-gramin-50 transition-colors">
+                  {feature.icon}
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-gramin-700 transition-colors">
+                  {feature.title}
+                </h3>
+                <p className="text-slate-600 leading-relaxed text-sm">{feature.desc}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing Section - Modern Design */}
-      <section className="py-20 bg-white">
+      {/* --- PRICING STRUCTURE --- */}
+      <section className="py-24 bg-slate-50 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Transparent Pricing for Every Stage
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4 tracking-tight">
+              Transparent Impact Pricing
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Start free and scale as your impact grows
-            </p>
-          </div>
+            <p className="text-slate-600 mb-8">Accessible plans for organizations of all sizes.</p>
 
-          {/* Plan Toggle */}
-          <div className="flex justify-center mb-12">
-            <div className="inline-flex rounded-lg bg-gray-100 p-1">
-              {Object.keys(planLabels).map((key) => (
+            {/* Toggle */}
+            <div className="inline-flex bg-white p-1 rounded-lg border border-slate-200 shadow-sm">
+              {['monthly', 'yearly'].map((cycle) => (
                 <button
-                  key={key}
-                  className={`px-6 py-3 text-sm font-semibold rounded-md transition-all ${
-                    selectedPlan === key
-                      ? 'bg-gramin-600 text-white shadow-sm'
-                      : 'text-gray-700 hover:text-gray-900'
+                  key={cycle}
+                  onClick={() => setBillingCycle(cycle)}
+                  className={`px-8 py-2 rounded-md text-sm font-medium capitalize transition-all ${
+                    billingCycle === cycle
+                      ? 'bg-gramin-700 text-white shadow-sm'
+                      : 'text-slate-500 hover:text-slate-900'
                   }`}
-                  onClick={() => setSelectedPlan(key)}
                 >
-                  {planLabels[key]}
+                  {cycle}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pricingPlans[selectedPlan].map((plan, index) => (
-              <PricingCard key={index} {...plan} planType={selectedPlan} />
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {pricingPlans[billingCycle].map((plan, i) => (
+              <div
+                key={i}
+                className={`flex flex-col p-8 rounded-xl bg-white border transition-all duration-300 ${
+                  plan.highlight
+                    ? 'border-gramin-600 shadow-xl ring-1 ring-gramin-600 relative overflow-hidden'
+                    : 'border-slate-200 shadow-sm hover:shadow-md'
+                }`}
+              >
+                {plan.highlight && (
+                  <div className="absolute top-0 right-0 bg-gramin-600 text-white text-[10px] uppercase font-bold px-3 py-1 rounded-bl-lg">
+                    Best Value
+                  </div>
+                )}
+
+                <div className="mb-6">
+                  <h3 className="text-lg font-bold text-slate-900">{plan.name}</h3>
+                  <p className="text-sm text-slate-500 mt-1">{plan.desc}</p>
+                </div>
+
+                <div className="mb-6 flex items-baseline gap-1">
+                  <span className="text-4xl font-bold text-slate-900">
+                    {typeof plan.price === 'number' && plan.price > 0 ? `₹${plan.price}` : 'Free'}
+                  </span>
+                  {plan.price > 0 && <span className="text-slate-500 text-sm">{plan.period}</span>}
+                </div>
+
+                <button
+                  onClick={() => setIsJoinModalOpen(true)}
+                  className={`w-full py-3 rounded-lg font-semibold text-sm mb-8 border transition-all ${
+                    plan.highlight
+                      ? 'bg-gramin-700 border-gramin-700 text-white hover:bg-gramin-800'
+                      : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
+                  }`}
+                >
+                  {plan.button}
+                </button>
+
+                <div className="mt-auto">
+                  <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">
+                    Includes
+                  </p>
+                  <ul className="space-y-3">
+                    {plan.features.map((feat, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-sm text-slate-700">
+                        <CheckCircle2
+                          className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.highlight ? 'text-gramin-600' : 'text-slate-400'}`}
+                        />
+                        <span className={plan.highlight ? 'font-medium' : ''}>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-20 bg-gramin-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left Content */}
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-                  Why NGOs Choose GraminSetu
-                </h2>
-                <p className="text-lg text-gray-600 mb-8">
-                  Join thousands of organizations already amplifying their social impact
-                </p>
-              </div>
-
-              <ul className="space-y-6">
-                {whyChooseUs.map((item, index) => (
-                  <li key={index} className="flex items-start gap-4">
-                    <div className="w-6 h-6 bg-gramin-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 12 12">
-                        <path
-                          d="M10 3L4.5 8.5 2 6"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          fill="none"
-                        />
-                      </svg>
-                    </div>
-                    <span className="text-gray-700 leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Right Content */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Proven Success Stories</h3>
-              </div>
-
-              <div className="space-y-6">
-                {successStories.map((story, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-gramin-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
-                      {index + 1}
-                    </div>
-                    <div>
-                      <p className="text-gray-700 leading-relaxed">{story}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+      {/* --- CTA SECTION --- */}
+      <section className="py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-slate-50 mb-6">
+            <HeartHandshake className="w-8 h-8 text-gramin-700" />
+          </div>
+          <h2 className="text-3xl font-bold text-slate-900 mb-6">Amplify Your Social Impact</h2>
+          <p className="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">
+            Join thousands of changemakers using GraminSetu to create sustainable development in
+            rural India.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={() => setIsJoinModalOpen(true)}
+              className="px-8 py-3 bg-slate-900 hover:bg-black text-white font-semibold rounded-lg transition-colors"
+            >
+              Get Started
+            </button>
+            <button
+              onClick={() => setIsPartnerModalOpen(true)}
+              className="px-8 py-3 bg-white border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-colors"
+            >
+              Partner With Us
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
       <Footer />
+
+      {/* --- MODALS --- */}
+
+      {/* Join/Register Modal */}
+      <Modal
+        isOpen={isJoinModalOpen}
+        onClose={() => setIsJoinModalOpen(false)}
+        title="Register Organization"
+      >
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">
+              Organization / NGO Name
+            </label>
+            <input
+              required
+              type="text"
+              className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gramin-500"
+              placeholder="Organization Name"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+            <input
+              required
+              type="email"
+              className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gramin-500"
+              placeholder="contact@org.org"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Sector</label>
+            <select className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gramin-500">
+              <option>Education</option>
+              <option>Healthcare</option>
+              <option>Agriculture</option>
+              <option>Microfinance</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-3 bg-gramin-700 hover:bg-gramin-800 text-white font-bold rounded-lg transition-all flex justify-center items-center"
+          >
+            {isSubmitting ? <Loader2 className="animate-spin" size={20} /> : 'Create Account'}
+          </button>
+        </form>
+      </Modal>
+
+      {/* Partner Modal */}
+      <Modal
+        isOpen={isPartnerModalOpen}
+        onClose={() => setIsPartnerModalOpen(false)}
+        title="Partnership Inquiry"
+      >
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">
+              Company / Institution Name
+            </label>
+            <input
+              required
+              type="text"
+              className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gramin-500"
+              placeholder="Company Name"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Official Email</label>
+            <input
+              required
+              type="email"
+              className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gramin-500"
+              placeholder="name@company.com"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">
+              Collaboration Interest
+            </label>
+            <textarea
+              className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gramin-500 min-h-[80px]"
+              placeholder="How would you like to partner?"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-3 bg-slate-900 hover:bg-black text-white font-bold rounded-lg transition-all flex justify-center items-center"
+          >
+            {isSubmitting ? <Loader2 className="animate-spin" size={20} /> : 'Send Inquiry'}
+          </button>
+        </form>
+      </Modal>
     </div>
   );
 };
-
-function Feature({ icon, title, desc, certification, stats }) {
-  return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 hover:shadow-lg transition-all duration-300 group relative overflow-hidden">
-      {/* Impact-focused gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gramin-50/25 via-purple-50/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-      <div className="relative z-10">
-        <div className="flex items-start space-x-4">
-          <div className="flex-shrink-0">
-            <div className="text-4xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-gramin-50 to-gramin-100 p-3 rounded-lg">
-              {icon}
-            </div>
-          </div>
-          <div className="space-y-4 flex-1">
-            <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-gramin-700 transition-colors">
-                {title}
-              </h3>
-              <div className="flex flex-wrap gap-2 mb-3">
-                {certification && (
-                  <div className="inline-flex items-center px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">
-                    🏆 {certification}
-                  </div>
-                )}
-                {stats && (
-                  <div className="inline-flex items-center px-3 py-1 bg-gramin-100 text-gramin-700 text-xs font-semibold rounded-full">
-                    💎 {stats}
-                  </div>
-                )}
-              </div>
-            </div>
-            <p className="text-gray-600 leading-relaxed text-sm">{desc}</p>
-
-            {/* Impact CTA */}
-            <div className="pt-2 border-t border-gray-100">
-              <span className="text-gramin-600 text-sm font-medium group-hover:text-gramin-700 transition-colors cursor-pointer flex items-center">
-                Maximize Impact →
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PricingCard({ name, icon, details, price, priceLabel, highlight, who, summary, cta }) {
-  const colors = highlight
-    ? {
-        bg: 'bg-gradient-to-br from-gramin-600 to-gramin-700',
-        text: 'text-white',
-        border: 'border-gramin-600',
-        cardShadow: 'shadow-2xl shadow-gramin-200',
-      }
-    : {
-        bg: 'bg-white',
-        text: 'text-gray-900',
-        border: 'border-gray-200',
-        cardShadow: 'shadow-lg hover:shadow-xl',
-      };
-
-  return (
-    <div
-      className={`relative rounded-2xl border-2 transition-all duration-300 ${colors.border} ${colors.bg} ${colors.cardShadow} p-8 ${highlight ? 'scale-105 ring-4 ring-gramin-200' : 'hover:scale-102'} group`}
-    >
-      {highlight && (
-        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-          <span className="bg-gradient-to-r from-gramin-500 to-gramin-600 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
-            ⭐ Most Popular
-          </span>
-        </div>
-      )}
-
-      {/* Impact Badge for Free Plan */}
-      {name.includes('Starter') && (
-        <div className="absolute -top-3 -right-3">
-          <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
-            🌱 Impact Start
-          </span>
-        </div>
-      )}
-
-      <div className="text-center space-y-6">
-        <div
-          className={`text-5xl group-hover:scale-110 transition-transform duration-300 ${highlight ? 'drop-shadow-lg' : ''}`}
-        >
-          {icon}
-        </div>
-        <div>
-          <h3 className={`text-2xl font-bold mb-2 ${highlight ? 'text-white' : 'text-gray-900'}`}>
-            {name}
-          </h3>
-          <p className={`text-sm font-medium ${highlight ? 'text-gramin-100' : 'text-gray-600'}`}>
-            {who}
-          </p>
-        </div>
-        <div className="space-y-3">
-          <div className={`text-4xl font-bold ${highlight ? 'text-white' : 'text-gramin-600'}`}>
-            {priceLabel}
-          </div>
-          {price > 0 && (
-            <div className={`text-sm ${highlight ? 'text-gramin-200' : 'text-gray-500'}`}>
-              {price === 199 && '≈ ₹6.6/day'}
-              {price === 499 && '≈ ₹16.6/day'}
-              {price === 537 && '≈ ₹6.0/day'}
-              {price === 1347 && '≈ ₹15.0/day'}
-              {price === 1799 && '≈ ₹4.9/day'}
-              {price === 4499 && '≈ ₹12.3/day'}
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="mt-8 space-y-6">
-        <p className={`text-sm leading-relaxed ${highlight ? 'text-gramin-100' : 'text-gray-600'}`}>
-          {summary}
-        </p>
-
-        <div className="space-y-4">
-          <h4
-            className={`font-semibold text-sm uppercase tracking-wide ${highlight ? 'text-gramin-200' : 'text-gray-700'}`}
-          >
-            💚 Impact Features:
-          </h4>
-          <ul className="space-y-3">
-            {details.map((detail, idx) => (
-              <li
-                key={idx}
-                className={`flex items-start gap-3 text-sm leading-relaxed ${highlight ? 'text-gramin-100' : 'text-gray-600'}`}
-              >
-                <div
-                  className={`w-5 h-5 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0 ${highlight ? 'bg-gramin-500' : 'bg-gramin-100'}`}
-                >
-                  <svg
-                    className={`w-3 h-3 ${highlight ? 'text-white' : 'text-gramin-600'}`}
-                    fill="currentColor"
-                    viewBox="0 0 12 12"
-                  >
-                    <path d="M10 3L4.5 8.5 2 6" stroke="currentColor" strokeWidth="2" fill="none" />
-                  </svg>
-                </div>
-                <span className="flex-1">{detail}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <button
-        className={`w-full mt-8 py-4 px-6 rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 ${
-          highlight
-            ? 'bg-white text-gramin-600 hover:bg-gray-50 shadow-lg'
-            : 'bg-gradient-to-r from-gramin-600 to-gramin-700 text-white hover:from-gramin-700 hover:to-gramin-800 shadow-lg hover:shadow-xl'
-        }`}
-      >
-        {cta}
-      </button>
-    </div>
-  );
-}
 
 export default memo(BusinessNgoBusinessModel);

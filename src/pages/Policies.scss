@@ -1,0 +1,236 @@
+// Variables - Clean, Standard Brand Colors
+$gramin-green: #047857;
+$gramin-dark: #064e3b;
+$gramin-light: #ecfdf5;
+$setu-orange: #d97706;
+$text-dark: #111827;
+$text-secondary: #374151;
+$bg-color: #f8fafc;
+$paper-white: #ffffff;
+
+.policies-page {
+    min-height: 100vh;
+    background-color: $bg-color;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: $text-dark;
+    overflow-x: hidden;
+    position: relative;
+
+    // Animation similar to Contact page
+    animation: fadeIn 0.5s ease-out;
+
+    /* --- Ambient Background: Matching Contact.scss --- */
+    &::before {
+        content: '';
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        background: radial-gradient(circle at 50% 0%, #f0fdf4 0%, transparent 60%);
+        pointer-events: none;
+    }
+
+    /* --- Hero Section: Clean & Professional --- */
+    .policy-hero {
+        position: relative;
+        z-index: 10;
+        padding: 6rem 1.5rem 4rem;
+        text-align: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+
+        .logo-wrapper {
+            margin-bottom: 2rem;
+            display: inline-block;
+
+            img {
+                width: 120px;
+                height: auto;
+                filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
+            }
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: $text-dark;
+            letter-spacing: -0.02em;
+
+            // Clean gradient text matching Contact page grandiosity
+            background: linear-gradient(135deg, $gramin-dark 0%, $gramin-green 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            @media (max-width: 768px) {
+                font-size: 2.25rem;
+            }
+        }
+
+        .effective-date {
+            display: inline-block;
+            background: $gramin-light;
+            color: $gramin-green;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+    }
+
+    /* --- Content Wrapper --- */
+    .policy-content-wrapper {
+        position: relative;
+        z-index: 20;
+        max-width: 900px;
+        margin: 0 auto 6rem;
+        padding: 0 1.5rem;
+        margin-top: 3rem; // Clean separation from hero
+    }
+
+    /* --- The Document Paper --- */
+    .policy-paper {
+        background: $paper-white;
+        border-radius: 1.5rem;
+        padding: 4rem;
+
+        // Classic, soft shadow like other pages
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
+            0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        border: 1px solid rgba(0, 0, 0, 0.03);
+
+        @media (max-width: 768px) {
+            padding: 2rem;
+        }
+
+        >p:first-of-type {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: $text-secondary;
+            margin-bottom: 3rem;
+            border-left: 4px solid $gramin-green;
+            padding-left: 1.5rem;
+            background: $gramin-light;
+            padding: 1.5rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+        }
+
+        /* --- Sections --- */
+        section {
+            margin-bottom: 3.5rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            h2 {
+                color: $text-dark;
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 1.25rem;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+
+                .section-number {
+                    color: white;
+                    background: $gramin-green;
+                    width: 2rem;
+                    height: 2rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 0.5rem; // Soft square
+                    font-size: 1rem;
+                    font-weight: 700;
+                }
+            }
+
+            p {
+                color: $text-secondary;
+                line-height: 1.7;
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+                margin-top: 1rem;
+
+                li {
+                    position: relative;
+                    padding-left: 1.5rem;
+                    margin-bottom: 0.75rem;
+                    color: $text-secondary;
+                    line-height: 1.6;
+
+                    // Simple, clean bullet
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 0.6rem;
+                        width: 6px;
+                        height: 6px;
+                        background: $setu-orange; // Bringing in the secondary brand color
+                        border-radius: 50%;
+                    }
+
+                    strong {
+                        color: $text-dark;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+
+        // Link Styling matches standard web pages
+        a {
+            color: $gramin-green;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 500;
+
+            &:hover {
+                color: $gramin-dark;
+            }
+        }
+
+        // Contact Box - Simple & functional
+        .contact-info-box {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border-left: 4px solid $gramin-green;
+
+            p {
+                margin-bottom: 0.5rem;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            strong {
+                color: $text-dark;
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -9,48 +9,59 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './Contact.scss';
 
-const initialFormState = { name: '', email: '', subject: '', message: '' };
-
 function Contact() {
   const location = useLocation();
-  const [form, setForm] = useState(initialFormState);
+
+  // Using individual state variables to completely isolate fields
+  // This prevents any possibility of state object merging issues or 'ghost' updates
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState(null);
   const [showToast, setShowToast] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
     setStatus(null);
+
     try {
-      await axios.post(
-        `${process.env.REACT_APP_STRAPI_API_URL}/contacts`,
-        {
-          data: {
-            name: form.name,
-            email: form.email,
-            subject: form.subject,
-            messages: form.message,
-          },
+      const baseUrl = process.env.REACT_APP_STRAPI_API_URL || 'http://localhost:1337/api';
+      const apiUrl = baseUrl.endsWith('/api') ? baseUrl : `${baseUrl}/api`;
+
+      // Construct payload explicitly
+      const payload = {
+        data: {
+          name: name,
+          email: email,
+          subject: subject,
+          message: message,
         },
-        {
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      };
+
+      await axios.post(`${apiUrl}/contacts`, payload, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+
       setStatus({
         type: 'success',
-        message: 'Message sent successfully! We will get back to you shortly.',
+        message: 'Message sent successfully! Our team will contact you shortly.',
       });
-      setForm(initialFormState);
+
+      // Clear form
+      setName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+
       setShowToast(true);
     } catch (err) {
+      console.error('Contact Form Error:', err);
       const errorMsg =
-        err?.response?.data?.error?.message || 'Something went wrong. Please try again later.';
+        err?.response?.data?.error?.message || 'Unable to send message. Please try again later.';
       setStatus({ type: 'error', message: errorMsg });
       setShowToast(true);
     } finally {
@@ -113,53 +124,57 @@ function Contact() {
             Fill out the form below and we'll get back to you as soon as possible.
           </p>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} autoComplete="on">
             <div className="grid md:grid-cols-2 gap-5">
               <div className="form-group">
-                <label>Your Name</label>
+                <label htmlFor="contact_name_field">Your Name</label>
                 <input
+                  id="contact_name_field"
                   type="text"
-                  name="name"
+                  name="user_name_input" /* Unique Name to avoid conflicts */
                   placeholder="e.g. Rahul Kumar"
-                  required
-                  value={form.name}
-                  onChange={handleChange}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  autoComplete="name"
                 />
               </div>
               <div className="form-group">
-                <label>Email Address</label>
+                <label htmlFor="contact_email_field">Email Address</label>
                 <input
+                  id="contact_email_field"
                   type="email"
-                  name="email"
+                  name="user_email_input"
                   placeholder="name@example.com"
-                  required
-                  value={form.email}
-                  onChange={handleChange}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="email"
                 />
               </div>
             </div>
 
             <div className="form-group">
-              <label>Subject</label>
+              <label htmlFor="contact_subject_field">Subject</label>
               <input
+                id="contact_subject_field"
                 type="text"
-                name="subject"
+                name="user_subject_input"
                 placeholder="How can we help you?"
-                required
-                value={form.subject}
-                onChange={handleChange}
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                autoComplete="off"
               />
             </div>
 
             <div className="form-group">
-              <label>Message</label>
+              <label htmlFor="contact_message_field">Message</label>
               <textarea
-                name="message"
+                id="contact_message_field"
+                name="user_message_input"
                 rows="6"
                 placeholder="Tell us more about your inquiry..."
-                required
-                value={form.message}
-                onChange={handleChange}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                autoComplete="off"
               ></textarea>
             </div>
 
