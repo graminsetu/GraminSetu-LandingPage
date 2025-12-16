@@ -1,16 +1,42 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  ChevronDown,
+  Menu,
+  X,
+  Home,
+  Briefcase,
+  BookOpen,
+  Info,
+  Building2,
+  Landmark,
+  Sprout,
+  Phone,
+} from 'lucide-react';
 import Logo from './Logo/Logo';
+import './Navbar.scss';
 
 const Navbar = () => {
   const [portalsOpen, setPortalsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loginDropdownOpen, setLoginDropdownOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const loginDropdownTimeout = useRef(null);
   const closeTimeout = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Scroll effect for navbar background
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Handlers for login dropdown (hover and click)
   const handleLoginMouseEnter = () => {
@@ -40,402 +66,307 @@ const Navbar = () => {
     }, 150);
   };
 
-  // Close mobile menu helper
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
+  // Navigation Links Data
+  const navLinks = [
+    { name: 'Home', path: '/', icon: <Home className="w-4 h-4" /> },
+    { name: 'About', path: '/about', icon: <Info className="w-4 h-4" /> },
+    { name: 'Careers', path: '/careers', icon: <Briefcase className="w-4 h-4" /> },
+    { name: 'Blog', path: '/blog', icon: <BookOpen className="w-4 h-4" /> },
+    { name: 'Contact', path: '/contact', icon: <Phone className="w-4 h-4" /> },
+  ];
+
+  const portalLinks = [
+    {
+      label: 'Village Portal',
+      path: '/village-business-model',
+      icon: <Sprout className="w-5 h-5 text-gramin-600" />,
+    },
+    {
+      label: 'Government/CSR',
+      path: '/government-csr-business-model',
+      icon: <Landmark className="w-5 h-5 text-setu-600" />,
+    },
+    {
+      label: 'Business/NGO',
+      path: '/business/ngo-business-model',
+      icon: <Building2 className="w-5 h-5 text-blue-600" />,
+    },
+  ];
+
+  const loginLinks = [
+    {
+      label: 'Village Login',
+      path: '/login/village',
+      icon: <Sprout className="w-5 h-5 text-gramin-600" />,
+    },
+    {
+      label: 'Business Login',
+      path: '/login/business',
+      icon: <Building2 className="w-5 h-5 text-blue-600" />,
+    },
+    {
+      label: 'Govt Login',
+      path: '/login/government',
+      icon: <Landmark className="w-5 h-5 text-setu-600" />,
+    },
+  ];
+
   return (
-    <nav className="w-full bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''} `}>
+      <div className="navbar-container">
         {/* Logo Section */}
         <div className="flex-shrink-0 flex items-center">
-          <Link to="/" onClick={closeMobileMenu}>
-            <Logo size="lg" showText={true} />
+          <Link to="/" onClick={closeMobileMenu} className="nav-logo-link">
+            <div className="logo-wrapper">
+              <Logo size="lg" showText={true} />
+            </div>
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center space-x-8">
-          <Link
-            to="/"
-            className={`text-sm font-semibold transition-colors duration-200 ${
-              location.pathname === '/' ? 'text-gramin-700' : 'text-gray-600 hover:text-gramin-600'
-            }`}
-          >
-            Home
-          </Link>
+        <div className="nav-menu-desktop">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              to={link.path}
+              className={`nav-link ${location.pathname === link.path ? 'active' : ''}`}
+            >
+              {link.name}
+            </Link>
+          ))}
 
           {/* Portals Dropdown */}
           <div
-            className="relative"
+            className="dropdown-wrapper"
             onMouseEnter={handlePortalsMouseEnter}
             onMouseLeave={handlePortalsMouseLeave}
           >
-            <button
-              className={`flex items-center gap-1 text-sm font-semibold transition-colors duration-200 focus:outline-none ${
-                portalsOpen ? 'text-gramin-700' : 'text-gray-600 hover:text-gramin-600'
-              }`}
-            >
+            <button className={`dropdown-toggle ${portalsOpen ? 'active' : ''}`}>
               Portals
-              <svg
-                className={`w-4 h-4 transition-transform duration-200 ${portalsOpen ? 'rotate-180' : ''}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+              <motion.div
+                animate={{ rotate: portalsOpen ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
+                <ChevronDown className="w-4 h-4" />
+              </motion.div>
             </button>
 
-            {/* Desktop Dropdown Menu */}
-            <div
-              className={`absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden transform transition-all duration-200 origin-top-left ${
-                portalsOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
-              }`}
-            >
-              <div className="py-2">
-                {[
-                  { label: 'Village Portal', path: '/village-business-model' },
-                  { label: 'Government/CSR', path: '/government-csr-business-model' },
-                  { label: 'Business/NGO', path: '/business/ngo-business-model' },
-                ].map((item) => (
-                  <button
-                    key={item.path}
-                    onClick={() => {
-                      setPortalsOpen(false);
-                      navigate(item.path);
-                    }}
-                    className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gramin-50 hover:text-gramin-700 transition-colors"
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <AnimatePresence>
+              {portalsOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                  className="dropdown-menu"
+                >
+                  <div className="dropdown-content">
+                    {portalLinks.map((item) => (
+                      <button
+                        key={item.path}
+                        onClick={() => {
+                          setPortalsOpen(false);
+                          navigate(item.path);
+                        }}
+                        className="dropdown-item"
+                      >
+                        <div className="icon-box">{item.icon}</div>
+                        <span className="label">{item.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-
-          <Link
-            to="/careers"
-            className={`text-sm font-semibold transition-colors duration-200 ${
-              location.pathname === '/careers'
-                ? 'text-gramin-700'
-                : 'text-gray-600 hover:text-gramin-600'
-            }`}
-          >
-            Careers
-          </Link>
-
-          <Link
-            to="/blog"
-            className={`text-sm font-semibold transition-colors duration-200 ${
-              location.pathname === '/blog'
-                ? 'text-gramin-700'
-                : 'text-gray-600 hover:text-gramin-600'
-            }`}
-          >
-            Blog
-          </Link>
-
-          <Link
-            to="/about"
-            className={`text-sm font-semibold transition-colors duration-200 ${
-              location.pathname === '/about'
-                ? 'text-gramin-700'
-                : 'text-gray-600 hover:text-gramin-600'
-            }`}
-          >
-            About
-          </Link>
         </div>
 
         {/* Desktop Login Button */}
-        <div className="hidden lg:flex items-center">
+        <div className="nav-auth-desktop">
           <div
-            className="relative"
+            className="dropdown-wrapper"
             onMouseEnter={handleLoginMouseEnter}
             onMouseLeave={handleLoginMouseLeave}
           >
             <button
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white transition-all duration-300 shadow-md ${
-                loginDropdownOpen
-                  ? 'bg-gramin-700 shadow-lg ring-2 ring-offset-2 ring-gramin-500'
-                  : 'bg-gramin-600 hover:bg-gramin-700 hover:shadow-lg'
-              }`}
+              className={`login-btn ${loginDropdownOpen ? 'active' : ''}`}
               onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}
             >
               Login
-              <svg
-                className={`w-4 h-4 transition-transform duration-200 ${loginDropdownOpen ? 'rotate-180' : ''}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+              <motion.div
+                animate={{ rotate: loginDropdownOpen ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
+                <ChevronDown className="w-4 h-4" />
+              </motion.div>
             </button>
 
-            {/* Login Dropdown */}
-            <div
-              className={`absolute right-0 top-full mt-2 w-60 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all duration-200 origin-top-right ${
-                loginDropdownOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'
-              }`}
-            >
-              <div className="p-2">
-                {[
-                  { label: 'Village Portal', path: '/login/village', icon: '🏡' },
-                  { label: 'Business Portal', path: '/login/business', icon: '💼' },
-                  { label: 'Government Portal', path: '/login/government', icon: '🏛️' },
-                ].map((item) => (
-                  <button
-                    key={item.path}
-                    onClick={() => {
-                      setLoginDropdownOpen(false);
-                      navigate(item.path);
-                    }}
-                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gramin-50 hover:text-gramin-700 transition-colors"
-                  >
-                    <span>{item.icon}</span>
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <AnimatePresence>
+              {loginDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                  className="login-dropdown-menu"
+                >
+                  <div className="dropdown-content">
+                    <div className="dropdown-header">Select Portal</div>
+                    {loginLinks.map((item) => (
+                      <button
+                        key={item.path}
+                        onClick={() => {
+                          setLoginDropdownOpen(false);
+                          navigate(item.path);
+                        }}
+                        className="dropdown-item"
+                      >
+                        <div className="icon-box">{item.icon}</div>
+                        <span className="label">{item.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="flex lg:hidden items-center">
-          <button
-            onClick={() => setMobileMenuOpen((s) => !s)}
-            className={`${
-              mobileMenuOpen
-                ? 'p-2 rounded-md text-gray-700 bg-white/0'
-                : 'p-3 rounded-full text-gray-700 hover:bg-gray-100'
-            } focus:outline-none focus:ring-2 focus:ring-gramin-500 focus:ring-offset-2 transition-all`}
-            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-drawer"
-          >
-            <span className="sr-only">{mobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
-            {mobileMenuOpen ? (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
+          <button onClick={() => setMobileMenuOpen(true)} className="mobile-toggle-btn">
+            <span className="sr-only">Open menu</span>
+            <Menu className="w-6 h-6" />
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay (portal to document.body to avoid stacking context issues) */}
+      {/* Mobile Menu Overlay */}
       {createPortal(
-        <div
-          id="mobile-drawer-wrapper"
-          className={`fixed inset-0 z-[99999] lg:hidden transition-opacity duration-300 ${
-            mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-          }`}
-        >
-          {/* Backdrop */}
-          <div
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-            onClick={closeMobileMenu}
-          />
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <div className="mobile-overlay" style={{ display: 'block' }}>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="backdrop"
+                onClick={closeMobileMenu}
+              />
 
-          {/* Drawer */}
-          <div
-            id="mobile-drawer"
-            className={`absolute top-0 right-0 w-[48%] max-w-xs h-full bg-white shadow-2xl transform transition-transform duration-300 ease-out ${
-              mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-            }`}
-          >
-            <div className="flex flex-col h-full overflow-y-auto">
-              {/* Drawer Header */}
-              <div className="flex items-center justify-between p-6 border-b border-gray-100">
-                <span className="text-xl font-bold text-gray-900">Menu</span>
-                <button
-                  onClick={closeMobileMenu}
-                  className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-                  aria-label="Close menu"
-                >
-                  <svg
-                    className="w-6 h-6 text-gray-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-              </div>
-
-              {/* Drawer Links */}
-              <div className="flex-1 px-6 py-6 space-y-6">
-                <Link
-                  to="/"
-                  onClick={closeMobileMenu}
-                  className={`block text-lg font-medium ${
-                    location.pathname === '/' ? 'text-gramin-700' : 'text-gray-800'
-                  }`}
-                >
-                  Home
-                </Link>
-
-                {/* Mobile Portals Accordion */}
-                <div className="space-y-3">
-                  <button
-                    onClick={() => setPortalsOpen(!portalsOpen)}
-                    className="flex items-center justify-between w-full text-lg font-medium text-gray-800"
-                  >
-                    Portals
-                    <svg
-                      className={`w-5 h-5 text-gray-500 transition-transform ${portalsOpen ? 'rotate-180' : ''}`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </button>
-                  <div
-                    className={`pl-4 space-y-3 overflow-hidden transition-all duration-300 ${
-                      portalsOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-                  >
-                    <button
-                      onClick={() => {
-                        closeMobileMenu();
-                        navigate('/village-business-model');
-                      }}
-                      className="block w-full text-left text-base text-gray-600 py-1"
-                    >
-                      Village Portal
-                    </button>
-                    <button
-                      onClick={() => {
-                        closeMobileMenu();
-                        navigate('/government-csr-business-model');
-                      }}
-                      className="block w-full text-left text-base text-gray-600 py-1"
-                    >
-                      Government/CSR
-                    </button>
-                    <button
-                      onClick={() => {
-                        closeMobileMenu();
-                        navigate('/business/ngo-business-model');
-                      }}
-                      className="block w-full text-left text-base text-gray-600 py-1"
-                    >
-                      Business/NGO
+              {/* Drawer */}
+              <motion.div
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                className="drawer"
+              >
+                <div className="flex flex-col h-full bg-white">
+                  {/* Drawer Header */}
+                  <div className="drawer-header">
+                    <span className="drawer-title">
+                      <Logo size="sm" showText={false} />
+                      Menu
+                    </span>
+                    <button onClick={closeMobileMenu} className="close-btn">
+                      <X className="w-6 h-6" />
                     </button>
                   </div>
+
+                  {/* Drawer Content */}
+                  <div className="drawer-content">
+                    <div className="mobile-nav-links">
+                      {/* Main Links */}
+                      {navLinks.map((link) => (
+                        <Link
+                          key={link.name}
+                          to={link.path}
+                          onClick={closeMobileMenu}
+                          className={`mobile-link ${location.pathname === link.path ? 'active' : ''}`}
+                        >
+                          {link.icon}
+                          {link.name}
+                        </Link>
+                      ))}
+
+                      {/* Mobile Portals Accordion */}
+                      <div className="mobile-section-divider">
+                        <p className="section-label">Portals & Services</p>
+                        {portalLinks.map((item) => (
+                          <button
+                            key={item.path}
+                            onClick={() => {
+                              closeMobileMenu();
+                              navigate(item.path);
+                            }}
+                            className="mobile-portal-btn"
+                          >
+                            {item.icon}
+                            {item.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Mobile Footer (Login) */}
+                  <div className="drawer-footer">
+                    <div className="login-grid">
+                      <Link
+                        to="/login/village"
+                        onClick={closeMobileMenu}
+                        className="mobile-login-link"
+                      >
+                        <Sprout className="w-4 h-4" />
+                        Village Login
+                      </Link>
+                      <Link
+                        to="/login/business"
+                        onClick={closeMobileMenu}
+                        className="mobile-login-link"
+                      >
+                        <Building2 className="w-4 h-4" />
+                        Business Login
+                      </Link>
+                      <Link
+                        to="/login/government"
+                        onClick={closeMobileMenu}
+                        className="mobile-login-link govt-login"
+                      >
+                        <UserLoginIcon className="w-4 h-4" />
+                        Government Login
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-
-                <Link
-                  to="/careers"
-                  onClick={closeMobileMenu}
-                  className={`block text-lg font-medium ${
-                    location.pathname === '/careers' ? 'text-gramin-700' : 'text-gray-800'
-                  }`}
-                >
-                  Careers
-                </Link>
-
-                <Link
-                  to="/blog"
-                  onClick={closeMobileMenu}
-                  className={`block text-lg font-medium ${
-                    location.pathname === '/blog' ? 'text-gramin-700' : 'text-gray-800'
-                  }`}
-                >
-                  Blog
-                </Link>
-
-                <Link
-                  to="/about"
-                  onClick={closeMobileMenu}
-                  className={`block text-lg font-medium ${
-                    location.pathname === '/about' ? 'text-gramin-700' : 'text-gray-800'
-                  }`}
-                >
-                  About
-                </Link>
-              </div>
-
-              {/* Mobile Footer (Login) */}
-              <div className="p-6 bg-gray-50 border-t border-gray-100">
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">
-                  Access Portals
-                </p>
-                <div className="grid gap-3">
-                  <button
-                    onClick={() => {
-                      closeMobileMenu();
-                      navigate('/login/village');
-                    }}
-                    className="w-full text-center py-3 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-                  >
-                    Village Login
-                  </button>
-                  <button
-                    onClick={() => {
-                      closeMobileMenu();
-                      navigate('/login/business');
-                    }}
-                    className="w-full text-center py-3 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-                  >
-                    Business Login
-                  </button>
-                  <button
-                    onClick={() => {
-                      closeMobileMenu();
-                      navigate('/login/government');
-                    }}
-                    className="w-full text-center py-3 bg-gramin-600 text-white rounded-xl text-sm font-semibold hover:bg-gramin-700 transition-colors"
-                  >
-                    Government Login
-                  </button>
-                </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
-        </div>,
+          )}
+        </AnimatePresence>,
         document.body
       )}
     </nav>
   );
 };
+
+// Helper for mobile login icon
+const UserLoginIcon = ({ className }) => (
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+    <circle cx="12" cy="7" r="4" />
+  </svg>
+);
 
 export default Navbar;
