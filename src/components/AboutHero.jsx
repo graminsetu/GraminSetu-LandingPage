@@ -10,7 +10,7 @@ const AboutHero = () => (
         style={{ width: 100, height: 100 }}
       />
       <h2 className="text-2xl font-bold text-gramin-800 mb-1 text-center">Tamminana Bhogesh</h2>
-      <h3 className="text-base text-gramin-600 mb-4 text-center">Founder & CEO, GraminSetu</h3>
+      <h3 className="text-base text-gramin-600 mb-4 text-center">GraminSetu Team</h3>
       <h1 className="text-4xl md:text-5xl font-extrabold text-gramin-700 tracking-tight mb-4 text-center">
         About GraminSetu
       </h1>

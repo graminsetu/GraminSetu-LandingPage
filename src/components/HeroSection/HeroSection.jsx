@@ -97,7 +97,7 @@ const HeroSection = () => {
             <p className="hero-section__description">
               GraminSetu connects you to what matters most.{' '}
               <strong>Access Government Schemes</strong>, <strong>Sell Your Crops</strong> at fair
-              prices, and <strong>Connect with your Community</strong>—all in one simple place.
+              prices, and <strong>Connect with your Community</strong>, all in one simple place.
             </p>
 
             {/* Strategic CTAs */}
@@ -123,16 +123,16 @@ const HeroSection = () => {
             {/* Core Pillars / Services */}
             <div className="hero-section__stats">
               <div className="text-center lg:text-left">
-                <div className="font-bold text-gray-900 text-3xl mb-1">800M+</div>
-                <div className="text-sm text-gray-500 font-medium">Villagers Reached</div>
+                <div className="font-bold text-gray-900 text-3xl mb-1">6.4L+</div>
+                <div className="text-sm text-gray-500 font-medium">Villages Targeted</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="font-bold text-gray-900 text-3xl mb-1">3</div>
-                <div className="text-sm text-gray-500 font-medium">Specialized Portals</div>
+                <div className="font-bold text-gray-900 text-3xl mb-1">Zero</div>
+                <div className="text-sm text-gray-500 font-medium">Middlemen</div>
               </div>
               <div className="text-center lg:text-left">
                 <div className="font-bold text-gray-900 text-3xl mb-1">100%</div>
-                <div className="text-sm text-gray-500 font-medium">Governance Transparency</div>
+                <div className="text-sm text-gray-500 font-medium">Direct Benefit</div>
               </div>
             </div>
           </div>
@@ -162,7 +162,11 @@ const HeroSection = () => {
                 </p>
               </div>
 
-              <img src={graminsetuMainImage} alt="GraminSetu Integrated Platform Dashboard" />
+              <img
+                src={graminsetuMainImage}
+                alt="GraminSetu Integrated Platform Dashboard"
+                className="w-full max-w-3xl lg:max-w-5xl h-auto"
+              />
 
               {/* 3-Portal Ecosystem Indicators - Professional 'Cards' */}
 

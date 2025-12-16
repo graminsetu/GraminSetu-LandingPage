@@ -1,266 +1,219 @@
-import Navbar from '../components/Navbar';
-import graminsetuLogo from '../assets/images/graminsetu-logo.png';
-import Footer from '../components/Footer/Footer';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer/Footer';
 import PageTitle from '../components/PageTitle';
 import HelpSupportButton from '../components/HelpSupport/HelpSupportButton';
+import BhogeshImage from '../assets/images/Bhogesh.webp';
+import {
+  CheckCircle2,
+  XCircle,
+  ArrowRight,
+  Users,
+  Building2,
+  Landmark,
+  Globe,
+  ShieldCheck,
+  Heart,
+} from 'lucide-react';
 
 function About() {
   const location = useLocation();
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gramin-50 via-white to-gramin-100 font-sans flex flex-col">
+    <div className="min-h-screen bg-white font-sans text-slate-800">
       <PageTitle pathname={location.pathname} />
-
-      {/* Structured Data for Organization */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Organization',
-            name: 'GraminSetu',
-            url: 'https://graminsetu.in/',
-            logo: 'https://graminsetu.in/static/media/graminsetu-logo.png',
-            description: 'Empowering Rural India with Opportunity, Transparency, and Growth',
-            founder: {
-              '@type': 'Person',
-              name: 'Tamminana Bhogesh',
-              jobTitle: 'Founder & CEO',
-            },
-            sameAs: [
-              'https://www.linkedin.com/company/graminsetu',
-              'https://twitter.com/graminsetu',
-            ],
-          }),
-        }}
-      />
-
-      {/* Navbar */}
       <Navbar />
 
-      {/* Main Content */}
-      <main className="flex-1 w-full max-w-4xl mx-auto py-16 px-4 pt-0">
-        <div className="flex flex-col items-center mb-8">
-          <img
-            src={graminsetuLogo}
-            alt="GraminSetu Logo"
-            className="drop-shadow"
-            style={{ width: 230, height: 230, marginTop: 0, marginBottom: -20 }}
-          />
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-2 text-gramin-700 drop-shadow-sm text-center">
+      <main className="w-full">
+        {/* 1. HERO: Clean, Centered, Authoritative */}
+        <section className="pt-24 pb-16 px-6 max-w-4xl mx-auto text-center border-b border-slate-100">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 text-green-700 text-sm font-semibold mb-6">
+            <span className="w-2 h-2 rounded-full bg-green-500"></span>
+            Our Story
+          </div>
+          <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
             About GraminSetu
           </h1>
-          <p className="text-lg text-gramin-700 text-center max-w-2xl mb-4">
-            Empowering Rural India with{' '}
-            <span className="font-semibold">Opportunity, Transparency, and Growth</span>
-          </p>
-        </div>
-
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-2 text-gramin-800">1. Our Mission</h2>
-          <ul className="list-disc pl-6 text-lg text-gramin-700 space-y-1">
-            <li>
-              Bridge the digital divide in rural India through comprehensive technology solutions
-            </li>
-            <li>Connect villages with essential services, opportunities, and resources</li>
-            <li>Empower rural communities with access to fair trade and transparent governance</li>
-            <li>
-              Create sustainable growth opportunities for farmers, artisans, and entrepreneurs
-            </li>
-          </ul>
-          <p className="text-base text-gramin-600 mt-2">
-            GraminSetu is dedicated to creating a platform that serves as a bridge between rural
-            India and the digital economy.
+          <p className="text-xl md:text-2xl text-slate-500 leading-relaxed font-light">
+            Connecting rural India to the world through{' '}
+            <span className="text-slate-900 font-medium">trust, technology, and transparency.</span>
           </p>
         </section>
 
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-2 text-gramin-800">2. Our Vision</h2>
-          <ul className="list-disc pl-6 text-lg text-gramin-700 space-y-1">
-            <li>Create a more connected, equitable, and prosperous future for rural India</li>
-            <li>Eliminate geographical barriers that limit opportunities and access</li>
-            <li>Ensure every village has access to the same resources as urban areas</li>
-            <li>Build a sustainable ecosystem for rural development and growth</li>
-          </ul>
-          <p className="text-base text-gramin-600 mt-2">
-            We envision a world where technology empowers rural communities to achieve their full
-            potential.
+        {/* 2. INTRO: The Mission Statement (Lead Text) */}
+        <section className="py-20 px-6 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-slate-700 leading-8 mb-8">
+            <strong className="text-slate-900 font-bold">GraminSetu</strong> is a mission-driven
+            digital platform created to strengthen rural communities through accessible technology.
+            It is designed to address real challenges faced by villages in accessing information,
+            markets, and public services.
           </p>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-2 text-gramin-800">3. What We Do</h2>
-          <ul className="list-disc pl-6 text-lg text-gramin-700 space-y-1">
-            <li>
-              Provide a secure digital marketplace for direct trade between farmers and buyers
-            </li>
-            <li>Facilitate transparent delivery of government schemes and services</li>
-            <li>Enable NGOs and corporates to manage and monitor rural impact projects</li>
-            <li>Offer learning modules, skill training, and information resources</li>
-            <li>Promote community networking and knowledge sharing capabilities</li>
-          </ul>
-          <p className="text-base text-gramin-600 mt-2">
-            Our comprehensive digital ecosystem is designed to address the unique challenges and
-            opportunities in rural India.
-          </p>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-2 text-gramin-800">4. Who We Serve</h2>
-          <ul className="list-disc pl-6 text-lg text-gramin-700 space-y-1">
-            <li>Rural citizens seeking growth and development opportunities</li>
-            <li>Farmers, artisans, and rural entrepreneurs</li>
-            <li>NGOs and social impact organizations</li>
-            <li>Government agencies and local officials</li>
-            <li>Businesses and service providers looking to reach rural markets</li>
-          </ul>
-          <p className="text-base text-gramin-600 mt-2">
-            Our platform is designed to benefit all stakeholders in the rural ecosystem, creating
-            value for everyone involved.
-          </p>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-2 text-gramin-800">5. Our Approach</h2>
-          <ul className="list-disc pl-6 text-lg text-gramin-700 space-y-1">
-            <li>Technology-first, community-centered design philosophy</li>
-            <li>User-friendly interfaces accessible to all literacy levels</li>
-            <li>Multilingual support for regional languages</li>
-            <li>Secure and encrypted data protection systems</li>
-            <li>Transparent operations with fair pricing policies</li>
-            <li>Sustainable development practices and environmental responsibility</li>
-          </ul>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-2 text-gramin-800">6. Our Core Values</h2>
-          <ul className="list-disc pl-6 text-lg text-gramin-700 space-y-1">
-            <li>
-              <span className="font-semibold">Transparency:</span> Open and honest communication in
-              all our dealings
-            </li>
-            <li>
-              <span className="font-semibold">Inclusivity:</span> Ensuring equal access and
-              opportunities for all
-            </li>
-            <li>
-              <span className="font-semibold">Innovation:</span> Continuously improving through
-              technology and feedback
-            </li>
-            <li>
-              <span className="font-semibold">Sustainability:</span> Building solutions that create
-              lasting positive impact
-            </li>
-            <li>
-              <span className="font-semibold">Trust:</span> Maintaining the highest standards of
-              integrity and reliability
-            </li>
-          </ul>
-          <p className="text-base text-gramin-600 mt-2">
-            These values guide every decision we make and every service we provide to our community.
-          </p>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-2 text-gramin-800">7. Our Team & Leadership</h2>
-          <ul className="list-disc pl-6 text-lg text-gramin-700 space-y-1">
-            <li>
-              Passionate professionals committed to rural development and digital transformation
-            </li>
-            <li>Diverse expertise in technology, agriculture, rural development, and business</li>
-            <li>Dedicated to creating comprehensive solutions for rural challenges</li>
-            <li>Continuous learning and adaptation to community needs</li>
-          </ul>
-          <p className="text-base text-gramin-600 mt-2">
-            Our team combines deep rural understanding with cutting-edge technology expertise to
-            deliver meaningful solutions.
-          </p>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-2 text-gramin-800">8. Our Commitment</h2>
-          <ul className="list-disc pl-6 text-lg text-gramin-700 space-y-1">
-            <li>Uphold legal transparency, data protection, and ethical standards</li>
-            <li>Partner exclusively with accredited institutions and certified vendors</li>
-            <li>Foster sustainable growth and inclusive development for every stakeholder</li>
-            <li>Continuous improvement based on user feedback and community needs</li>
-            <li>Maintain the highest standards of service quality and reliability</li>
-          </ul>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-2 text-gramin-800">9. Join Our Mission</h2>
-          <ul className="list-disc pl-6 text-lg text-gramin-700 space-y-1">
-            <li>Partner with us as a rural entrepreneur or community leader</li>
-            <li>Collaborate as an organization working in rural development</li>
-            <li>Support our mission as someone passionate about rural empowerment</li>
-            <li>Contribute your expertise to help build a better rural ecosystem</li>
-          </ul>
-          <div className="mt-4 flex flex-col sm:flex-row gap-3">
-            <a
-              href="https://www.linkedin.com/company/graminsetu/?viewAsMember=true"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gramin-600 hover:bg-gramin-700 text-white font-semibold py-2 px-6 rounded-full transition shadow focus:ring-2 focus:ring-gramin-400"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                className="w-4 h-4"
-              >
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.838-1.563 3.036 0 3.6 2 3.6 4.59v5.606z" />
-              </svg>
-              Connect on LinkedIn
-            </a>
-            <a
-              href="mailto:bhogesh@graminsetu.in"
-              className="inline-flex items-center gap-2 bg-white border border-gramin-600 text-gramin-700 hover:bg-gramin-50 font-semibold py-2 px-6 rounded-full transition shadow focus:ring-2 focus:ring-gramin-400"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="w-4 h-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-              Email Us
-            </a>
+          <div className="pl-6 border-l-4 border-green-500 italic text-slate-600 text-lg">
+            The platform brings together villagers, businesses, NGOs, and government bodies into a
+            unified digital ecosystem that supports communication, participation, and transparency
+            at the village level.
           </div>
         </section>
 
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-2 text-gramin-800">10. Legal & Compliance</h2>
-          <ul className="list-disc pl-6 text-lg text-gramin-700 space-y-1">
-            <li>Full compliance with Indian laws and regulations</li>
-            <li>Transparent business practices and ethical operations</li>
-            <li>Adherence to highest standards of data protection and privacy</li>
-            <li>Regular audits and compliance monitoring</li>
-          </ul>
-          <p className="text-base text-gramin-600 mt-2">
-            For detailed information about our policies, please refer to our{' '}
-            <a
-              href="/terms"
-              className="underline text-gramin-600 hover:text-gramin-800 font-medium"
-            >
-              Terms of Service
-            </a>{' '}
-            and{' '}
-            <a
-              href="/privacy"
-              className="underline text-gramin-600 hover:text-gramin-800 font-medium"
-            >
-              Privacy Policy
-            </a>
-            .
-          </p>
+        {/* 3. THE PROBLEM (Visual List) */}
+        <section className="py-20 bg-slate-50 px-6">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl font-bold text-slate-900 mb-4">The Challenge</h2>
+                <p className="text-slate-600 text-lg mb-6">
+                  Despite digital progress, rural India still faces a disconnect.
+                </p>
+                <ul className="space-y-4">
+                  {[
+                    'Limited access to accurate local information',
+                    'Lack of awareness about government schemes',
+                    'Restricted market access for local products',
+                    'Weak communication with active institutions',
+                    'Platforms not designed for rural context',
+                  ].map((item, index) => (
+                    <li key={index} className="flex items-start gap-3 text-slate-700">
+                      <XCircle className="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-slate-100 italic text-slate-600 text-lg leading-relaxed text-center">
+                "These challenges limit economic growth, transparency, and community participation.
+                We exist to solve them."
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 4. WHAT WE DO: Interactive3-Card Layout */}
+        <section className="py-24 px-6 max-w-7xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">What GraminSetu Does</h2>
+            <p className="text-slate-500">A unified ecosystem for every stakeholder.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Card 1 */}
+            <div className="bg-white p-8 rounded-2xl border border-slate-200 hover:border-green-400 hover:shadow-lg transition-all duration-300 group">
+              <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-green-600 mb-6 group-hover:scale-110 transition-transform">
+                <Users size={28} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-4">For Villagers</h3>
+              <ul className="space-y-3 text-slate-600">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={18} className="text-green-500 mt-1" /> Marketplace & Goods
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={18} className="text-green-500 mt-1" /> Govt Scheme Info
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={18} className="text-green-500 mt-1" /> Village News
+                </li>
+              </ul>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-white p-8 rounded-2xl border border-slate-200 hover:border-orange-400 hover:shadow-lg transition-all duration-300 group">
+              <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center text-orange-600 mb-6 group-hover:scale-110 transition-transform">
+                <Building2 size={28} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-4">Business & NGOs</h3>
+              <ul className="space-y-3 text-slate-600">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={18} className="text-orange-500 mt-1" /> Direct Engagement
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={18} className="text-orange-500 mt-1" /> Campaign Tools
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={18} className="text-orange-500 mt-1" /> Impact Reporting
+                </li>
+              </ul>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white p-8 rounded-2xl border border-slate-200 hover:border-blue-400 hover:shadow-lg transition-all duration-300 group">
+              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform">
+                <Landmark size={28} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-4">Government</h3>
+              <ul className="space-y-3 text-slate-600">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={18} className="text-blue-500 mt-1" /> Village Visibility
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={18} className="text-blue-500 mt-1" /> Citizen Feedback
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={18} className="text-blue-500 mt-1" /> Program Monitoring
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* 5. ROADMAP: Mission & Vision Split */}
+        <section className="bg-slate-900 text-white py-24 px-6 md:px-12 rounded-[2rem] mx-4 md:mx-8 mb-20">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16">
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <Globe className="text-green-400" size={32} />
+                <h2 className="text-3xl font-bold">Our Mission</h2>
+              </div>
+              <p className="text-slate-300 text-lg leading-relaxed">
+                To provide rural communities with reliable digital access that supports information
+                sharing, economic opportunity, community participation, and transparent governance.
+              </p>
+            </div>
+            <div className="md:border-l md:border-slate-700 md:pl-16">
+              <div className="flex items-center gap-3 mb-6">
+                <ShieldCheck className="text-orange-400" size={32} />
+                <h2 className="text-3xl font-bold">Our Vision</h2>
+              </div>
+              <p className="text-slate-300 text-lg leading-relaxed">
+                To create a future where every village is digitally connected, informed, and
+                empowered to participate in social and economic development.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 6. HOW WE BUILD (Clean List) */}
+        <section className="py-20 px-6 max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-900">How We Build</h2>
+            <div className="h-1 w-20 bg-green-500 rounded-full mx-auto mt-4"></div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-6 text-lg text-slate-700">
+            <div className="p-6 bg-slate-50 rounded-xl flex items-center gap-4">
+              <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center font-bold text-green-600 shadow-sm border border-slate-100">
+                1
+              </span>
+              Mobile-first design
+            </div>
+            <div className="p-6 bg-slate-50 rounded-xl flex items-center gap-4">
+              <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center font-bold text-green-600 shadow-sm border border-slate-100">
+                2
+              </span>
+              Regional language support
+            </div>
+            <div className="p-6 bg-slate-50 rounded-xl flex items-center gap-4">
+              <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center font-bold text-green-600 shadow-sm border border-slate-100">
+                3
+              </span>
+              Simple, friendly interface
+            </div>
+            <div className="p-6 bg-slate-50 rounded-xl flex items-center gap-4">
+              <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center font-bold text-green-600 shadow-sm border border-slate-100">
+                4
+              </span>
+              Privacy-first data approach
+            </div>
+          </div>
         </section>
 
         <HelpSupportButton />
