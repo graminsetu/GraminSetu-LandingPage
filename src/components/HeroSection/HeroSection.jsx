@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Sprout, Handshake, Landmark, ShieldCheck } from 'lucide-react';
-import graminsetuMainImage from '../../assets/images/graminsetuMainImage.png';
+import graminsetuMainImage from '../../assets/images/graminsetuMainImage.webp';
 import './HeroSection.scss';
 
 const HeroSection = () => {
