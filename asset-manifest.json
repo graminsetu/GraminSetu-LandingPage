@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/GraminSetu-LandingPage/static/css/main.5213d555.css",
+    "main.js": "/GraminSetu-LandingPage/static/js/main.886b0e48.js",
+    "static/js/803.aa20cabe.chunk.js": "/GraminSetu-LandingPage/static/js/803.aa20cabe.chunk.js",
+    "static/js/203.3fc19d19.chunk.js": "/GraminSetu-LandingPage/static/js/203.3fc19d19.chunk.js",
+    "static/js/38.15f35c74.chunk.js": "/GraminSetu-LandingPage/static/js/38.15f35c74.chunk.js",
+    "static/js/488.c40bd734.chunk.js": "/GraminSetu-LandingPage/static/js/488.c40bd734.chunk.js",
+    "static/media/Bhogesh.webp": "/GraminSetu-LandingPage/static/media/Bhogesh.e57a3bd2fc86b4077b2f.webp",
+    "static/media/graminsetu-logo.png": "/GraminSetu-LandingPage/static/media/graminsetu-logo.e39bfe6e0bdb6e08a82f.png",
+    "static/media/support.mp4": "/GraminSetu-LandingPage/static/media/support.5d42fe5546934247b4a3.mp4",
+    "service-worker.js": "/GraminSetu-LandingPage/service-worker.js",
+    "static/media/graminsetuMainImage.webp": "/GraminSetu-LandingPage/static/media/graminsetuMainImage.c14a8279b3bf09073209.webp",
+    "index.html": "/GraminSetu-LandingPage/index.html",
+    "main.5213d555.css.map": "/GraminSetu-LandingPage/static/css/main.5213d555.css.map",
+    "main.886b0e48.js.map": "/GraminSetu-LandingPage/static/js/main.886b0e48.js.map",
+    "803.aa20cabe.chunk.js.map": "/GraminSetu-LandingPage/static/js/803.aa20cabe.chunk.js.map",
+    "203.3fc19d19.chunk.js.map": "/GraminSetu-LandingPage/static/js/203.3fc19d19.chunk.js.map",
+    "38.15f35c74.chunk.js.map": "/GraminSetu-LandingPage/static/js/38.15f35c74.chunk.js.map",
+    "488.c40bd734.chunk.js.map": "/GraminSetu-LandingPage/static/js/488.c40bd734.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5213d555.css",
+    "static/js/main.886b0e48.js"
+  ]
+}

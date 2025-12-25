@@ -1,0 +1,25 @@
+name: Deploy Docker to EC2
+
+on:
+  push:
+    branches:
+      - master   # deploy only when master branch is updated
+
+jobs:
+  deploy:
+    runs-on: self-hosted   # use your EC2 runner
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Stop old container if running
+        run: |
+          docker stop landingpage || true
+          docker rm landingpage || true
+
+      - name: Build Docker image
+        run: docker build -t landingpage .
+
+      - name: Run new container
+        run: docker run -d --name landingpage -p 8080:80 landingpage
