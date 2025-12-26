@@ -5,19 +5,22 @@ on:
     branches:
       - main
       - master
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Use Node.js 18
@@ -34,32 +37,23 @@ jobs:
           CI: false
         run: npm run build
 
-      # If you add a secret `GH_PAGES_TOKEN` (classic PAT with `repo` scope),
-      # this step will use it. Otherwise we fall back to the default GITHUB_TOKEN.
-      - name: Deploy to gh-pages (PAT)
-        if: ${{ secrets.GH_PAGES_TOKEN != '' }}
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          personal_token: ${{ secrets.GH_PAGES_TOKEN }}
-          publish_dir: ./build
-          publish_branch: gh-pages
-          cname: graminsetu.in
-          enable_jekyll: false
-          user_name: github-actions[bot]
-          user_email: github-actions[bot]@users.noreply.github.com
-          commit_message: "deploy: update gh-pages"
-          force_orphan: true
+      - name: Add CNAME + disable Jekyll
+        run: |
+          echo "graminsetu.in" > build/CNAME
+          touch build/.nojekyll
 
-      - name: Deploy to gh-pages (GITHUB_TOKEN)
-        if: ${{ secrets.GH_PAGES_TOKEN == '' }}
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ github.token }}
-          publish_dir: ./build
-          publish_branch: gh-pages
-          cname: graminsetu.in
-          enable_jekyll: false
-          user_name: github-actions[bot]
-          user_email: github-actions[bot]@users.noreply.github.com
-          commit_message: "deploy: update gh-pages"
-          force_orphan: true
+          path: build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
