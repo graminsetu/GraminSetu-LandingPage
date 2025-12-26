@@ -1,25 +1,40 @@
-name: Deploy Docker to EC2
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - master   # deploy only when master branch is updated
+      - main
+      - master
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  deploy:
-    runs-on: self-hosted   # use your EC2 runner
-
+  build-and-deploy:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Stop old container if running
-        run: |
-          docker stop landingpage || true
-          docker rm landingpage || true
+      - name: Use Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
 
-      - name: Build Docker image
-        run: docker build -t landingpage .
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Run new container
-        run: docker run -d --name landingpage -p 8080:80 landingpage
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          publish_branch: gh-pages
+          cname: graminsetu.in
