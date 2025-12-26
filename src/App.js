@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import WorkInProgress from './pages/WorkInProgress';
 import About from './pages/About.jsx';
@@ -33,7 +33,7 @@ function PageTitleWithLocation() {
 
 function App() {
   return (
-    <Router>
+    <>
       <PageTitleWithLocation />
       <Suspense
         fallback={
@@ -60,7 +60,7 @@ function App() {
           <Route path="/blog" element={<Blog />} />
         </Routes>
       </Suspense>
-    </Router>
+    </>
   );
 }
 
