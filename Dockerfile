@@ -1,30 +1,15 @@
-# ---- Build Stage ----
-FROM node:20-alpine AS builder
+FROM node:18-alpine AS build
 WORKDIR /app
 
-# Install dependencies (including devDependencies)
-COPY package*.json ./
-RUN npm install --legacy-peer-deps
+COPY package.json package-lock.json ./
+RUN npm ci
 
-# Copy the rest of the app
 COPY . .
-
-# Optionally skip ESLint if it fails in Docker
-ENV SKIP_ESLINT=true
-
-# Build the React app
 RUN npm run build
 
-# ---- Production Stage ----
-FROM node:20-alpine AS production
-WORKDIR /app
+FROM nginx:1.27-alpine AS runtime
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Install serve only (no dev dependencies)
-RUN npm install -g serve
-
-
-# Copy built assets from builder
-COPY --from=builder /app/build ./build
-
-# Run the app with serve in single-process foreground mode
-CMD ["serve", "-s", "build", "-p", "80", "--single"]
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
